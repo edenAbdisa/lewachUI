@@ -1,7 +1,10 @@
 
 #header {
     position: absolute;
-    width: 220px;
+    width: 200px;
+  }
+  .pro-sidebar .pro-menu a {
+     color: #fff !important
   }
   #header .pro-sidebar {
     height: 100vh;

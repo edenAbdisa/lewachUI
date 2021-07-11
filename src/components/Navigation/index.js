@@ -20,7 +20,7 @@ const Navigation = () =>(
 
 const NavigationAuth = () => (
   <>
-      <Nav.Link href={ROUTES.ACCOUNT}>Account</Nav.Link>
+      <Link to={ROUTES.ACCOUNT} class="nav-link">Account</Link>
       {/* {!!authUser.roles[ROLES.ADMIN] && (
         <li>
           <Link to={ROUTES.ADMIN}>Admin</Link>
@@ -33,7 +33,7 @@ const NavigationAuth = () => (
   
   const NavigationNonAuth = () => (
     <>
-      <Nav.Link href={ROUTES.SIGN_IN}>Sign in</Nav.Link>      
+      <Link to={ROUTES.SIGN_IN} class="nav-link">Sign in</Link>      
     </>
   );
 

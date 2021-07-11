@@ -2,6 +2,10 @@
     color:#fff !important
     
 }
+.navbar-light .navbar-nav .nav-link a{
+    color:#fff !important
+    
+}
 .navbar-expand-lg {
     flex-flow: row nowrap;
     justify-content: space-between !important;
