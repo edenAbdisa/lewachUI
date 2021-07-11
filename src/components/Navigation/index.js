@@ -1,0 +1,40 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Navbar from "react-bootstrap/Navbar" ;
+import Nav from "react-bootstrap/Nav" ;
+import './navigation.css';
+import SignOutButton from '../SignOut';
+import * as ROUTES from '../../constants/routes.js';
+import * as ROLES from '../../constants/roles.js';
+import * as THEME from '../../constants/theme.js';
+const Navigation = () =>(
+  <Navbar expand="lg" style={{background:THEME.HeaderColor, color:THEME.HeaderFontColor}}>
+  <Navbar.Brand href="#home" style={{color:THEME.HeaderFontColor}}>{THEME.AppNameAdmin}</Navbar.Brand>
+  <Navbar.Toggle aria-controls="basic-navbar-nav" style={{color:THEME.HeaderFontColor}}/>
+  <Nav className="mr-sm-2"  >
+  <NavigationAuth/>
+  <NavigationNonAuth/>
+  </Nav>
+</Navbar>
+);
+
+const NavigationAuth = () => (
+  <>
+      <Nav.Link href={ROUTES.ACCOUNT}>Account</Nav.Link>
+      {/* {!!authUser.roles[ROLES.ADMIN] && (
+        <li>
+          <Link to={ROUTES.ADMIN}>Admin</Link>
+        </li>
+      )} */}
+      <SignOutButton />
+    </>
+
+  );
+  
+  const NavigationNonAuth = () => (
+    <>
+      <Nav.Link href={ROUTES.SIGN_IN}>Sign in</Nav.Link>      
+    </>
+  );
+
+export default Navigation;
