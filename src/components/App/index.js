@@ -23,13 +23,13 @@ const App = () => (
     <Col sm={2}>
     <Sidebar/>
     </Col>
-    <Col sm={9}>
-    <Route exact path={ROUTES.REPORT} component={Report} />
-    <Route exact path={ROUTES.STATISTICS} component={Statistics} />
-    <Route exact path={ROUTES.FLAGGEDITEMS} component={Flaggeditems} />
-    <Route exact path={ROUTES.MEMBERSHIP} component={Membership} />
-    <Route exact path={ROUTES.CATEGORY} component={Category} />
-    <Route exact path={ROUTES.ACCOUNT} component={Account} />
+    <Col sm={9} style={{paddingTop:67}}>
+      <Route exact path={ROUTES.REPORT} component={Report} />
+      <Route exact path={ROUTES.STATISTICS} component={Statistics} />
+      <Route exact path={ROUTES.FLAGGEDITEMS} component={Flaggeditems} />
+      <Route exact path={ROUTES.MEMBERSHIP} component={Membership} />
+      <Route exact path={ROUTES.CATEGORY} component={Category} />
+      <Route exact path={ROUTES.ACCOUNT} component={Account} />
     
     </Col>
   </Row>
