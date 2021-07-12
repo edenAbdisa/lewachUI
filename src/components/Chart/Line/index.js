@@ -9,15 +9,15 @@ class Line extends Component {
 			exportEnabled: true,
 			theme: "light2", // "light1", "dark1", "dark2"
 			title:{
-				text: "Bounce Rate by Week of Year"
+				text: this.props.title
 			},
 			axisY: {
-				title: "Bounce Rate",
+				title: this.props.ylabel,
 				includeZero: false,
 				suffix: "%"
 			},
 			axisX: {
-				title: "Week of Year",
+				title: this.props.xlabel,
 				prefix: "W",
 				interval: 2
 			},
@@ -53,8 +53,7 @@ class Line extends Component {
 		}
 		
 		return (
-		<div>
-			<h1>React Line Chart</h1>
+		<div> 
 			<CanvasJSChart options = {options} 
 				/* onRef={ref => this.chart = ref} */
 			/>

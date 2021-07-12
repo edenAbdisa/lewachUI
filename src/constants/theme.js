@@ -3,3 +3,7 @@ export const HeaderFontColor = '#fff';
 export const SidebarColor = '#54949e';
 export const SubmitButton = '#000000';
 export const AppNameAdmin="Liwach Admin";
+export const TitleColor = '#54949e';
+export const TitleSize = 50;
+export const CardTitleColor = '#fe7584';
+export const GraphColor='#6a4467';

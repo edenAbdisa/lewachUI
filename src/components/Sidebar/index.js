@@ -64,7 +64,7 @@ const Sidebar = () => {
                 <Link to={ROUTES.MEMBERSHIP}> Membership <br/> Managment </Link>
               </MenuItem>
               <MenuItem icon={<BiCog />}>
-                <Link to={ROUTES.CATEGORY}>Category <br/> Managment</Link>
+                <Link to={ROUTES.UTILITIES}>Utilities <br/> Managment</Link>
               </MenuItem>
             </Menu>
           </SidebarContent>

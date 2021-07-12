@@ -7,7 +7,7 @@ import Report from "../Report";
 import Statistics from "../Statistics";
 import Flaggeditems from "../Flaggeditem";
 import Membership from "../Membership";
-import Category from "../Category"; 
+import Utilities from "../Utilities"; 
 import Account from "../Account"; 
 
 import Row from "react-bootstrap/Row" ;
@@ -23,12 +23,12 @@ const App = () => (
     <Col sm={2}>
     <Sidebar/>
     </Col>
-    <Col sm={9} style={{paddingTop:67}}>
+    <Col sm={9} >
       <Route exact path={ROUTES.REPORT} component={Report} />
       <Route exact path={ROUTES.STATISTICS} component={Statistics} />
       <Route exact path={ROUTES.FLAGGEDITEMS} component={Flaggeditems} />
       <Route exact path={ROUTES.MEMBERSHIP} component={Membership} />
-      <Route exact path={ROUTES.CATEGORY} component={Category} />
+      <Route exact path={ROUTES.UTILITIES} component={Utilities} />
       <Route exact path={ROUTES.ACCOUNT} component={Account} />
     
     </Col>
