@@ -15,19 +15,20 @@ const Statistics = () =>(
     <CardStatistics title="Number of items" content="4500"/>
     </Col>
 </Row>
-<Row style={{textAlign: '-webkit-center',padding: 9}}> 
+<Row style={{textAlign: '-webkit-center',padding: 9, marginTop:15}}> 
+<Col>
 <Line 
     title="Number of registered users"
     ylabel="Number of users"
-    xlabel="Month"/> 
-
-</Row>
-<Row>
+    xlabel="Month"/> </Col>
+    <Col>
 <Line 
     title="Number of registered items"
     ylabel="Number of items"
     xlabel="Month"/>
+    </Col>
 </Row>
+
 </>
 );
 

@@ -4,10 +4,10 @@ import ItemReport from './ItemReport';
 import ServiceReport from './ServiceReport';
 import UserReport from './UserReport';
 
-import * as ROUTES from '../../constants/routes.js';
-import * as ROLES from '../../constants/roles.js';
 import * as THEME from '../../constants/theme.js';
 const Report = () =>(
+  <>
+<h3 style={{textAlign:'center', color:THEME.TitleColor, fontSize:THEME.TitleSize}}>Report</h3>
 <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
   <Tab eventKey="home" title="Item">
     <ItemReport />
@@ -19,6 +19,7 @@ const Report = () =>(
     <UserReport />
   </Tab>
 </Tabs>
+</>
 );
 
 export default Report

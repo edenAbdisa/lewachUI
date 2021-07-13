@@ -4,8 +4,7 @@ import Navbar from "react-bootstrap/Navbar" ;
 import Nav from "react-bootstrap/Nav" ;
 import './navigation.css';
 import SignOutButton from '../SignOut';
-import * as ROUTES from '../../constants/routes.js';
-import * as ROLES from '../../constants/roles.js';
+import * as ROUTES from '../../constants/routes.js'; 
 import * as THEME from '../../constants/theme.js';
 const Navigation = () =>(
   <Navbar expand="lg" style={{background:THEME.HeaderColor, color:THEME.HeaderFontColor}}>

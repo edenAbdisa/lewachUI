@@ -25,8 +25,8 @@ import * as THEME from '../../constants/theme.js';
 
 const Sidebar = () => {
   
-    //create initial menuCollapse state using useState hook
-    const [menuCollapse, setMenuCollapse] = useState(false)
+  //create initial menuCollapse state using useState hook
+  const [menuCollapse, setMenuCollapse] = useState(false)
 
     //create a custom function that will change menucollapse state from false to true and true to false
   const menuIconClick = () => {
@@ -51,7 +51,7 @@ const Sidebar = () => {
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
-              <MenuItem active={true} icon={<FiHome />}>
+              <MenuItem   icon={<FiHome />}>
                 <Link to={ROUTES.REPORT}>Report </Link>
               </MenuItem>
               <MenuItem icon={<FaList />}>
