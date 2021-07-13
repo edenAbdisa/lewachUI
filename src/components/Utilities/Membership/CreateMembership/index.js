@@ -6,28 +6,31 @@ import * as THEME from '../../../../constants/theme';
 
 const INITIAL_STATE = {
   name: '',
+  limitOfPost:0 ,
+  transactionLimit:0,
   error: null,
 };
 
-class AddType extends Component {
+class AddMembership extends Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
 
   onSubmit = event => {
-    const { name, password } = this.state;
+    const { name,limitOfPost,transactionLimit } = this.state;
     event.preventDefault(); 
   };
   onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value,
+        [event.target.limitOfPost]: event.target.value,
+        [event.target.transactionLimit]: event.target.value });
   };
 
   render() {
-    const { name, error } = this.state;
-    const isInvalid = name === '';
+    const { name,limitOfPost,transactionLimit, error } = this.state;
+    const isInvalid =  name === '';
     const inputsActive = this.props.type==='delete';
-
     return (
     <div className='popup'>
         <div className='popup_inner'>
@@ -36,38 +39,32 @@ class AddType extends Component {
             <AiFillCloseCircle/>
         </p>     
       
-      <Form > 
-        <Form.Group controlId="formBasicAddType" onSubmit={this.onSubmit}   >
+      <Form> 
+        <Form.Group controlId="formBasicAddMembership" onSubmit={this.onSubmit}>
             <Form.Label >{this.props.title}</Form.Label>
             <Form.Text className="text-muted">
              {this.props.message}
             </Form.Text>
-            <Form.Label>Type</Form.Label>
-            <Form.Control type="text" placeholder="Enter type" value={name}
+            <Form.Label>Membership name</Form.Label>
+            <Form.Control type="text" placeholder="Premium" value={name}
                 onChange={this.onChange} name="name" disabled={inputsActive}/>
-            
-        </Form.Group>
-        <Form.Group controlId="exampleForm.ControlSelect2" >
-            <Form.Label > Select category </Form.Label>
-            <Form.Control as="select" size="sm" disabled={inputsActive} >
-            <option>Category 1</option>
-            <option>Category 2</option>
-            <option>Category 3</option>
-            <option>Category 4</option>
-            <option>Category 5</option>
-            </Form.Control>
+                <Form.Label>Transaction limit</Form.Label>
+            <Form.Control type="number" placeholder="Enter transaction limit" value={limitOfPost}
+                onChange={this.onChange} name="limitOfPost" disabled={inputsActive}/>
+                <Form.Label>Limit of post</Form.Label>
+            <Form.Control type="number" placeholder="Enter Limit of post" value={transactionLimit}
+                onChange={this.onChange} name="transactionLimit" disabled={inputsActive}/>
         </Form.Group> 
         <Button variant="primary" type="submit" disabled={isInvalid} style={{backgroundImage:THEME.SubmitGradientButton}}>
-             {this.props.buttonName}
+          {this.props.buttonName}
         </Button>
         {error && <p>{error.message}</p>}
         </Form>
-    
       </div>
       </div>
     );
   }
 }
 
-export default AddType;
+export default AddMembership;
 

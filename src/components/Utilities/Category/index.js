@@ -9,6 +9,7 @@ class Category extends Component {
     super(props);
 
     this.state = {
+      data:'',
       loading: false,
       editShowPopup:false,
       addShowPopup:false,
@@ -19,22 +20,34 @@ class Category extends Component {
     /* if (this.state.user) {
       return;
     } */
-
+    fetch("http://liwachapi.herokuapp.com/api/category", {
+       "method": "GET",
+       "headers": {
+         "accept": "application/json"
+       }
+     }) 
+     .then(response => {
+       this.setState({
+         data: response.data
+       })
+     })
+     .catch(err => { console.log(err); 
+     });
     this.setState({ loading: true });
   }
   addCategoryViewPopup = () => {
     this.setState({
-      showPopup:!this.state.addShowPopup
+      addShowPopup:!this.state.addShowPopup
     });
   }
   editCategoryViewPopup = () => {
       this.setState({
-      showPopup:!this.state.editShowPopup
+      editShowPopup:!this.state.editShowPopup
     });
   }
   deleteCategoryViewPopup = () => {
       this.setState({
-      showPopup:!this.state.deleteShowPopup
+      deleteShowPopup:!this.state.deleteShowPopup
     });
     
     //this.props.firebase.doPasswordReset(this.state.user.email);
@@ -42,6 +55,7 @@ class Category extends Component {
 render(){ 
   return(
     <>
+    <p>{this.state.data  && JSON.stringify(this.state.data, null, 4)}</p>
 <Table striped bordered hover size="sm">
   <thead>
     <tr>
@@ -80,6 +94,7 @@ render(){
   <CreateCategory
     type="add"
     title="Add category"
+    message="Make sure the category name doesnt exist."
     text='Close Me'
     buttonName="Add category"
     closePopup={this.addCategoryViewPopup.bind(this)}
@@ -90,6 +105,7 @@ render(){
   <CreateCategory
     type="edit"
     title="Edit category"
+    message="Make sure the category name doesnt exist."
     text='Close Me'
     buttonName="Edit category"
     closePopup={this.editCategoryViewPopup.bind(this)}
@@ -100,6 +116,7 @@ render(){
   <CreateCategory
     type="delete"
     title="Delete category"
+    message="Are you sure you want to delete this category?"
     text='Close Me'
     buttonName="Delete category"
     closePopup={this.deleteCategoryViewPopup.bind(this)}

@@ -83,7 +83,8 @@ render(){
   </Table> 
   {this.state.addShowPopup ? 
   <CreateType
-  type="add"
+   type="add"
+    message="Make sure the type name doesnt exist."
     title="Add type"
     text='Close Me'
     buttonName="Add type"
@@ -95,6 +96,7 @@ render(){
   <CreateType
     type="edit"
     title="Edit type"
+    message="Make sure the type name doesnt exist."
     text='Close Me'
     buttonName="Edit type"
     closePopup={this.editTypeViewPopup.bind(this)}
@@ -105,6 +107,7 @@ render(){
   <CreateType
     type="delete"
     title="Delete type"
+    message="Are you sure you want to delete this type?"
     text='Close Me'
     buttonName="Delete type" 
     closePopup={this.deleteTypeViewPopup.bind(this)}

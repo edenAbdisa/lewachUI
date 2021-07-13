@@ -35,14 +35,16 @@ class AddCategory extends Component {
             <AiFillCloseCircle/>
         </p>     
       
-      <Form>
+      <Form> 
         <Form.Group controlId="formBasicAddCategory" onSubmit={this.onSubmit}>
             <Form.Label >{this.props.title}</Form.Label>
+            <Form.Text className="text-muted">
+             {this.props.message}
+            </Form.Text>
+            <Form.Label>Category name</Form.Label>
             <Form.Control type="text" placeholder="Enter Category" value={name}
                 onChange={this.onChange} name="name" disabled={inputsActive}/>
-            <Form.Text className="text-muted">
-            Make sure the category name doesnt exist.
-            </Form.Text>
+            
         </Form.Group> 
         <Button variant="primary" type="submit" disabled={isInvalid} style={{backgroundImage:THEME.SubmitGradientButton}}>
           {this.props.buttonName}
