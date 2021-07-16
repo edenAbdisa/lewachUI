@@ -12,3 +12,5 @@ export const PASSWORD_FORGET = '/pw-forget';
 export const ADMIN = '/admin';
 export const ADMIN_DETAILS = '/admin/:id';
 export const API_GET_CATEGORY = 'http://liwachapi.herokuapp.com/api/category';
+export const API_GET_TYPE = 'http://liwachapi.herokuapp.com/api/type';
+export const API_GET_MEMBERSHIP = 'http://liwachapi.herokuapp.com/api/membership';

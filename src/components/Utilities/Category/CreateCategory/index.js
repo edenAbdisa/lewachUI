@@ -74,8 +74,8 @@ class AddCategory extends Component {
     }    
     const { name } = this.state;
     event.preventDefault();     
-    this.props.refresh();
-    this.props.closePopup();
+    //this.props.refresh();
+    //this.props.closePopup();
   };
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -107,7 +107,7 @@ class AddCategory extends Component {
                 onChange={this.onChange} name="name" disabled={this.state.isDelete}/>
 
         </Form.Group> 
-        <Button variant="primary" type="submit"  style={{backgroundImage:THEME.SubmitGradientButton}}>
+        <Button variant="primary" type="submit"  disabled={isInvalid} style={{backgroundImage:THEME.SubmitGradientButton}}>
           {this.props.buttonName}
         </Button>
         {error && <p>{error.message}</p>}

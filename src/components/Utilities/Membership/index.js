@@ -3,87 +3,112 @@ import {Table} from "react-bootstrap";
 import CreateMembership from './CreateMembership';
 import { GrAdd } from "react-icons/gr";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import * as ROUTES from  '../../../constants/routes.js';
+import axios from 'axios';
+import  RowSelection  from '../../Table';
 
 class Membership extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      data:[],
+      categoryList:[],
       loading: false,
       editShowPopup:false,
       addShowPopup:false,
-      deleteShowPopup:false
+      deleteShowPopup:false,
+      loadingData:true, 
+      singleData:{},
+      column:[]
     };
   }
-  componentDidMount() {
+  COLUMNS = [    
+    {
+      Header: 'Name',
+      Footer: 'Name',
+      accessor: 'name',
+      sticky: 'left'
+    },
+    {
+      Header: 'Transaction limit',
+      Footer: 'Transaction limit',
+      accessor: 'transaction_limit',
+      sticky: 'left'
+    },
+    {
+      Header: 'Limit of post',
+      Footer: 'Limit of post',
+      accessor: 'limit_of_post',
+      sticky: 'left'
+    }
+  ]
+   async getData(){ 
+    this.setState({column:this.COLUMNS});
+      await axios
+        .get(ROUTES.API_GET_MEMBERSHIP)
+        .then((response) => {
+          // check if the data is populated
+          console.log(response.data.data);
+          this.setState({data:response.data.data});
+          // you tell it that you had the result
+          this.setState({loadingData:false});
+        });
+    
+    if (this.state.loadingData) {
+      // if the result is not ready so you make the axios call
+      this.getData();
+    }   
+    
+  }
+  componentWillMount() {
     /* if (this.state.user) {
       return;
-    } */
-
-    this.setState({ loading: true });
+    } */ 
+    this.getData();
   }
   addMembershipViewPopup = () => {
     this.setState({
       addShowPopup:!this.state.addShowPopup
     });
   }
-  editMembershipViewPopup = () => {
+  editMembershipViewPopup = (row) => { 
       this.setState({
-      editShowPopup:!this.state.editShowPopup
+      editShowPopup:!this.state.editShowPopup,
+      singleData:row
     });
   }
-  deleteMembershipViewPopup = () => {
+  deleteMembershipViewPopup= (row) => {
       this.setState({
-      deleteShowPopup:!this.state.deleteShowPopup
+      deleteShowPopup:!this.state.deleteShowPopup ,
+      singleData:row
     });
-    
-    //this.props.firebase.doPasswordReset(this.state.user.email);
   }
 render(){ 
   return(
-    <>
-<Table striped bordered hover size="sm">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Edit</th>
-      <th>Delete</th>
-      <th>
+    <> 
       <p 
                 onClick={this.addMembershipViewPopup.bind(this)}
               >
-               <GrAdd/> Add membership
+               <GrAdd/> Add Membership
               </p>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td><p 
-                onClick={this.editMembershipViewPopup.bind(this)}
-              >
-               <AiOutlineEdit/> Edit
-              </p></td>
-      <td><p 
-                onClick={this.deleteMembershipViewPopup.bind(this)}
-              >
-               <AiOutlineDelete/> Delete
-              </p></td>
-    </tr>  
-  </tbody>
-  
-</Table>
+     
+<RowSelection 
+      data={this.state.data}
+      column={this.state.column} 
+      edit={this.editMembershipViewPopup.bind(this)}
+      delete={this.deleteMembershipViewPopup.bind(this)}
+    />
   {this.state.addShowPopup ? 
   <CreateMembership
-    type="add"
+    type="create"
     title="Add membership"
     message="Make sure the membership name doesnt exist."
     text='Close Me'
     buttonName="Add membership"
     closePopup={this.addMembershipViewPopup.bind(this)}
+    singleData= {this.state.singleData}
+    refresh={this.getData.bind(this)}
   />
   : null
  } 
@@ -95,6 +120,8 @@ render(){
     text='Close Me'
     buttonName="Edit membership"
     closePopup={this.editMembershipViewPopup.bind(this)}
+    singleData= {this.state.singleData}
+    refresh={this.getData.bind(this)}
   />
   : null
  }
@@ -106,6 +133,8 @@ render(){
     text='Close Me'
     buttonName="Delete membership"
     closePopup={this.deleteMembershipViewPopup.bind(this)}
+    singleData= {this.state.singleData}
+    refresh={this.getData.bind(this)}
   />
   : null
  }

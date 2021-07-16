@@ -16,21 +16,13 @@ class Category extends Component {
       addShowPopup:false,
       deleteShowPopup:false,
       loadingData:true, 
-      setLoadingData:true,
-      setData:[],
       singleData:{},
       column:[]
     } 
     
   }
    COLUMNS = [
-    {
-      Header: 'Id',
-      Footer: 'Id',
-      accessor: 'id',
-      disableFilters: true,
-      sticky: 'left'
-    },
+    
     {
       Header: 'Name',
       Footer: 'Name',
@@ -39,9 +31,9 @@ class Category extends Component {
     }
   ]
  
-   getData(){ 
+  async getData(){ 
     this.setState({column:this.COLUMNS});
-       axios
+      await axios
         .get(ROUTES.API_GET_CATEGORY)
         .then((response) => {
           // check if the data is populated
