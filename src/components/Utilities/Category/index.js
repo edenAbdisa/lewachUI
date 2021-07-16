@@ -1,125 +1,134 @@
-import React,{Component} from "react";
+import React, { useMemo, useState, useEffect, Component } from "react";
 import {Table} from "react-bootstrap";
 import CreateCategory from './CreateCategory';
 import { GrAdd } from "react-icons/gr";
-import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
-
+import * as ROUTES from  '../../../constants/routes.js';
+import axios from 'axios';
+import  RowSelection  from '../../Table';
 class Category extends Component {
   constructor(props) {
-    super(props);
-
+    super(props); 
     this.state = {
-      data:'',
+      data:[],
+      categoryList:[],
       loading: false,
       editShowPopup:false,
       addShowPopup:false,
-      deleteShowPopup:false
-    };
+      deleteShowPopup:false,
+      loadingData:true, 
+      setLoadingData:true,
+      setData:[],
+      singleData:{},
+      column:[]
+    } 
+    
   }
-  componentDidMount() {
-    /* if (this.state.user) {
-      return;
-    } */
-    fetch("http://liwachapi.herokuapp.com/api/category", {
-       "method": "GET",
-       "headers": {
-         "accept": "application/json"
-       }
-     }) 
-     .then(response => {
-       this.setState({
-         data: response.data
-       })
-     })
-     .catch(err => { console.log(err); 
-     });
-    this.setState({ loading: true });
+   COLUMNS = [
+    {
+      Header: 'Id',
+      Footer: 'Id',
+      accessor: 'id',
+      disableFilters: true,
+      sticky: 'left'
+    },
+    {
+      Header: 'Name',
+      Footer: 'Name',
+      accessor: 'name',
+      sticky: 'left'
+    }
+  ]
+ 
+   getData(){ 
+    this.setState({column:this.COLUMNS});
+       axios
+        .get(ROUTES.API_GET_CATEGORY)
+        .then((response) => {
+          // check if the data is populated
+          console.log(response.data.data);
+          this.setState({data:response.data.data});
+          // you tell it that you had the result
+          this.setState({loadingData:false});
+        });
+    
+    if (this.state.loadingData) {
+      // if the result is not ready so you make the axios call
+      this.getData();
+    }   
+    
   }
+  componentWillMount() {
+    this.getData();    
+  }
+  
   addCategoryViewPopup = () => {
     this.setState({
       addShowPopup:!this.state.addShowPopup
     });
   }
-  editCategoryViewPopup = () => {
+  editCategoryViewPopup = (row) => { 
       this.setState({
-      editShowPopup:!this.state.editShowPopup
+      editShowPopup:!this.state.editShowPopup,
+      singleData:row
     });
   }
-  deleteCategoryViewPopup = () => {
+  deleteCategoryViewPopup = (row) => {
       this.setState({
-      deleteShowPopup:!this.state.deleteShowPopup
+      deleteShowPopup:!this.state.deleteShowPopup ,
+      singleData:row
     });
-    
-    //this.props.firebase.doPasswordReset(this.state.user.email);
-  }
-render(){ 
+  } 
+render(){  
   return(
-    <>
-    <p>{this.state.data  && JSON.stringify(this.state.data, null, 4)}</p>
-<Table striped bordered hover size="sm">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Edit</th>
-      <th>Delete</th>
-      <th>
+   
+    <> 
       <p 
                 onClick={this.addCategoryViewPopup.bind(this)}
               >
                <GrAdd/> Add category
               </p>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td><p 
-                onClick={this.editCategoryViewPopup.bind(this)}
-              >
-               <AiOutlineEdit/> Edit
-              </p></td>
-      <td><p 
-                onClick={this.deleteCategoryViewPopup.bind(this)}
-              >
-               <AiOutlineDelete/> Delete
-              </p></td>
-    </tr>  
-  </tbody>
-  
-</Table>
+     
+<RowSelection 
+      data={this.state.data}
+      column={this.state.column} 
+      edit={this.editCategoryViewPopup.bind(this)}
+      delete={this.deleteCategoryViewPopup.bind(this)}
+    />
   {this.state.addShowPopup ? 
   <CreateCategory
-    type="add"
+    type="create"
     title="Add category"
     message="Make sure the category name doesnt exist."
     text='Close Me'
     buttonName="Add category"
     closePopup={this.addCategoryViewPopup.bind(this)}
+    refresh={this.getData.bind(this)}
   />
   : null
  } 
  {this.state.editShowPopup ? 
   <CreateCategory
+    singleData= {this.state.singleData}
     type="edit"
     title="Edit category"
     message="Make sure the category name doesnt exist."
     text='Close Me'
     buttonName="Edit category"
     closePopup={this.editCategoryViewPopup.bind(this)}
+    refresh={this.getData.bind(this)}
   />
   : null
  }
  {this.state.deleteShowPopup ? 
   <CreateCategory
+  singleData= {this.state.singleData}
     type="delete"
     title="Delete category"
     message="Are you sure you want to delete this category?"
     text='Close Me'
     buttonName="Delete category"
     closePopup={this.deleteCategoryViewPopup.bind(this)}
+    refresh={this.getData.bind(this)}
   />
   : null
  }
