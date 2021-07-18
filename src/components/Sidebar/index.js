@@ -58,19 +58,26 @@ const Sidebar = () => {
                 <Link to={ROUTES.STATISTICS}>Statistics</Link>
               </MenuItem>
               <MenuItem icon={<FaRegHeart />}>
-                <Link to={ROUTES.FLAGGEDITEMS}>Flagged Items</Link>
+                <Link to={ROUTES.FLAGGEDITEMS}>Flagged  <br/> Items</Link>
               </MenuItem>
               <MenuItem icon={<RiPencilLine />}>
-                <Link to={ROUTES.MEMBERSHIP}> Membership <br/> Managment </Link>
+                <Link to={ROUTES.MEMBERSHIP}> User <br/> Managment </Link>
               </MenuItem>
               <MenuItem icon={<BiCog />}>
                 <Link to={ROUTES.UTILITIES}>Utilities <br/> Managment</Link>
+              </MenuItem>
+              <MenuItem icon={<RiPencilLine />}>
+              <Link to={ROUTES.ACCOUNT}>Internal <br/> User</Link>
               </MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-              <MenuItem icon={<FiLogOut />}>Settings</MenuItem>
+              
+              <MenuItem icon={<RiPencilLine />}>
+              <Link to="#">Settings</Link>
+      
+      </MenuItem>
             </Menu>
           </SidebarFooter>
         </ProSidebar>

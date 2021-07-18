@@ -9,3 +9,6 @@
     text-align: center;
     height: 60px;
 }
+.card-link a{ 
+    color:black !important;
+}

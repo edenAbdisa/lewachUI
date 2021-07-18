@@ -1,6 +1,7 @@
 export const HeaderColor = '#54949e';
 export const HeaderFontColor = '#fff';
 export const SidebarColor = '#54949e';
+export const CardBottom = 'linear-gradient(to right, #fe4357 , #f48769)';
 export const SubmitButton = '#fe7584';
 export const SubmitGradientButton ='linear-gradient(to right, #fe4357 , #f48769)';
 export const AppNameAdmin="Liwach Admin";

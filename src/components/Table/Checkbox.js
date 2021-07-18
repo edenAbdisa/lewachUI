@@ -10,7 +10,7 @@ export const Checkbox = React.forwardRef(({ indeterminate, ...rest }, ref) => {
 
   return (
     <>
-      <input type='radio' ref={resolvedRef} {...rest} />
+      <input type='checkbox' ref={resolvedRef} {...rest} />
     </>
   )
 })

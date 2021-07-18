@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar';
 import * as ROUTES from '../../constants/routes.js';
 import Report from "../Report";
 import Statistics from "../Statistics";
-import Flaggeditems from "../Flaggeditem";
+import Flagged from "../Flaggeditem";
 import Membership from "../Membership";
 import Utilities from "../Utilities"; 
 import Account from "../Account"; 
@@ -26,7 +26,7 @@ const App = () => (
     <Col sm={9} >
       <Route exact path={ROUTES.REPORT} component={Report} />
       <Route exact path={ROUTES.STATISTICS} component={Statistics} />
-      <Route exact path={ROUTES.FLAGGEDITEMS} component={Flaggeditems} />
+      <Route exact path={ROUTES.FLAGGEDITEMS} component={Flagged} />
       <Route exact path={ROUTES.MEMBERSHIP} component={Membership} />
       <Route exact path={ROUTES.UTILITIES} component={Utilities} />
       <Route exact path={ROUTES.ACCOUNT} component={Account} />

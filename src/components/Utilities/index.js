@@ -4,19 +4,28 @@ import {Tab,Tabs} from "react-bootstrap";
 import Category from './Category';
 import Type from './Type';
 import Membership from './Membership';
+import Reporttype from './Reporttype';
+import * as THEME from '../../constants/theme.js';
 
 const Utilities = () =>(
+  <>
+  <h3 style={{textAlign:'center', color:THEME.TitleColor, fontSize:THEME.TitleSize}}>Utilities</h3>
+
 <Tabs defaultActiveKey="profilem" id="uncontrolled-tab-examples">
-  <Tab eventKey="home" title="Category">
+  <Tab eventKey="category" title="Category">
     <Category />
   </Tab>
-  <Tab eventKey="profile" title="Type">
+  <Tab eventKey="type" title="Type">
     <Type />
   </Tab>
-  <Tab eventKey="contact" title="Membership">
+  <Tab eventKey="membership" title="Membership">
     <Membership />
   </Tab>
+  <Tab eventKey="reporttype" title="Report type">
+    <Reporttype />
+  </Tab>
 </Tabs>
+</>
 );
 
 export default Utilities
