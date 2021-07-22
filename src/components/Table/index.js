@@ -76,30 +76,23 @@ const RowSelection = (props) => {
   const { globalFilter, pageIndex, pageSize } = state;
   const handleEdit = (e) => {
     if (props.edit) {
-      if (
-        -1 !==
-        Object.values(selectedFlatRows).findIndex((v) => v == null || v === "")
-      ) {
-        props.edit(selectedFlatRows[0].values);
-      }
+      if (selectedFlatRows.length===0){}else{props.edit(selectedFlatRows[0].values);}
     }
   };
   const handleDelete = (e) => {
     if (props.delete) {
-      if (
-        -1 !==
-        Object.values(selectedFlatRows).findIndex((v) => v == null || v === "")
-      ) {
+      if (selectedFlatRows.length===0) {
+        
+      }else{
         props.delete(selectedFlatRows[0].values);
       }
     }
   };
   const handleApprove = (e) => {
     if (props.approve) {
-      if (
-        -1 !==
-        Object.values(selectedFlatRows).findIndex((v) => v == null || v === "")
-      ) {
+      if (selectedFlatRows.length===0) {
+       
+      }else{
         props.approve(selectedFlatRows[0].values);
       }
     }

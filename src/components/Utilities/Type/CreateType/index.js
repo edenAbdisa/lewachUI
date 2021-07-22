@@ -16,6 +16,7 @@ const INITIAL_STATE = {
   isEdit: false,
   loadingData: true,
   categoryList: [],
+  message:""
 };
 
 class AddType extends Component {
@@ -24,7 +25,7 @@ class AddType extends Component {
     this.state = { ...INITIAL_STATE };
   }
   componentWillMount() {
-    this.getCategory();
+   // this.getCategory();
   }
   async createType() {
     await axios({
@@ -37,7 +38,7 @@ class AddType extends Component {
         name: this.state.name,
       }),
     }).then((response) => {
-      this.setState({ loadingData: false });
+      this.setState({ loadingData: false,message:"Successfull" });
       console.log(response);
     });
     if (this.state.loadingData) {
@@ -50,7 +51,7 @@ class AddType extends Component {
         name: this.state.name,
       })
       .then((response) => {
-        this.setState({ loadingData: false });
+        this.setState({ loadingData: false,message:"successfull" });
         console.log(response);
       });
     if (this.state.loadingData) {
@@ -61,7 +62,7 @@ class AddType extends Component {
     await axios
       .delete(ROUTES.API_GET_TYPE + "/" + this.state.itemId)
       .then((response) => {
-        this.setState({ loadingData: false });
+        this.setState({ loadingData: false,message:"sucessfull" });
         console.log(response);
       });
     if (this.state.loadingData) {
@@ -94,12 +95,10 @@ class AddType extends Component {
   render() {
     const { name, error } = this.state;
     const isInvalid = name === "";
-    this.setState({ isDelete: this.props.type === "delete" });
-    this.setState({ isCreate: this.props.type === "create" });
-    this.setState({ isEdit: this.props.type === "edit" });
-    this.setState({
-      itemId: this.state.isCreate ? null : this.props.singleData.id,
-    });
+    this.state.isDelete= this.props.type === "delete" ;
+    this.state.isCreate=this.props.type === "create" ;
+    this.state.isEdit=this.props.type === "edit" ;
+    this.state.itemId= this.props.type === "create" ? null : this.props.singleData.id;
 
     return (
       <div className="popup">
@@ -112,6 +111,9 @@ class AddType extends Component {
             <Form.Group controlId="formBasicAddType">
               <Form.Label>{this.props.title}</Form.Label>
               <Form.Text className="text-muted">{this.props.message}</Form.Text>
+              <Form.Text className="text-muted">
+                {this.state.message}
+              </Form.Text>
               <Form.Label>Type</Form.Label>
               <Form.Control
                 type="text"
@@ -147,7 +149,7 @@ class AddType extends Component {
             <Button
               variant="primary"
               type="submit"
-              disabled={isInvalid}
+              disabled={this.state.isDelete?false:isInvalid}
               style={{ backgroundImage: THEME.SubmitGradientButton }}
             >
               {this.props.buttonName}

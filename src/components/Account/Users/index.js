@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import "../../../css/popup.css";
 import { AiFillCloseCircle } from "react-icons/ai";
 import * as THEME from "../../../constants/theme";
+import * as ROUTES from "../../../constants/routes.js";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 const INITIAL_STATE = {
   firstname: "",
   lastname: "",
@@ -10,6 +12,7 @@ const INITIAL_STATE = {
   passwordOne: "",
   passwordTwo: "",
   error: null,
+  role:''
 };
 class Users extends Component {
   constructor(props) {
@@ -20,11 +23,34 @@ class Users extends Component {
   componentWillMount() {
     //this.getUser();
   }
+  async createUser() {
+    await axios({
+      method: "post",
+      url: ROUTES.API_GET_USER,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({
+        email: this.state.email,
+        first_name:this.state.firstname,
+        last_name:this.state.lastname,
+        password:this.state.passwordOne,
+        type:this.state.role
+      }),
+    }).then((response) => {
+      this.setState({ loadingData: false });
+      console.log(response);
+      this.state.error="Success";
+    });
+    if (this.state.loadingData) {
+      this.createCategory();
+    }
+  }
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
-    const { firstname, lastname, email, passwordOne, passwordTwo, error } =
+    const { firstname, lastname, email, passwordOne, passwordTwo,role, error } =
       this.state;
 
     const isInvalid =
@@ -33,13 +59,10 @@ class Users extends Component {
       email === "" ||
       firstname === "" ||
       lastname === "";
-    this.setState({ isDelete: this.props.type === "delete" });
-    this.setState({ isCreate: this.props.type === "create" });
-    this.setState({ isEdit: this.props.type === "edit" });
-    this.setState({
-      itemId: this.state.isCreate ? null : this.props.singleData.id,
-    });
-
+      this.state.isDelete= this.props.type === "delete" ;
+      this.state.isCreate=this.props.type === "create" ;
+      this.state.isEdit=this.props.type === "edit" ;
+      this.state.itemId= this.state.isCreate ? null : this.props.singleData.id;
     return (
       <div className="popup ">
         <div className="popup_inner">
@@ -99,10 +122,11 @@ class Users extends Component {
             <Form.Label>Role</Form.Label>
             <Form.Group controlId="exampleForm.ControlSelect2">
               <Form.Label> Select Role </Form.Label>
-              <Form.Control as="select" name="categoryId" size="sm">
-                <option>HR</option>
-                <option>Operations</option>
-                <option>Data Handler</option>
+              <Form.Control as="select" name="role" size="sm" value={role}
+                onChange={this.onChange}>
+                <option value="hr">HR</option>
+                <option value="operations">Operations</option>
+                <option value="data handler">Data Handler</option>
               </Form.Control>
             </Form.Group>
             <Button

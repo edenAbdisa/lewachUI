@@ -77,7 +77,7 @@ async getUser() {
   }
   Object.keys(data).forEach(function(key) {
     user=key==='user'?data[key]:user;
-    organization=key==='organization'?data[key]:organization;
+    organization=key==='org'?data[key]:organization;
   });
   this.setState({loadingData: false,userNumber: user,  organizationNumber: organization});
 

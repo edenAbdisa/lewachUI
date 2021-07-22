@@ -60,7 +60,7 @@ const Sidebar = () => {
               <MenuItem icon={<RiPencilLine />}>
                 <Link to={ROUTES.MEMBERSHIP}>
                   {" "}
-                  User <br /> Managment{" "}
+                  Organization <br /> Managment{" "}
                 </Link>
               </MenuItem>
               <MenuItem icon={<BiCog />}>

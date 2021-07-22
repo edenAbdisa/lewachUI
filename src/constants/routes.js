@@ -17,6 +17,7 @@ export const API_GET_MEMBERSHIP = 'http://liwachapi.herokuapp.com/api/membership
 export const API_GET_USER = 'http://liwachapi.herokuapp.com/api/user';
 export const API_GET_USER_COUNT = 'http://liwachapi.herokuapp.com/api/user/count';
 export const API_GET_INTERNAL_USER = 'http://liwachapi.herokuapp.com/api/user/internal';
+export const API_GET_ORGANIZATION = 'http://liwachapi.herokuapp.com/api/user/organization';
 export const API_GET_USER_COUNT_DATE = 'http://liwachapi.herokuapp.com/api/user/countByDate';
 export const API_GET_ITEM = 'http://liwachapi.herokuapp.com/api/item';
 export const API_GET_ITEM_COUNT_DATE = 'http://liwachapi.herokuapp.com/api/item/countByDate';

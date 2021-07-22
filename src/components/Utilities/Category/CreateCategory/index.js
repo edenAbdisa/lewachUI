@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   isCreate: false,
   isEdit: false,
   loadingData: true,
+  messages:""
 };
 
 class AddCategory extends Component {
@@ -32,8 +33,10 @@ class AddCategory extends Component {
         name: this.state.name,
       }),
     }).then((response) => {
-      this.setState({ loadingData: false });
-      console.log(response);
+      this.setState({ loadingData: false,messages:"Success"});
+      console.log(response); 
+    }).catch(e=>{
+      this.setState({ error:e});
     });
     if (this.state.loadingData) {
       this.createCategory();
@@ -82,12 +85,11 @@ class AddCategory extends Component {
   render() {
     const { name, error } = this.state;
     const isInvalid = name === "";
-    this.setState({ isDelete: this.props.type === "delete" });
-    this.setState({ isCreate: this.props.type === "create" });
-    this.setState({ isEdit: this.props.type === "edit" });
-    this.setState({
-      itemId: this.state.isCreate ? null : this.props.singleData.id,
-    });
+    this.state.isDelete= this.props.type === "delete" ;
+    this.state.isCreate=this.props.type === "create" ;
+    this.state.isEdit=this.props.type === "edit" ;
+    this.state.itemId= this.state.isCreate ? null : this.props.singleData.id;
+
 
     return (
       <div className="popup">
@@ -101,6 +103,9 @@ class AddCategory extends Component {
               <Form.Label>{this.props.title}</Form.Label>
               <Form.Text className="text-muted">
                 {this.props.messages}
+              </Form.Text>
+              <Form.Text className="text-muted">
+                {this.state.messages}
               </Form.Text>
               <Form.Label>Category Name</Form.Label>
               <Form.Control
@@ -119,7 +124,7 @@ class AddCategory extends Component {
             <Button
               variant="primary"
               type="submit"
-              disabled={isInvalid}
+              disabled={this.state.isDelete?false:isInvalid}
               style={{ backgroundImage: THEME.SubmitGradientButton }}
             >
               {this.props.buttonName}

@@ -19,7 +19,7 @@ const Utilities = () => (
       Utilities
     </h3>
 
-    <Tabs defaultActiveKey="profilem" id="uncontrolled-tab-examples">
+    <Tabs defaultActiveKey="category" id="uncontrolled-tab-examples">
       <Tab eventKey="category" title="Category">
         <Category />
       </Tab>

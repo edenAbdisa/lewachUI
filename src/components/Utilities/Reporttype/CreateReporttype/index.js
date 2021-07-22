@@ -85,12 +85,11 @@ class Reporttype extends Component {
   render() {
     const { report_detail, type_for, error } = this.state;
     const isInvalid = report_detail === "" || type_for === "";
-    this.setState({ isDelete: this.props.type === "delete" });
-    this.setState({ isCreate: this.props.type === "create" });
-    this.setState({ isEdit: this.props.type === "edit" });
-    this.setState({
-      itemId: this.state.isCreate ? null : this.props.singleData.id,
-    });
+    this.state.isDelete= this.props.type === "delete" ;
+    this.state.isCreate=this.props.type === "create" ;
+    this.state.isEdit=this.props.type === "edit" ;
+    this.state.itemId= this.state.isCreate ? null : this.props.singleData.id;
+
 
     return (
       <div className="popup">
@@ -142,7 +141,7 @@ class Reporttype extends Component {
             <Button
               variant="primary"
               type="submit"
-              disabled={isInvalid}
+              disabled={this.state.isDelete?false:isInvalid}
               style={{ backgroundImage: THEME.SubmitGradientButton }}
             >
               {this.props.buttonName}

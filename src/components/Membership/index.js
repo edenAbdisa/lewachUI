@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-//import CreateCategory from "./CreateCategory";
-import { GrAdd } from "react-icons/gr";
+import UserCard from "./UserCard"; 
 import * as ROUTES from "../../constants/routes.js";
+import * as THEME from "../../constants/theme.js";
 import axios from "axios";
 import RowSelection from "../Table";
 class Membership extends Component {
@@ -25,6 +25,18 @@ class Membership extends Component {
       sticky: "left",
     },
     {
+      Header: "Id",
+      Footer: "Id",
+      accessor: "id",
+      sticky: "left",
+    },
+    {
+      Header: "Status",
+      Footer: "Status",
+      accessor: "status",
+      sticky: "left",
+    },
+    {
       Header: "Email",
       Footer: "Email",
       accessor: "email",
@@ -40,7 +52,7 @@ class Membership extends Component {
 
   async getData() {
     this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_INTERNAL_USER).then((response) => {
+    await axios.get(ROUTES.API_GET_ORGANIZATION+'/pending').then((response) => {
       // check if the data is populated
       console.log(response.data.data);
       this.setState({ data: response.data.data });
@@ -57,14 +69,22 @@ class Membership extends Component {
     this.getData();
   }
 
-  approveOrganizationViewPopup = () => {
+  approveOrganizationViewPopup = (row) => {
     this.setState({
       approveShowPopup: !this.state.approveShowPopup,
+      singleData: row,
     });
   };
   render() {
     return (
       <>
+      <h3
+      style={{
+        textAlign: "center",
+        color: THEME.TitleColor,
+        fontSize: THEME.TitleSize,
+      }}
+    >Organization Managment</h3>
         <RowSelection
           data={this.state.data}
           column={this.state.column}
@@ -72,7 +92,15 @@ class Membership extends Component {
           showButton={false}
           showApprove={true}
         />
-        
+        {this.state.approveShowPopup ? (
+          <UserCard
+            singleData={this.state.singleData} 
+            title="Delete category" 
+            text="Close Me" 
+            closePopup={this.approveOrganizationViewPopup.bind(this)}
+            
+          />
+        ) : null}
       </>
     );
   }

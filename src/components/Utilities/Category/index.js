@@ -25,7 +25,12 @@ class Category extends Component {
       Footer: "Name",
       accessor: "name",
       sticky: "left",
-    },
+    },{
+      Header: "Id",
+      Footer: "Id",
+      accessor: "id",
+      sticky: "left",
+    }
   ];
 
   async getData() {
