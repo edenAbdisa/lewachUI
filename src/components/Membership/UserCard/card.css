@@ -1,11 +1,11 @@
-.membership .card-title{
-    background-color:'#fe7584';
-    background-image: linear-gradient(to right, #fe7584 , #f2c6ba);
-    border-radius: 25px; 
-    text-align: center;
-    color:#fff;
+.membership .card-title {
+  background-color: "#fe7584";
+  background-image: linear-gradient(to right, #fe7584, #f2c6ba);
+  border-radius: 25px;
+  text-align: center;
+  color: #fff;
 }
-.membership .card-text{ 
-    text-align: center;
-    height: 60px;
+.membership .card-text {
+  text-align: center;
+  height: 60px;
 }

@@ -1,14 +1,14 @@
-.flagged .card-title{
-    background-color:'#fe7584';
-    background-image: linear-gradient(to right, #fe7584 , #f2c6ba);
-    border-radius: 25px; 
-    text-align: center;
-    color:#fff;
+.flagged .card-title {
+  background-color: "#fe7584";
+  background-image: linear-gradient(to right, #fe7584, #f2c6ba);
+  border-radius: 25px;
+  text-align: center;
+  color: #fff;
 }
-.flagged .card-text{ 
-    text-align: center;
-    height: 60px;
+.flagged .card-text {
+  text-align: center;
+  height: 60px;
 }
-.card-link a{ 
-    color:black !important;
+.card-link a {
+  color: black !important;
 }

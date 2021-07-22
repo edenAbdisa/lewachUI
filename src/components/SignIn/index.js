@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 
-import { SignUpLink } from '../SignUp';
+import { SignUpLink } from "../SignUp";
 //import { PasswordForgetLink } from '../PasswordForget';
 //import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
+import * as ROUTES from "../../constants/routes";
 
 const SignInPage = () => (
   <div>
@@ -16,13 +16,13 @@ const SignInPage = () => (
 );
 
 const INITIAL_STATE = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
   error: null,
 };
 
 const ERROR_CODE_ACCOUNT_EXISTS =
-  'auth/account-exists-with-different-credential';
+  "auth/account-exists-with-different-credential";
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
   An account with an E-Mail address to
@@ -38,10 +38,10 @@ class SignInFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  onSubmit = event => {
+  onSubmit = (event) => {
     const { email, password } = this.state;
 
-/*     this.props.firebase
+    /*     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
@@ -54,14 +54,14 @@ class SignInFormBase extends Component {
     event.preventDefault(); */
   };
 
-  onChange = event => {
+  onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
     const { email, password, error } = this.state;
 
-    const isInvalid = password === '' || email === '';
+    const isInvalid = password === "" || email === "";
 
     return (
       <form onSubmit={this.onSubmit}>
@@ -89,11 +89,8 @@ class SignInFormBase extends Component {
   }
 }
 
-
-const SignInForm = compose(
-  withRouter,
-)(SignInFormBase);
+const SignInForm = compose(withRouter)(SignInFormBase);
 
 export default SignInPage;
 
-export { SignInForm};
+export { SignInForm };

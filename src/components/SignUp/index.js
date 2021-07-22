@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
- 
-import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+
+import * as ROUTES from "../../constants/routes";
+import * as ROLES from "../../constants/roles";
 
 const SignUpPage = () => (
   <div>
@@ -12,15 +12,15 @@ const SignUpPage = () => (
 );
 
 const INITIAL_STATE = {
-  username: '',
-  email: '',
-  passwordOne: '',
-  passwordTwo: '',
+  username: "",
+  email: "",
+  passwordOne: "",
+  passwordTwo: "",
   isAdmin: false,
   error: null,
 };
 
-const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
+const ERROR_CODE_ACCOUNT_EXISTS = "auth/email-already-in-use";
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
   An account with this E-Mail address already exists.
@@ -37,7 +37,7 @@ class SignUpFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  onSubmit = event => {
+  onSubmit = (event) => {
     /* const { username, email, passwordOne, isAdmin } = this.state;
     const roles = {};
 
@@ -76,29 +76,23 @@ class SignUpFormBase extends Component {
     event.preventDefault(); */
   };
 
-  onChange = event => {
+  onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  onChangeCheckbox = event => {
+  onChangeCheckbox = (event) => {
     this.setState({ [event.target.name]: event.target.checked });
   };
 
   render() {
-    const {
-      username,
-      email,
-      passwordOne,
-      passwordTwo,
-      isAdmin,
-      error,
-    } = this.state;
+    const { username, email, passwordOne, passwordTwo, isAdmin, error } =
+      this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
-      passwordOne === '' ||
-      email === '' ||
-      username === '';
+      passwordOne === "" ||
+      email === "" ||
+      username === "";
 
     return (
       <form onSubmit={this.onSubmit}>

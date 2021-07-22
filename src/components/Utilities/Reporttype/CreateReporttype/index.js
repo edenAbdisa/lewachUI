@@ -1,136 +1,158 @@
-import React, { Component } from 'react';
-import '../../../../css/popup.css';
-import {Form,Button} from "react-bootstrap";
+import React, { Component } from "react";
+import "../../../../css/popup.css";
+import { Form, Button } from "react-bootstrap";
 import { AiFillCloseCircle } from "react-icons/ai";
-import * as THEME from '../../../../constants/theme';
-import * as ROUTES from  '../../../../constants/routes.js';
-import axios from 'axios';
+import * as THEME from "../../../../constants/theme";
+import * as ROUTES from "../../../../constants/routes.js";
+import axios from "axios";
 
 const INITIAL_STATE = {
-  report_detail: '',
-  type_for: '',
-  itemId:0,
+  report_detail: "",
+  type_for: "",
+  itemId: 0,
   error: null,
-  isDelete:false,
-  isCreate:false,
-  isEdit:false,
-  loadingData:true
+  isDelete: false,
+  isCreate: false,
+  isEdit: false,
+  loadingData: true,
 };
 
 class Reporttype extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...INITIAL_STATE};
+    this.state = { ...INITIAL_STATE };
   }
- async createReporttype(){
-     await axios({
-      method : "post",
-      url :ROUTES.API_GET_REPORTTYPE,
-      headers : {
-          "Content-Type":"application/json",  
+  async createReporttype() {
+    await axios({
+      method: "post",
+      url: ROUTES.API_GET_REPORTTYPE,
+      headers: {
+        "Content-Type": "application/json",
       },
-      data : JSON.stringify({
-        report_detail:this.state.report_detail,
-        type_for:this.state.type_for
+      data: JSON.stringify({
+        report_detail: this.state.report_detail,
+        type_for: this.state.type_for,
+      }),
+    }).then((response) => {
+      this.setState({ loadingData: false });
+      console.log(response);
+    });
+    if (this.state.loadingData) {
+      this.createReporttype();
+    }
+  }
+  async editReporttype() {
+    await axios
+      .put(ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId, {
+        report_detail: this.state.report_detail,
+        type_for: this.state.type_for,
       })
-    }) 
-    .then((response) => {
-      this.setState({loadingData:false});    
-      console.log(response);
-    });  
-    if (this.state.loadingData) {
-      this.createReporttype();
-    }  
-  }
-  async editReporttype(){
-    await axios
-    .put(ROUTES.API_GET_REPORTTYPE+'/'+this.state.itemId,{
-      report_detail:this.state.report_detail,
-      type_for:this.state.type_for
-    })
-    .then((response) => {
-      this.setState({loadingData:false});    
-      console.log(response);
-    });  
+      .then((response) => {
+        this.setState({ loadingData: false });
+        console.log(response);
+      });
     if (this.state.loadingData) {
       this.editReporttype();
     }
   }
-  async deleteReporttype(){
+  async deleteReporttype() {
     await axios
-    .delete(ROUTES.API_GET_REPORTTYPE+'/'+this.state.itemId)
-    .then((response) => {
-      this.setState({loadingData:false});    
-      console.log(response);
-    });  
+      .delete(ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId)
+      .then((response) => {
+        this.setState({ loadingData: false });
+        console.log(response);
+      });
     if (this.state.loadingData) {
       this.deleteReporttype();
     }
   }
- async onSubmit(event){ 
-    if(this.state.isCreate){
+  async onSubmit(event) {
+    if (this.state.isCreate) {
       this.createReporttype();
-    }else if(this.state.isEdit){
+    } else if (this.state.isEdit) {
       this.editReporttype();
-    }else{
+    } else {
       this.deleteReporttype();
-    }    
-    const { name } = this.state;
-    event.preventDefault();     
+    }
+    event.preventDefault();
     //this.props.refresh();
     //this.props.closePopup();
-  };
-  onChange = event => {
+  }
+  onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
-    const { report_detail,type_for, error } = this.state;
-    const isInvalid =  report_detail === '' || type_for === '';
-    this.state.isDelete = this.props.type==='delete';
-    this.state.isCreate = this.props.type==='create';
-    this.state.isEdit = this.props.type==='edit';
-    this.state.itemId=this.state.isCreate? null: this.props.singleData.id;
+    const { report_detail, type_for, error } = this.state;
+    const isInvalid = report_detail === "" || type_for === "";
+    this.setState({ isDelete: this.props.type === "delete" });
+    this.setState({ isCreate: this.props.type === "create" });
+    this.setState({ isEdit: this.props.type === "edit" });
+    this.setState({
+      itemId: this.state.isCreate ? null : this.props.singleData.id,
+    });
+
     return (
-    <div className='popup'>
-        <div className='popup_inner'>
-        
-        <p onClick={this.props.closePopup} style={{float:'right'}}>
-            <AiFillCloseCircle/>
-        </p>     
-      
-      <Form onSubmit={(e) => this.onSubmit(e)}> 
-        <Form.Group controlId="formBasicAddReporttype" >
-            <Form.Label >{this.props.title}</Form.Label>
-            <Form.Text className="text-muted">
-             {this.props.messages}
-            </Form.Text>
-            <Form.Label>Report type Name</Form.Label>
-            <Form.Control type="text" placeholder={this.state.isCreate?'Enter the report detail':this.props.singleData.report_detail} value={report_detail}
-                onChange={this.onChange} name="report_detail" disabled={this.state.isDelete}/>
-            <Form.Label>Type for</Form.Label>
-        </Form.Group> 
-        <Form.Group controlId="exampleForm.ControlSelect2" >
-            <Form.Label > {this.state.isCreate?'Enter the type':this.props.singleData.type_for} </Form.Label>
-            <Form.Control as="select" name="categoryId" size="sm" disabled={this.state.isDelete} onChange={this.onChange}>
-             
-               <option >Users</option>
-               <option >Item</option>
-               <option >Service</option> 
-           
-            
-            </Form.Control>
-        </Form.Group>
-        <Button variant="primary" type="submit"  disabled={isInvalid} style={{backgroundImage:THEME.SubmitGradientButton}}>
-          {this.props.buttonName}
-        </Button>
-        {error && <p>{error.message}</p>}
-        </Form>
-      </div>
+      <div className="popup">
+        <div className="popup_inner">
+          <p onClick={this.props.closePopup} style={{ float: "right" }}>
+            <AiFillCloseCircle />
+          </p>
+
+          <Form onSubmit={(e) => this.onSubmit(e)}>
+            <Form.Group controlId="formBasicAddReporttype">
+              <Form.Label>{this.props.title}</Form.Label>
+              <Form.Text className="text-muted">
+                {this.props.messages}
+              </Form.Text>
+              <Form.Label>Report type Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder={
+                  this.state.isCreate
+                    ? "Enter the report detail"
+                    : this.props.singleData.report_detail
+                }
+                value={report_detail}
+                onChange={this.onChange}
+                name="report_detail"
+                disabled={this.state.isDelete}
+              />
+              <Form.Label>Type for</Form.Label>
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect2">
+              <Form.Label>
+                {" "}
+                {this.state.isCreate
+                  ? "Enter the type"
+                  : this.props.singleData.type_for}{" "}
+              </Form.Label>
+              <Form.Control
+                as="select"
+                name="categoryId"
+                size="sm"
+                disabled={this.state.isDelete}
+                onChange={this.onChange}
+              >
+                <option>Users</option>
+                <option>Item</option>
+                <option>Service</option>
+              </Form.Control>
+            </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={isInvalid}
+              style={{ backgroundImage: THEME.SubmitGradientButton }}
+            >
+              {this.props.buttonName}
+            </Button>
+            {error && <p>{error.message}</p>}
+          </Form>
+        </div>
       </div>
     );
   }
 }
 
 export default Reporttype;
-
