@@ -46,6 +46,9 @@ const Sidebar = () => {
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
+            <MenuItem icon={<FiHome />}>
+                <Link to={ROUTES.MAPBOX}>Users <br/> Map  </Link>
+              </MenuItem>
               <MenuItem icon={<FiHome />}>
                 <Link to={ROUTES.REPORT}>Report </Link>
               </MenuItem>

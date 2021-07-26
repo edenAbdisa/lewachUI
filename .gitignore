@@ -5,7 +5,7 @@ MY OWN.txt
 /node_modules
 /.pnp
 .pnp.js
-
+.env
 # testing
 /coverage
 

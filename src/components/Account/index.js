@@ -49,7 +49,7 @@ class Account extends Component {
   ];
   async getData() {
     this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_INTERNAL_USER).then((response) => {
+    await axios.get(ROUTES.API_GET_INTERNAL_USER+'/active').then((response) => {
       // check if the data is populated
       console.log(response.data.data);
       this.setState({ data: response.data.data });

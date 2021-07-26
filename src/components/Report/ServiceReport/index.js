@@ -54,10 +54,27 @@ class ServiceReport extends Component {
     this.getData();
   }
 }
-async getRequest() {
-  var data={};
+async getServiceCountByStatus() {
+  var data={};    
   var open=0;
   var bartered=0;
+  this.setState({ column: this.COLUMNS });
+  await axios.get(ROUTES.API_GET_SERVICE_COUNT_BY_STATUS).then((response) => {
+    console.log(response.data);
+    data=response.data;
+  });
+  if (this.state.loadingData) {
+    this.getServiceCountByStatus();
+  }
+  Object.keys(data).forEach(function(key) {
+    bartered=key==='bartered'?data[key]:bartered;
+    open=key==='open'?data[key]:open;
+  });
+  this.setState({loadingData: false,  barteredRequest: bartered, openRequest: open});
+
+}
+async getRequest() {
+  var data={};
   var declined=0;
   var accepted=0;
   this.setState({ column: this.COLUMNS });
@@ -70,18 +87,17 @@ async getRequest() {
   }
   Object.keys(data).forEach(function(key) {
     accepted=key==='accepted'?data[key]:accepted;
-    declined=key==='declined'?data[key]:declined;
-    bartered=key==='bartered'?data[key]*2:bartered;
-    open=key==='open'?data[key]:open;
+    declined=key==='declined'?data[key]:declined; 
   });
   this.setState({loadingData: false,
-                 acceptedRequest: accepted,  barteredRequest: bartered, 
-                 declinedRequest: declined,  openRequest: open});
+                 acceptedRequest: accepted,
+                 declinedRequest: declined});
 
 }
 componentWillMount() {
   this.getData();
   this.getRequest();
+  this.getServiceCountByStatus();
 }
  render(){
    return(

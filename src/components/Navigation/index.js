@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import "./navigation.css";
-import SignOutButton from "../SignOut";
+import Button from "react-bootstrap/Button";
+import "./navigation.css"; 
 import * as ROUTES from "../../constants/routes.js";
 import * as THEME from "../../constants/theme.js";
 const Navigation = () => (
@@ -35,13 +35,20 @@ const NavigationAuth = () => (
           <Link to={ROUTES.ADMIN}>Admin</Link>
         </li>
       )} */}
-    <SignOutButton />
+     <Button onClick={onSignOut()}>Sign out</Button>
   </>
 );
-
+const onSignOut = () => {
+  /* localStorage.setItem('auth', false);      
+  localStorage.setItem('role', '');
+  localStorage.setItem('token', '');
+  localStorage.setItem('userId', ''); */  
+  
+     
+};
 const NavigationNonAuth = () => (
   <>
-    <Link to={ROUTES.SIGN_IN} class="nav-link">
+    <Link to={ROUTES.SIGNIN} class="nav-link">
       Sign in
     </Link>
   </>

@@ -1,20 +1,11 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import React, { Component } from "react"; 
 import { compose } from "recompose";
-
-import { SignUpLink } from "../SignUp";
-//import { PasswordForgetLink } from '../PasswordForget';
-//import { withFirebase } from '../Firebase';
+import { SignUpLink } from "../SignUp"; 
 import * as ROUTES from "../../constants/routes";
-
-const SignInPage = () => (
-  <div>
-    <h1>SignIn</h1>
-    <SignInForm />
-    <SignUpLink />
-  </div>
-);
-
+import * as THEME from "../../constants/theme"; 
+import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { Redirect,withRouter } from 'react-router-dom';
 const INITIAL_STATE = {
   email: "",
   password: "",
@@ -31,27 +22,46 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   your personal account page.
 `;
 
-class SignInFormBase extends Component {
+class SignIn extends Component {
   constructor(props) {
-    super(props);
-
+    super(props); 
     this.state = { ...INITIAL_STATE };
   }
+ async login(){   
+  const { email, password } = this.state; 
+      await axios({
+        method: "post",
+        url: ROUTES.API_GET_USER_LOGIN,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+          email:email,
+          password:password
+        })
+      }).then((response) => {
+          // check if the data is populated
+          this.setState({ loadingData: false,messages:"Success"});
+          console.log(response.data);
+          if(response.data.remember_token){        
+            localStorage.setItem('auth', true);      
+          localStorage.setItem('role', response.data.type.toString());
+          localStorage.setItem('token', response.data.remember_token.toString());
+          localStorage.setItem('userId', response.data.id.toString());  
+          this.props.history.push("/report");
+           
+         }
 
-  onSubmit = (event) => {
-    const { email, password } = this.state;
-
-    /*     this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+          if (this.state.loadingData) {
+            this.login();
+          }
       })
-      .catch(error => {
-        this.setState({ error });
-      });
+}
+  async onSubmit (event) {
+    this.login();     
 
-    event.preventDefault(); */
+    event.preventDefault(); 
+
   };
 
   onChange = (event) => {
@@ -64,33 +74,37 @@ class SignInFormBase extends Component {
     const isInvalid = password === "" || email === "";
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <Form onSubmit={(e) => this.onSubmit(e)}>
+        <Form.Group controlId="formBasicAddCategory">
+              <Form.Label>Sign In</Form.Label>
+        <Form.Control
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <Form.Control
           name="password"
           value={password}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
-        <button disabled={isInvalid} type="submit">
+        </Form.Group>
+        <Button
+              variant="primary"
+              type="submit"
+              disabled={isInvalid}
+              style={{ backgroundImage: THEME.SubmitGradientButton }}
+            >
           Sign In
-        </button>
+        </Button>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }
-
-const SignInForm = compose(withRouter)(SignInFormBase);
-
-export default SignInPage;
-
-export { SignInForm };
+ 
+export default withRouter(SignIn); 

@@ -5,6 +5,12 @@ import * as THEME from "../../../constants/theme";
 import * as ROUTES from "../../../constants/routes.js";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+
+import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
+require('dotenv').config();
 const INITIAL_STATE = {
   firstname: "",
   lastname: "",
@@ -12,18 +18,44 @@ const INITIAL_STATE = {
   passwordOne: "",
   passwordTwo: "",
   error: null,
-  role:''
+  role:'',
+  lng:5,
+  lat:5
 };
+const mapContainerRef = React.createRef(null);
 class Users extends Component {
   constructor(props) {
     super(props);
-
-    this.state = { ...INITIAL_STATE };
-  }
-  componentWillMount() {
+    this.state = { ...INITIAL_STATE };  
+  }  
+  
+  componentDidMount() {  
+    const map = new mapboxgl.Map({
+      container: 'map-container' 
+    });
+    const m=new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+      placeholder: 'Enter user address'
+      });
+      m.on('result', function (e) {
+        this.fuSetGeo(e.result)
+    }.bind(this));
+    map.addControl(      
+      m
+    );
     //this.getUser();
   }
-  async createUser() {
+  async onSubmit(event) { 
+      this.createUser();
+    event.preventDefault();
+    //this.props.refresh();
+    //this.props.closePopup();
+  }
+  fuSetGeo= (val) =>{
+    this.setState({lat:val.geometry.coordinates[0],lng:val.geometry.coordinates[1]});
+  };
+  async createUser() { 
     await axios({
       method: "post",
       url: ROUTES.API_GET_USER,
@@ -31,27 +63,45 @@ class Users extends Component {
         "Content-Type": "application/json",
       },
       data: JSON.stringify({
-        email: this.state.email,
-        first_name:this.state.firstname,
-        last_name:this.state.lastname,
-        password:this.state.passwordOne,
-        type:this.state.role
-      }),
+        email: this.state.email.toString(),
+        first_name:this.state.firstname.toString(),
+        last_name:this.state.lastname.toString(),
+        phone_number: "+2519443322",
+        password:this.state.passwordOne.toString(),
+        type:"hr",
+        status: "active",
+        birthdate: "2020-01-27",
+        address:{
+          latitude: this.state.lat,
+          longitude:this.state.lng,
+          type:"user"},
+        membership_id:4
+      })
     }).then((response) => {
       this.setState({ loadingData: false });
       console.log(response);
       this.state.error="Success";
+    }).catch(e=>{
+      this.setState({ error:e});
     });
     if (this.state.loadingData) {
       this.createCategory();
     }
+   // event.preventDefault();
   }
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
-    const { firstname, lastname, email, passwordOne, passwordTwo,role, error } =
+    const { firstname, lastname, email, passwordOne, passwordTwo,role, error,lat,lng } =
       this.state;
+        
+      /*
+   map.on('move', () => {
+      this.(map.getCenter().lng.toFixed(4));
+      setLat(map.getCenter().lat.toFixed(4));
+      setZoom(map.getZoom().toFixed(2));
+    }); */
 
     const isInvalid =
       passwordOne !== passwordTwo ||
@@ -73,6 +123,7 @@ class Users extends Component {
             <Form.Group controlId="formBasicAddType">
               <Form.Label>{this.props.title}</Form.Label>
               <Form.Text className="text-muted">{this.props.message}</Form.Text>
+  
               <Form.Label>First Name</Form.Label>
 
               <Form.Control
@@ -118,9 +169,11 @@ class Users extends Component {
                 type="password"
                 placeholder="Confirm Password"
               />
+              <Form.Label>Address</Form.Label>              
+              <div id='map-container'  />
             </Form.Group>
             <Form.Label>Role</Form.Label>
-            <Form.Group controlId="exampleForm.ControlSelect2">
+            {/* <Form.Group controlId="exampleForm.ControlSelect2">
               <Form.Label> Select Role </Form.Label>
               <Form.Control as="select" name="role" size="sm" value={role}
                 onChange={this.onChange}>
@@ -128,7 +181,8 @@ class Users extends Component {
                 <option value="operations">Operations</option>
                 <option value="data handler">Data Handler</option>
               </Form.Control>
-            </Form.Group>
+            </Form.Group> */}
+            
             <Button
               variant="primary"
               type="submit"
@@ -142,7 +196,10 @@ class Users extends Component {
           </Form>
         </div>
       </div>
-    );
+      
+    );    
+      
+  
   }
 }
 
