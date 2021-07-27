@@ -1,6 +1,7 @@
 import React, { Component } from "react"; 
 import { compose } from "recompose";
 import { SignUpLink } from "../SignUp"; 
+import "./signin.css";
 import * as ROUTES from "../../constants/routes";
 import * as THEME from "../../constants/theme"; 
 import { Form, Button } from "react-bootstrap";
@@ -47,8 +48,8 @@ class SignIn extends Component {
             localStorage.setItem('auth', true);      
           localStorage.setItem('role', response.data.type.toString());
           localStorage.setItem('token', response.data.remember_token.toString());
-          localStorage.setItem('userId', response.data.id.toString());  
-          this.props.history.push("/report");
+          localStorage.setItem('userId', response.data.id);  
+          this.props.history.push(ROUTES.REPORT);
            
          }
 
@@ -74,7 +75,9 @@ class SignIn extends Component {
     const isInvalid = password === "" || email === "";
 
     return (
-      <Form onSubmit={(e) => this.onSubmit(e)}>
+<div className="outer ">
+  <div className="signin_inner">
+  <Form onSubmit={(e) => this.onSubmit(e)} style={{    textAlign: 'center'}}>
         <Form.Group controlId="formBasicAddCategory">
               <Form.Label>Sign In</Form.Label>
         <Form.Control
@@ -96,13 +99,15 @@ class SignIn extends Component {
               variant="primary"
               type="submit"
               disabled={isInvalid}
-              style={{ backgroundImage: THEME.SubmitGradientButton }}
+              style={{ position:'center', backgroundImage: THEME.SubmitGradientButton }}
             >
           Sign In
         </Button>
 
         {error && <p>{error.message}</p>}
       </Form>
+      </div>
+      </div>
     );
   }
 }

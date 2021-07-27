@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+.app-main {
+  padding:0px !important;
+  display: flex;
+  height: 95vh;
+  overflow: hidden;
+}
+.nav-column {
+  padding:0px!important; 
+}
+
+.content-column {
+  font-size: 18px; 
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

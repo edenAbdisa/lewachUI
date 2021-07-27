@@ -77,14 +77,7 @@ const Sidebar = () => {
                 </Link>
               </MenuItem>
             </Menu>
-          </SidebarContent>
-          <SidebarFooter>
-            <Menu iconShape="square">
-              <MenuItem icon={<RiPencilLine />}>
-                <Link to="#">Settings</Link>
-              </MenuItem>
-            </Menu>
-          </SidebarFooter>
+          </SidebarContent> 
         </ProSidebar>
       </div>
     </>

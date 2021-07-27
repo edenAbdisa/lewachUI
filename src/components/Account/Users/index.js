@@ -85,7 +85,7 @@ class Users extends Component {
       this.setState({ error:e});
     });
     if (this.state.loadingData) {
-      this.createCategory();
+      this.createUser();
     }
    // event.preventDefault();
   }

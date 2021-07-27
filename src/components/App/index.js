@@ -10,23 +10,23 @@ import Membership from "../Membership";
 import Utilities from "../Utilities";
 import SignIn from "../SignIn";
 import Account from "../Account";
-import Mapbox from "../Mapbox";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Mapbox from "../Mapbox";  
+import { Grid, Row, Col } from "react-flexbox-grid";
 //import { withAuthentication } from '../Session';
 import "./App.css";
 const App = () => (
-  
+   
   <Router>
+    
      {localStorage.getItem("auth")==='true' ? (
                    <> 
-                   <Navigation />
-             
-                   <Row>
-                     <Col sm={2}>
+                   
+                   <Navigation style={{height:'10%'}}/>
+                   <Grid fluid className="app-main" >
+                     <Col sm={2} className="nav-column" xs={12}  >
                        <Sidebar />
                      </Col>
-                     <Col sm={9}>
+                     <Col className="content-column" xs style={{height:'90%'}}>
                        <Route exact path={ROUTES.REPORT} component={Report} />
                        <Route exact path={ROUTES.STATISTICS} component={Statistics} />
                        <Route exact path={ROUTES.FLAGGEDITEMS} component={Flagged} />
@@ -35,10 +35,14 @@ const App = () => (
                        <Route exact path={ROUTES.ACCOUNT} component={Account} />
                        <Route exact path={ROUTES.MAPBOX} component={Mapbox} />
                      </Col>
-                   </Row>
+                     </Grid>
                    </>
           ) : ( 
+            <>
+            
             <Route exact path={ROUTES.SIGNIN} component={SignIn} />
+            <Route  component={SignIn} />
+            </>
             
         
        )
@@ -46,4 +50,4 @@ const App = () => (
   </Router>
 );
 
-export default App;
+export default withRouter(App);

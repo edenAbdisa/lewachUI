@@ -33,7 +33,8 @@ class UserReport extends Component {
       accessor: "last_name",
       filter: 'equals',
       sticky: "left",
-      }
+      },
+      
     ],
    },
    {
@@ -50,7 +51,8 @@ class UserReport extends Component {
  ];
  async getData() {
   this.setState({ column: this.COLUMNS });
-  await axios.get(ROUTES.API_GET_USER).then((response) => {
+  await axios.get(ROUTES.API_GET_USER,
+    { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} }).then((response) => {
     // check if the data is populated
     console.log(response.data.data);
     this.setState({ data: response.data.data });
