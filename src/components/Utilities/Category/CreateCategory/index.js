@@ -33,7 +33,7 @@ class AddCategory extends Component {
         name: this.state.name,
       }),
     }).then((response) => {
-      this.setState({ loadingData: false,messages:"Success"});
+      this.setState({ loadingData: false});
       console.log(response); 
       this.state.error="Category added successfully.";
     }).catch(e=>{
@@ -113,10 +113,7 @@ class AddCategory extends Component {
               <Form.Label>{this.props.title}</Form.Label>
               <Form.Text className="text-muted">
                 {this.props.messages}
-              </Form.Text>
-              <Form.Text className="text-muted">
-                {this.state.messages}
-              </Form.Text>
+              </Form.Text> 
               <Form.Label>Category Name</Form.Label>
               <Form.Control
                 type="text"
@@ -139,7 +136,7 @@ class AddCategory extends Component {
             >
               {this.props.buttonName}
             </Button>
-            {error && <p>{error.message}</p>}
+             <p>{error}</p>
           </Form>
         </div>
       </div>

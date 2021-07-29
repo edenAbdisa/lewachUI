@@ -39,7 +39,7 @@ class AddType extends Component {
         name: this.state.name,
       }),
     }).then((response) => {
-      this.setState({ loadingData: false,message:"Successfull" });
+      this.setState({ loadingData: false });
       this.state.error="Type added successfully.";
 
       console.log(response);
@@ -154,9 +154,9 @@ class AddType extends Component {
                 value={categoryId}
                 disabled={this.state.isDelete}
               >
-               { this.state.categoryList.array.forEach(element => {
+               { this.state.categoryList.map((element) => (
                <option value={element.id}>{element.name}</option> 
-             }) } 
+               )) } 
               </Form.Control>
             </Form.Group>
             <Button
@@ -167,7 +167,7 @@ class AddType extends Component {
             >
               {this.props.buttonName}
             </Button>
-            {error && <p>{error.message}</p>}
+            <p>{error}</p>
           </Form>
         </div>
       </div>

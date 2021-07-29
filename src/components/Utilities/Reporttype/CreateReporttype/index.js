@@ -160,7 +160,7 @@ class Reporttype extends Component {
             >
               {this.props.buttonName}
             </Button>
-            {error && <p>{error.message}</p>}
+            <p>{error}</p>
           </Form>
         </div>
       </div>
