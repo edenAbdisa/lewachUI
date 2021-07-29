@@ -89,9 +89,7 @@ class AddMembership extends Component {
   };
   onChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value,
-      [event.target.limitOfPost]: event.target.value,
-      [event.target.transactionLimit]: event.target.value,
+      [event.target.name]: event.target.value
     });
   };
 
@@ -139,9 +137,9 @@ class AddMembership extends Component {
                     ? "Enter transaction limit"
                     : this.props.singleData.name
                 }
-                value={limitOfPost}
+                value={transactionLimit}
                 onChange={this.onChange}
-                name="limitOfPost"
+                name="transactionLimit"
                 disabled={this.state.isDelete}
               />
               <Form.Label>Limit of post</Form.Label>
@@ -152,9 +150,9 @@ class AddMembership extends Component {
                     ? "Enter Limit of post"
                     : this.props.singleData.name
                 }
-                value={transactionLimit}
+                value={limitOfPost }
                 onChange={this.onChange}
-                name="transactionLimit"
+                name="limitOfPost"
                 disabled={this.state.isDelete}
               />
             </Form.Group>

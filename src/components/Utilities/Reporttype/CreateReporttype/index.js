@@ -131,7 +131,7 @@ class Reporttype extends Component {
                 name="report_detail"
                 disabled={this.state.isDelete}
               />
-              <Form.Label>Type for</Form.Label>
+              <Form.Label>For</Form.Label>
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlSelect2">
               <Form.Label>

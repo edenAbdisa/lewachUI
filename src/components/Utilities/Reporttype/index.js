@@ -103,7 +103,7 @@ class Reporttype extends Component {
             title="Edit reporttype"
             message="Make sure the report type detail doesnt exist."
             text="Close Me"
-            buttonName="Edit reporttype"
+            buttonName="Edit report type"
             closePopup={this.editReporttypeViewPopup.bind(this)}
             refresh={this.getData.bind(this)}
           />
@@ -115,7 +115,7 @@ class Reporttype extends Component {
             title="Delete reporttype"
             message="Are you sure you want to delete this report type?"
             text="Close Me"
-            buttonName="Delete reporttype"
+            buttonName="Delete report type"
             closePopup={this.deleteReporttypeViewPopup.bind(this)}
             refresh={this.getData.bind(this)}
           />
