@@ -147,9 +147,9 @@ class Reporttype extends Component {
                 disabled={this.state.isDelete}
                 onChange={this.onChange}
               >
-                <option>Users</option>
-                <option>Item</option>
-                <option>Service</option>
+                <option value="user">Users</option>
+                <option value="item">Item</option>
+                <option value="service">Service</option>
               </Form.Control>
             </Form.Group>
             <Button

@@ -153,6 +153,7 @@ class AddType extends Component {
                 size="sm"
                 value={categoryId}
                 disabled={this.state.isDelete}
+                onChange={this.onChange}
               >
                { this.state.categoryList.map((element) => (
                <option value={element.id}>{element.name}</option> 

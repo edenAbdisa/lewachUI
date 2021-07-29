@@ -68,7 +68,7 @@ class Users extends Component {
         last_name:this.state.lastname.toString(),
         phone_number: "+2519443322",
         password:this.state.passwordOne.toString(),
-        type:"hr",
+        type:this.state.role.toString(),
         status: "active",
         birthdate: "2020-01-27",
         address:{
@@ -78,12 +78,11 @@ class Users extends Component {
         membership_id:4
       })
     }).then((response) => {
-      this.setState({ loadingData: false });
+      this.setState({ loadingData: false,error:"User created succesfully" });
       console.log(response);
       this.state.error="User added successfully.";
     }).catch(e=>{
-      this.setState({ error:e});
-      this.state.error="Error happened while adding user";
+      this.setState({ error:"Error happened while adding user"}); 
     });
     if (this.state.loadingData) {
       this.createUser();
@@ -173,16 +172,14 @@ class Users extends Component {
               <Form.Label>Address</Form.Label>              
               <div id='map-container'  />
             </Form.Group>
-            <Form.Label>Role</Form.Label>
-            {/* <Form.Group controlId="exampleForm.ControlSelect2">
+            
               <Form.Label> Select Role </Form.Label>
               <Form.Control as="select" name="role" size="sm" value={role}
-                onChange={this.onChange}>
+                onChange={this.onChange} disabled={this.state.isDelete}>
                 <option value="hr">HR</option>
                 <option value="operations">Operations</option>
                 <option value="data handler">Data Handler</option>
-              </Form.Control>
-            </Form.Group> */}
+              </Form.Control> 
             
             <Button
               variant="primary"
@@ -193,7 +190,7 @@ class Users extends Component {
               {this.props.buttonName}
             </Button>
 
-            {error && <p>{error.message}</p>}
+            <p>{error}</p>
           </Form>
         </div>
       </div>
