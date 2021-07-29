@@ -35,8 +35,10 @@ class AddCategory extends Component {
     }).then((response) => {
       this.setState({ loadingData: false,messages:"Success"});
       console.log(response); 
+      this.state.error="Category added successfully.";
     }).catch(e=>{
-      this.setState({ error:e});
+      //this.setState({ error:e});
+      this.state.error="Error happened while adding category.";
     });
     if (this.state.loadingData) {
       this.createCategory();
@@ -50,6 +52,10 @@ class AddCategory extends Component {
       .then((response) => {
         this.setState({ loadingData: false });
         console.log(response);
+        this.state.error="Category edited successfully.";
+      }).catch(e=>{
+        //this.setState({ error:e});
+        this.state.error="Error happened while editing category.";
       });
     if (this.state.loadingData) {
       this.editCategory();
@@ -60,7 +66,11 @@ class AddCategory extends Component {
       .delete(ROUTES.API_GET_CATEGORY + "/" + this.state.itemId)
       .then((response) => {
         this.setState({ loadingData: false });
+        this.state.error="Category deleted successfully.";
         console.log(response);
+      }).catch(e=>{
+        //this.setState({ error:e});
+        this.state.error="Error happened while deleting category.";
       });
     if (this.state.loadingData) {
       this.deleteCategory();

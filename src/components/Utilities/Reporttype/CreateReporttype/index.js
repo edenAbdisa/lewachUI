@@ -35,7 +35,12 @@ class Reporttype extends Component {
       }),
     }).then((response) => {
       this.setState({ loadingData: false });
+      this.state.error="Report type added successfully.";
+
       console.log(response);
+    }).catch(e=>{
+      //this.setState({ error:e});
+      this.state.error="Error happened while adding report type.";
     });
     if (this.state.loadingData) {
       this.createReporttype();
@@ -49,7 +54,11 @@ class Reporttype extends Component {
       })
       .then((response) => {
         this.setState({ loadingData: false });
+        this.state.error="Report type edited successfully.";
         console.log(response);
+      }).catch(e=>{
+        //this.setState({ error:e});
+        this.state.error="Error happened while editing report type.";
       });
     if (this.state.loadingData) {
       this.editReporttype();
@@ -60,7 +69,12 @@ class Reporttype extends Component {
       .delete(ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId)
       .then((response) => {
         this.setState({ loadingData: false });
+        this.state.error="Report type deleted successfully.";
+
         console.log(response);
+      }).catch(e=>{
+        //this.setState({ error:e});
+        this.state.error="Error happened while deleting the report type.";
       });
     if (this.state.loadingData) {
       this.deleteReporttype();

@@ -5,6 +5,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import * as THEME from "../../../../constants/theme";
 import * as ROUTES from "../../../../constants/routes.js";
 import axios from "axios";
+import { Redirect,withRouter } from 'react-router-dom';
 
 const INITIAL_STATE = {
   name: "",
@@ -25,7 +26,7 @@ class AddType extends Component {
     this.state = { ...INITIAL_STATE };
   }
   componentWillMount() {
-   // this.getCategory();
+    this.getCategory();
   }
   async createType() {
     await axios({
@@ -39,7 +40,12 @@ class AddType extends Component {
       }),
     }).then((response) => {
       this.setState({ loadingData: false,message:"Successfull" });
+      this.state.error="Type added successfully.";
+
       console.log(response);
+    }).catch(e=>{
+      //this.setState({ error:e});
+      this.state.error="Error happened while adding type.";
     });
     if (this.state.loadingData) {
       this.createType();
@@ -51,8 +57,12 @@ class AddType extends Component {
         name: this.state.name,
       })
       .then((response) => {
-        this.setState({ loadingData: false,message:"successfull" });
+        this.setState({ loadingData: false });
+        this.state.error="Type edited successfully.";
         console.log(response);
+      }).catch(e=>{
+        //this.setState({ error:e});
+        this.state.error="Error happened while editing type.";
       });
     if (this.state.loadingData) {
       this.editType();
@@ -62,15 +72,20 @@ class AddType extends Component {
     await axios
       .delete(ROUTES.API_GET_TYPE + "/" + this.state.itemId)
       .then((response) => {
-        this.setState({ loadingData: false,message:"sucessfull" });
+        this.setState({ loadingData: false });
+        this.state.error="Type deleted successfully.";
         console.log(response);
+      }).catch(e=>{
+        //this.setState({ error:e});
+        this.state.error="Error happened while deleting type.";
       });
     if (this.state.loadingData) {
       this.deleteType();
     }
   }
   async getCategory() {
-    await axios.get(ROUTES.API_GET_CATEGORY).then((response) => {
+    await axios.get(ROUTES.API_GET_CATEGORY)
+              .then((response) => {
       this.setState({ categoryList: response.data.data });
       console.log(response);
     });
@@ -93,7 +108,7 @@ class AddType extends Component {
   };
 
   render() {
-    const { name, error } = this.state;
+    const { name,categoryId, error } = this.state;
     const isInvalid = name === "";
     this.state.isDelete= this.props.type === "delete" ;
     this.state.isCreate=this.props.type === "create" ;
@@ -111,9 +126,6 @@ class AddType extends Component {
             <Form.Group controlId="formBasicAddType">
               <Form.Label>{this.props.title}</Form.Label>
               <Form.Text className="text-muted">{this.props.message}</Form.Text>
-              <Form.Text className="text-muted">
-                {this.state.message}
-              </Form.Text>
               <Form.Label>Type</Form.Label>
               <Form.Control
                 type="text"
@@ -139,11 +151,12 @@ class AddType extends Component {
                 as="select"
                 name="categoryId"
                 size="sm"
+                value={categoryId}
                 disabled={this.state.isDelete}
               >
-                {/* { this.state.categoryList.array.forEach(element => {
+               { this.state.categoryList.array.forEach(element => {
                <option value={element.id}>{element.name}</option> 
-             }) } */}
+             }) } 
               </Form.Control>
             </Form.Group>
             <Button
@@ -162,4 +175,4 @@ class AddType extends Component {
   }
 }
 
-export default AddType;
+export default withRouter(AddType);

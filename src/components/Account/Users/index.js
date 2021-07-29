@@ -80,9 +80,10 @@ class Users extends Component {
     }).then((response) => {
       this.setState({ loadingData: false });
       console.log(response);
-      this.state.error="Success";
+      this.state.error="User added successfully.";
     }).catch(e=>{
       this.setState({ error:e});
+      this.state.error="Error happened while adding user";
     });
     if (this.state.loadingData) {
       this.createUser();

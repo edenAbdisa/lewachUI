@@ -6,7 +6,7 @@ import * as ROUTES from "../../constants/routes";
 import * as THEME from "../../constants/theme"; 
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { Redirect,withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 const INITIAL_STATE = {
   email: "",
   password: "",

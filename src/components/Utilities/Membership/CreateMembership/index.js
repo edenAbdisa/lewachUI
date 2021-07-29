@@ -35,7 +35,11 @@ class AddMembership extends Component {
       }),
     }).then((response) => {
       this.setState({ loadingData: false });
+      this.state.error="Membership added successfully.";
       console.log(response);
+    }).catch(e=>{
+      //this.setState({ error:e});
+      this.state.error="Error happened while adding membership.";
     });
     if (this.state.loadingData) {
       this.createMembership();
@@ -48,7 +52,11 @@ class AddMembership extends Component {
       })
       .then((response) => {
         this.setState({ loadingData: false });
+        this.state.error="Membership edited successfully.";
         console.log(response);
+      }).catch(e=>{
+        //this.setState({ error:e});
+        this.state.error="Error happened while editing membership.";
       });
     if (this.state.loadingData) {
       this.editMembership();
@@ -59,7 +67,11 @@ class AddMembership extends Component {
       .delete(ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId)
       .then((response) => {
         this.setState({ loadingData: false });
+        this.state.error="Membership deleted successfully.";
         console.log(response);
+      }).catch(e=>{
+        //this.setState({ error:e});
+        this.state.error="Error happened while deleting membership.";
       });
     if (this.state.loadingData) {
       this.deleteMembership();
