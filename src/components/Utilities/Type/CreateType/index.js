@@ -39,8 +39,8 @@ class AddType extends Component {
         name: this.state.name,
       }),
     }).then((response) => {
-      this.setState({ loadingData: false });
-      this.state.error="Type added successfully.";
+      this.setState({ loadingData: false,
+        error:"Type added successfully."});
 
       console.log(response);
     }).catch(e=>{
@@ -57,8 +57,8 @@ class AddType extends Component {
         name: this.state.name,
       })
       .then((response) => {
-        this.setState({ loadingData: false });
-        this.state.error="Type edited successfully.";
+        this.setState({ loadingData: false,
+          error:"Type edited successfully."});
         console.log(response);
       }).catch(e=>{
         //this.setState({ error:e});
@@ -72,8 +72,8 @@ class AddType extends Component {
     await axios
       .delete(ROUTES.API_GET_TYPE + "/" + this.state.itemId)
       .then((response) => {
-        this.setState({ loadingData: false });
-        this.state.error="Type deleted successfully.";
+        this.setState({ loadingData: false,
+          error:"Type deleted successfully."});
         console.log(response);
       }).catch(e=>{
         //this.setState({ error:e});

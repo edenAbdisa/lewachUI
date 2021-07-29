@@ -34,8 +34,8 @@ class Reporttype extends Component {
         type_for: this.state.type_for,
       }),
     }).then((response) => {
-      this.setState({ loadingData: false });
-      this.state.error="Report type added successfully.";
+      this.setState({ loadingData: false,
+        error:"Report type added successfully."});
 
       console.log(response);
     }).catch(e=>{
@@ -53,8 +53,8 @@ class Reporttype extends Component {
         type_for: this.state.type_for,
       })
       .then((response) => {
-        this.setState({ loadingData: false });
-        this.state.error="Report type edited successfully.";
+        this.setState({ loadingData: false,
+          error:"Report type edited successfully."});
         console.log(response);
       }).catch(e=>{
         //this.setState({ error:e});
@@ -68,8 +68,8 @@ class Reporttype extends Component {
     await axios
       .delete(ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId)
       .then((response) => {
-        this.setState({ loadingData: false });
-        this.state.error="Report type deleted successfully.";
+        this.setState({ loadingData: false,
+          error:"Report type deleted successfully."});
 
         console.log(response);
       }).catch(e=>{

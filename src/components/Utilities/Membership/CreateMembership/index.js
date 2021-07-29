@@ -34,8 +34,8 @@ class AddMembership extends Component {
         name: this.state.name,
       }),
     }).then((response) => {
-      this.setState({ loadingData: false });
-      this.state.error="Membership added successfully.";
+      this.setState({ loadingData: false,
+        error:"Membership added successfully."});
       console.log(response);
     }).catch(e=>{
       //this.setState({ error:e});
@@ -51,8 +51,8 @@ class AddMembership extends Component {
         name: this.state.name,
       })
       .then((response) => {
-        this.setState({ loadingData: false });
-        this.state.error="Membership edited successfully.";
+        this.setState({ loadingData: false,
+          error:"Membership edited successfully."});
         console.log(response);
       }).catch(e=>{
         //this.setState({ error:e});
@@ -66,8 +66,8 @@ class AddMembership extends Component {
     await axios
       .delete(ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId)
       .then((response) => {
-        this.setState({ loadingData: false });
-        this.state.error="Membership deleted successfully.";
+        this.setState({ loadingData: false,
+          error:"Membership deleted successfully."});
         console.log(response);
       }).catch(e=>{
         //this.setState({ error:e});

@@ -33,9 +33,8 @@ class AddCategory extends Component {
         name: this.state.name,
       }),
     }).then((response) => {
-      this.setState({ loadingData: false});
-      console.log(response); 
-      this.state.error="Category added successfully.";
+      this.setState({ loadingData: false,
+        error:"Category added successfully."});
     }).catch(e=>{
       //this.setState({ error:e});
       this.state.error="Error happened while adding category.";
@@ -50,9 +49,8 @@ class AddCategory extends Component {
         name: this.state.name,
       })
       .then((response) => {
-        this.setState({ loadingData: false });
-        console.log(response);
-        this.state.error="Category edited successfully.";
+        this.setState({ loadingData: false,
+          error:"Category edited successfully."});
       }).catch(e=>{
         //this.setState({ error:e});
         this.state.error="Error happened while editing category.";
@@ -65,8 +63,8 @@ class AddCategory extends Component {
     await axios
       .delete(ROUTES.API_GET_CATEGORY + "/" + this.state.itemId)
       .then((response) => {
-        this.setState({ loadingData: false });
-        this.state.error="Category deleted successfully.";
+        this.setState({ loadingData: false,
+          error:"Category deleted successfully."});
         console.log(response);
       }).catch(e=>{
         //this.setState({ error:e});
