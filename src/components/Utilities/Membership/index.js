@@ -23,6 +23,12 @@ class Membership extends Component {
   }
   COLUMNS = [
     {
+      Header: "Id",
+      Footer: "Id",
+      accessor: "id",
+      sticky: "left",
+    },
+    {
       Header: "Name",
       Footer: "Name",
       accessor: "name",

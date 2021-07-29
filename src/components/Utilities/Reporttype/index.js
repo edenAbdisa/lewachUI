@@ -21,6 +21,12 @@ class Reporttype extends Component {
   }
   COLUMNS = [
     {
+      Header: "Id",
+      Footer: "Id",
+      accessor: "id",
+      sticky: "left",
+    },
+    {
       Header: "Report Detail",
       Footer: "Report Detail",
       accessor: "report_detail",
