@@ -32,6 +32,8 @@ class AddMembership extends Component {
       },
       data: JSON.stringify({
         name: this.state.name,
+        limit_of_post: this.state.limitOfPost,
+        transaction_limit: this.state.transactionLimit
       }),
     }).then((response) => {
       this.setState({ loadingData: false,
@@ -39,6 +41,7 @@ class AddMembership extends Component {
       console.log(response);
     }).catch(e=>{
       //this.setState({ error:e});
+      this.setState({ loadingData: false});
       this.state.error="Error happened while adding membership.";
     });
     if (this.state.loadingData) {
@@ -49,12 +52,14 @@ class AddMembership extends Component {
     await axios
       .put(ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId, {
         name: this.state.name,
+        limit_of_post: this.state.limitOfPost,
+        transaction_limit: this.state.transactionLimit
       })
       .then((response) => {
         this.setState({ loadingData: false,
           error:"Membership edited successfully."});
         console.log(response);
-      }).catch(e=>{
+      }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while editing membership.";
       });
@@ -69,7 +74,7 @@ class AddMembership extends Component {
         this.setState({ loadingData: false,
           error:"Membership deleted successfully."});
         console.log(response);
-      }).catch(e=>{
+      }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while deleting membership.";
       });

@@ -31,14 +31,14 @@ class Reporttype extends Component {
       },
       data: JSON.stringify({
         report_detail: this.state.report_detail,
-        type_for: this.state.type_for,
+        type_for: this.state.type_for
       }),
     }).then((response) => {
       this.setState({ loadingData: false,
         error:"Report type added successfully."});
 
       console.log(response);
-    }).catch(e=>{
+    }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
       this.state.error="Error happened while adding report type.";
     });
@@ -50,13 +50,13 @@ class Reporttype extends Component {
     await axios
       .put(ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId, {
         report_detail: this.state.report_detail,
-        type_for: this.state.type_for,
+        type_for: this.state.type_for
       })
       .then((response) => {
         this.setState({ loadingData: false,
           error:"Report type edited successfully."});
         console.log(response);
-      }).catch(e=>{
+      }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while editing report type.";
       });
@@ -72,7 +72,7 @@ class Reporttype extends Component {
           error:"Report type deleted successfully."});
 
         console.log(response);
-      }).catch(e=>{
+      }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while deleting the report type.";
       });
@@ -142,8 +142,9 @@ class Reporttype extends Component {
               </Form.Label>
               <Form.Control
                 as="select"
-                name="categoryId"
+                name="type_for"
                 size="sm"
+                value={type_for}
                 disabled={this.state.isDelete}
                 onChange={this.onChange}
               >

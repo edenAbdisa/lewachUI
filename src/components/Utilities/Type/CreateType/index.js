@@ -37,6 +37,7 @@ class AddType extends Component {
       },
       data: JSON.stringify({
         name: this.state.name,
+        category_id: this.state.categoryId
       }),
     }).then((response) => {
       this.setState({ loadingData: false,
@@ -45,6 +46,7 @@ class AddType extends Component {
       console.log(response);
     }).catch(e=>{
       //this.setState({ error:e});
+      this.setState({ loadingData: false});
       this.state.error="Error happened while adding type.";
     });
     if (this.state.loadingData) {
@@ -55,6 +57,7 @@ class AddType extends Component {
     await axios
       .put(ROUTES.API_GET_TYPE + "/" + this.state.itemId, {
         name: this.state.name,
+        category_id: this.state.categoryId
       })
       .then((response) => {
         this.setState({ loadingData: false,
@@ -62,6 +65,7 @@ class AddType extends Component {
         console.log(response);
       }).catch(e=>{
         //this.setState({ error:e});
+        this.setState({ loadingData: false});
         this.state.error="Error happened while editing type.";
       });
     if (this.state.loadingData) {
@@ -77,6 +81,7 @@ class AddType extends Component {
         console.log(response);
       }).catch(e=>{
         //this.setState({ error:e});
+        this.setState({ loadingData: false});
         this.state.error="Error happened while deleting type.";
       });
     if (this.state.loadingData) {
@@ -86,7 +91,7 @@ class AddType extends Component {
   async getCategory() {
     await axios.get(ROUTES.API_GET_CATEGORY)
               .then((response) => {
-      this.setState({ categoryList: response.data.data });
+      this.setState({ categoryList: response.data.data,loadingData:false });
       console.log(response);
     });
     if (this.state.loadingData) {

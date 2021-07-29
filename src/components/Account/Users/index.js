@@ -81,7 +81,7 @@ class Users extends Component {
       this.setState({ loadingData: false,error:"User created succesfully" });
       console.log(response);
       this.state.error="User added successfully.";
-    }).catch(e=>{
+    }).catch(e=>{this.setState({ loadingData: false});
       this.setState({ error:"Error happened while adding user"}); 
     });
     if (this.state.loadingData) {
