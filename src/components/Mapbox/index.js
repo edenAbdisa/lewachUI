@@ -11,9 +11,9 @@ mapboxgl.accessToken =process.env.REACT_APP_MAPBOX_API_KEY;
 const Map = () => {
   const mapContainerRef = useRef(null);
 
-  const [lng, setLng] = useState(-87);
-  const [lat, setLat] = useState(41);
-  const [zoom, setZoom] = useState(10.5);
+  const [lng, setLng] = useState(38);
+  const [lat, setLat] = useState(8);
+  const [zoom, setZoom] = useState(3.5);
  
   // Add the control to the map.
   
