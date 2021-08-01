@@ -80,8 +80,10 @@ class ItemReport extends Component {
     var declined=0;
     var accepted=0;
     this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_REQUEST_COUNT+'/item').then((response) => {
+    await axios.get(ROUTES.API_GET_REQUEST_COUNT+'/item')
+        .then((response) => {
       console.log(response.data);
+      this.setState({loadingData: false});
       data=response.data;
     });
     if (this.state.loadingData) {
@@ -91,7 +93,7 @@ class ItemReport extends Component {
       accepted=key==='accepted'?data[key]:accepted;
       declined=key==='declined'?data[key]:declined;
     });
-    this.setState({loadingData: false,
+    this.setState({
                    acceptedRequest: accepted, 
                    declinedRequest: declined});
 

@@ -10,9 +10,8 @@
   flex-flow: row nowrap;
   justify-content: space-between !important;
 }
-.navbar-brand { 
-  padding-top:0em !important;
-  padding-bottom: .3125rem  !important;
+.navbar-brand {  
+  padding-top: .3125rem  !important;
   margin-right: 1rem;
   font-size: 1.45rem  !important;
 }

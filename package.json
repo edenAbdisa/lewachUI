@@ -12,6 +12,7 @@
     "date-fns": "^2.22.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "geojson": "^0.5.0",
     "mapbox-gl": "^2.3.1",
     "match-sorter": "^6.3.0",
     "react": "^17.0.2",

@@ -11,7 +11,7 @@ const Navigation = () => (
   <Navbar
    
     expand="lg"
-    style={{background: THEME.HeaderColor, color: THEME.HeaderFontColor }}
+    style={{background: THEME.HeaderColor, color: THEME.HeaderFontColor,zIndex:10 }}
   >
     <Navbar.Brand href="#home" style={{ color: THEME.HeaderFontColor }}>
       {THEME.AppNameAdmin}

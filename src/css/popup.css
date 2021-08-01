@@ -8,15 +8,13 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(151, 93, 93, 0.5);
 }
 .popup_inner {
   margin: 0;
   position: absolute;
-  top: 50%; 
-  -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    
+  top: 10%;  
+  bottom: 10%;
   overflow-y: scroll;
   padding: 20px;
   left: 25%;

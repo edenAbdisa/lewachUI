@@ -17,6 +17,7 @@ const INITIAL_STATE = {
   email: "",
   passwordOne: "",
   passwordTwo: "",
+  passworderr:"",
   error: null,
   role:'',
   lng:5,
@@ -91,9 +92,14 @@ class Users extends Component {
   }
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+    if(event.target.name==='passwordOne' && event.target.value.length < 8){
+      this.setState({passworderr:"Password must be greater than 8."});
+    }else{
+      this.setState({passworderr:"Good password."});
+    }
   };
   render() {
-    const { firstname, lastname, email, passwordOne, passwordTwo,role, error,lat,lng } =
+    const { firstname, lastname, email, passwordOne, passwordTwo,role, error,lat,lng,passworderr } =
       this.state;
         
       /*
@@ -105,6 +111,7 @@ class Users extends Component {
 
     const isInvalid =
       passwordOne !== passwordTwo ||
+      passwordOne.length < 8 ||
       passwordOne === "" ||
       email === "" ||
       firstname === "" ||
@@ -159,8 +166,10 @@ class Users extends Component {
                 value={passwordOne}
                 onChange={this.onChange}
                 type="password"
-                placeholder="Password"
+                placeholder="Password must be greater than 8 characters"
               />
+              
+              <Form.Label>{this.state.passworderr}</Form.Label>
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 name="passwordTwo"

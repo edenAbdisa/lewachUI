@@ -94,8 +94,10 @@ class Flagged extends Component {
         <RowSelection
           data={this.state.data}
           column={this.state.column}
-          edit={this.viewFlaggedViewPopup.bind(this)}
-          delete={this.viewFlaggedViewPopup.bind(this)}
+          view={this.viewFlaggedViewPopup.bind(this)} 
+          showButton={false}
+          showApprove={false}
+          showRemove={true}
         />
         {this.state.viewShowPopup ? (
           <FlaggedItemCard

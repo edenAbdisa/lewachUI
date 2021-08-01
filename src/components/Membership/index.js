@@ -91,6 +91,7 @@ class Membership extends Component {
           approve={this.approveOrganizationViewPopup.bind(this)} 
           showButton={false}
           showApprove={true}
+          showRemove={false}
         />
         {this.state.approveShowPopup ? (
           <UserCard

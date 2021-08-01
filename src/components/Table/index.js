@@ -11,6 +11,7 @@ import "./table.css";
 import { Checkbox } from "./Checkbox";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import { GrView } from "react-icons/gr";
 
 import { FcApprove } from "react-icons/fc";
 import { GlobalFilter,SliderColumnFilter  } from "./GlobalFilter";
@@ -97,6 +98,15 @@ const RowSelection = (props) => {
       }
     }
   };
+  const handleView = (e) => {
+    if (props.view) {
+      if (selectedFlatRows.length===0) {
+       
+      }else{
+        props.view(selectedFlatRows[0].values);
+      }
+    }
+  };
   return (
     <>
       
@@ -149,6 +159,12 @@ const RowSelection = (props) => {
               <th onClick={handleApprove}>
                 <FcApprove />
               </th>
+              </>):null
+              }
+              { props.showRemove? (<>
+                <th onClick={handleView}>
+                <GrView />
+              </th> 
               </>):null
               }
             </tr>
