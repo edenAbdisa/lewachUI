@@ -16,11 +16,17 @@ class UserCard extends Component {
     error: null,
     loadingData: true };
   }
-  async approveOrganization() {
-    await axios
-      .put(ROUTES.API_GET_USER + "/" + this.state.itemId,{
+  async approveOrganization(event) {
+    await axios({
+      method:"put",
+      url: ROUTES.API_GET_SINGLE_USER + "/" + this.state.itemId,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data:JSON.stringify({
         status:'active',
-      })
+      }),
+    })
       .then((response) => {
         this.setState({ loadingData: false });
         console.log(response);
@@ -29,7 +35,7 @@ class UserCard extends Component {
       this.approveOrganization();
     }
   }
-  async declineOrganization() {
+  async declineOrganization(event) {
     await axios
       .put(ROUTES.API_GET_USER + "/" + this.state.itemId,{
         status:'declined'
@@ -68,14 +74,14 @@ class UserCard extends Component {
     <Button
               variant="primary"
               type="submit"
-              onClick={this.approveOrganization}
+              onClick={(e) => this.approveOrganization(e)} 
               style={{ backgroundImage: THEME.SubmitGradientButton }}
             >
               Approve
             </Button>
             <Button
               variant="primary"
-              onClick={this.declineOrganization}
+              onClick={(e) => this.declineOrganization(e)} 
               style={{ backgroundImage: THEME.SubmitGradientButton }}
             >
               Decline

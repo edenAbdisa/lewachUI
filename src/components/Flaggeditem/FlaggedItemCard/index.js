@@ -1,18 +1,22 @@
 import React, { Component } from "react";
-import { Card } from "react-bootstrap";
+import { Card,Button } from "react-bootstrap";
 import "./card.css";
 import logo from "./../../../logo.svg";
 import * as THEME from "../../../constants/theme";
+import * as ROUTES from "../../../constants/routes.js";
+import axios from "axios";
 import "../../../css/popup.css";
 import { AiFillCloseCircle } from "react-icons/ai";
 const INITIAL_STATE = {
   name: "",
   itemId: 0,
+  flagId: 0,
   error: null,
   isDelete: false,
   isCreate: false,
   isEdit: false,
   loadingData: true,
+  type:""
 };
 
 class FlaggedItemCard extends Component {
@@ -20,7 +24,58 @@ class FlaggedItemCard extends Component {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
-
+  async keepItem(event) {
+    await axios({
+      method:"delete",
+      url: ROUTES.API_GET_FLAG + "/" + this.state.flagId
+    })
+      .then((response) => {
+        this.setState({ loadingData: false });
+        console.log(response);
+      });
+    if (this.state.loadingData) {
+      this.keepItem();
+    }
+  }
+  async removeItem(event) {
+    var url="";
+    if(this.state.type==='service'){
+      url=ROUTES.API_GET_SERVICE + "/" + this.state.itemId;
+    }else{
+      url=ROUTES.API_GET_ITEM + "/" + this.state.itemId
+    }
+    await axios({
+      method:"put",
+      url: url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data:JSON.stringify({
+        status:'removed',
+      }),
+    })
+      .then((response) => {
+        this.setState({ loadingData: false });
+        console.log(response);
+      });
+    if (this.state.loadingData) {
+      this.removeItem();
+    }
+    await axios({
+      method:"delete",
+      url: ROUTES.API_GET_FLAG + "/" + this.state.flagId
+    })
+      .then((response) => {
+        this.setState({ loadingData: false });
+        console.log(response);
+      });
+    if (this.state.loadingData) {
+      this.keepItem();
+    }
+  }
+  componentDidMount(){
+    this.setState({type:this.props.singleData.type,flagId:this.props.singleData.id,itemId:this.props.singleData.flagged_item_id});
+  }
   render() {
     return (
       <div className="popup">
@@ -44,14 +99,25 @@ class FlaggedItemCard extends Component {
             </Card.Body>
             <Card.Body
               style={{
-                backgroundImage: THEME.CardBottom,
                 color: "black !important",
               }}
             >
-              <Card.Link href="#" style={{ color: "#fff !important" }}>
-                Keep it
-              </Card.Link>
-              <Card.Link href="#">Remove it</Card.Link>
+              <Button
+              variant="primary"
+              type="submit"
+              onClick={(e) => this.keepItem(e)} 
+              style={{ backgroundImage: THEME.SubmitGradientButton }}
+            >
+              Keep it
+            </Button>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={(e) => this.removeItem(e)} 
+              style={{ backgroundImage: THEME.SubmitGradientButton }}
+            >
+              Remove it
+            </Button> 
             </Card.Body>
           </Card>
         </div>

@@ -2,6 +2,7 @@ import React,{Component} from "react";
 import { Row, Col } from "react-bootstrap";
 import CardReport from "../CardReport";
 import * as ROUTES from "../../../constants/routes.js";
+import * as THEME from "../../../constants/theme.js";
 import axios from "axios";
 import RowSelection from "../../Table";
 import { format } from 'date-fns';
@@ -91,14 +92,16 @@ componentWillMount() {
 render(){
   return(
     <>
-    <Row
-      style={{
-        backgroundColor: "#def1ef",
-        borderRadius: 25,
+    <div style={{
+        backgroundColor: THEME.DivColor, 
         textAlign: "-webkit-center",
         padding: 9,
-
-      }}
+        borderColor:THEME.ReportCardBoundaryColor,
+        borderWidth:0.5,
+        borderStyle:'solid'
+      }}>
+    <Row
+       
     >
       <Col>
         <CardReport title="Number of organization registered" content={this.state.organizationNumber} />
@@ -107,11 +110,13 @@ render(){
         <CardReport title="Number of user registered" content={this.state.userNumber} />
       </Col>
     </Row>
+    </div>
   <RowSelection
           data={this.state.data}
           column={this.state.column} 
           showButton={false}
-    /> </>
+    /> 
+    </>
   )};
 }
 

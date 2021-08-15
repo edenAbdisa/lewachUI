@@ -22,6 +22,10 @@ table th, tfoot td {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-image: linear-gradient(to right, #fe4357 , #f48769);
+  background-color: #3f2c37;
   color: white;
+}
+input[type="checkbox"]#checkbox1:checked {
+  border-color: #3f2c37!important;
+  background-color:#f87c1f!important;
 }

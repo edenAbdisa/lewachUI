@@ -24,6 +24,12 @@ class Flagged extends Component {
       sticky: "left",
     },
     {
+      Header: "Item Id",
+      Footer: "Item Id",
+      accessor: "flagged_item_id",
+      sticky: "left",
+    },
+    {
       Header: "Item",
       Footer: "Item",
       accessor: "flagged_item.name",

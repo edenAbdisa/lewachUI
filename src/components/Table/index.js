@@ -11,7 +11,7 @@ import "./table.css";
 import { Checkbox } from "./Checkbox";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
-import { GrView } from "react-icons/gr";
+import { AiOutlineFolderView } from "react-icons/ai";
 
 import { FcApprove } from "react-icons/fc";
 import { GlobalFilter,SliderColumnFilter  } from "./GlobalFilter";
@@ -163,7 +163,7 @@ const RowSelection = (props) => {
               }
               { props.showRemove? (<>
                 <th onClick={handleView}>
-                <GrView />
+                <AiOutlineFolderView/>
               </th> 
               </>):null
               }

@@ -13,7 +13,7 @@ const Navigation = () => (
     expand="lg"
     style={{background: THEME.HeaderColor, color: THEME.HeaderFontColor,zIndex:10 }}
   >
-    <Navbar.Brand href="#home" style={{ color: THEME.HeaderFontColor }}>
+    <Navbar.Brand href="#home" style={{ color: '#fff!important' }}>
       {THEME.AppNameAdmin}
     </Navbar.Brand>
     <Navbar.Toggle

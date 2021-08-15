@@ -6,6 +6,7 @@ import Type from "./Type";
 import Membership from "./Membership";
 import Reporttype from "./Reporttype";
 import * as THEME from "../../constants/theme.js";
+import "../../css/nav.css";
 
 const Utilities = () => (
   <>
@@ -20,7 +21,7 @@ const Utilities = () => (
     </h3>
 
     <Tabs defaultActiveKey="category" id="uncontrolled-tab-examples">
-      <Tab eventKey="category" title="Category">
+      <Tab eventKey="category" title="Category" >
         <Category />
       </Tab>
       <Tab eventKey="type" title="Type">

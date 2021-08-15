@@ -20,7 +20,7 @@ import { BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
 //import "./Header.css";
 import * as ROUTES from "../../constants/routes.js";
-
+import * as THEME from "../../constants/theme.js";
 const Sidebar = () => {
   //create initial menuCollapse state using useState hook
   const [menuCollapse, setMenuCollapse] = useState(false);
@@ -35,8 +35,8 @@ const Sidebar = () => {
     <>
       <div id="header">
         {}
-        <ProSidebar collapsed={menuCollapse}>
-          <SidebarHeader>
+        <ProSidebar collapsed={menuCollapse} style={{backgroundColor:THEME.SidebarColor}}>
+          <SidebarHeader style={{backgroundColor:THEME.SidebarColor}}>
             <div className="logotext" onClick={menuIconClick}>
               {/* changing menu collapse icon on click */}
               <p>
@@ -44,12 +44,12 @@ const Sidebar = () => {
               </p>
             </div>
           </SidebarHeader>
-          <SidebarContent>
-            <Menu iconShape="square">
-            <MenuItem icon={<FiHome />}>
+          <SidebarContent style={{backgroundColor:THEME.SidebarColor}}>
+            <Menu iconShape="square" style={{backgroundColor:THEME.SidebarColor}}>
+            <MenuItem icon={<FiHome />} style={{backgroundColor:THEME.SidebarColor}}>
                 <Link to={ROUTES.MAPBOX}>Users <br/> Map  </Link>
               </MenuItem>
-              <MenuItem icon={<FiHome />}>
+              <MenuItem icon={<FiHome />} style={{backgroundColor:THEME.SidebarColor}}>
                 <Link to={ROUTES.REPORT}>Report </Link>
               </MenuItem>
               <MenuItem icon={<FaList />}>
