@@ -29,6 +29,12 @@ class Account extends Component {
   }
   COLUMNS = [
     {
+      Header: "Id",
+      Footer: "Id",
+      accessor: "id",
+      sticky: "left",
+    },
+    {
       Header: "First Name",
       Footer: "First Name",
       accessor: "first_name",
