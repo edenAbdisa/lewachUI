@@ -59,7 +59,7 @@ class Users extends Component {
   async createUser() { 
     await axios({
       method: "post",
-      url: ROUTES.API_GET_USER,
+      url: ROUTES.API_GET_SINGLE_USER,
       headers: {
         "Content-Type": "application/json",
       },

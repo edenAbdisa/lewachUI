@@ -13,8 +13,10 @@ const Navigation = () => (
     expand="lg"
     style={{background: THEME.HeaderColor, color: THEME.HeaderFontColor,zIndex:10 }}
   >
-    <Navbar.Brand href="#home" style={{ color: '#fff!important' }}>
+    <Navbar.Brand  >
+      <Link to={ROUTES.LANDING} class="nav-link" style={{ color: '#fff!important' }}>
       {THEME.AppNameAdmin}
+      </Link>
     </Navbar.Brand>
     <Navbar.Toggle
       aria-controls="basic-navbar-nav"
