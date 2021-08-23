@@ -15,14 +15,17 @@ class Statistics extends Component {
       forServiceLineData:[],
       forFlagLineData:[],
       forRequestLineData:[],
-      arr:[]
+      arr:[],
+      startDate:new Date(),
+      endDate:new Date(),
     }
   }
   async getUserData() {
    var data={};
    var lineData=[]; 
     this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_USER_COUNT_DATE+'/created_at').then((response) => {
+    await axios.get(ROUTES.API_GET_USER_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate)
+            .then((response) => {
       console.log(response.data);
       data=response.data;
      if (this.state.loadingData) {
@@ -43,7 +46,7 @@ class Statistics extends Component {
     var data={};
     var lineData=[]; 
      this.setState({ column: this.COLUMNS });
-     await axios.get(ROUTES.API_GET_ITEM_COUNT_DATE+'/created_at').then((response) => {
+     await axios.get(ROUTES.API_GET_ITEM_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
        console.log(response.data);
        data=response.data;
       if (this.state.loadingData) {
@@ -64,7 +67,7 @@ class Statistics extends Component {
     var data={};
     var lineData=[]; 
      this.setState({ column: this.COLUMNS });
-     await axios.get(ROUTES.API_GET_REQUEST_COUNT_DATE+'/created_at').then((response) => {
+     await axios.get(ROUTES.API_GET_REQUEST_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
        console.log(response.data);
        data=response.data;
       if (this.state.loadingData) {
@@ -85,7 +88,7 @@ class Statistics extends Component {
     var data={};
     var lineData=[]; 
      this.setState({ column: this.COLUMNS });
-     await axios.get(ROUTES.API_GET_SERVICE_COUNT_DATE+'/created_at').then((response) => {
+     await axios.get(ROUTES.API_GET_SERVICE_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
        console.log(response.data);
        data=response.data;
       if (this.state.loadingData) {
@@ -106,7 +109,7 @@ class Statistics extends Component {
     var data={};
     var lineData=[]; 
      this.setState({ column: this.COLUMNS });
-     await axios.get(ROUTES.API_GET_FLAG_COUNT_DATE+'/created_at').then((response) => {
+     await axios.get(ROUTES.API_GET_FLAG_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
        console.log(response.data);
        data=response.data;
       if (this.state.loadingData) {
@@ -123,7 +126,16 @@ class Statistics extends Component {
        this.setState({ loadingData: false, forFlagLineData:lineData});
      });    
    }
+   setDate = () => { 
+    var today = new Date('yyyy-MM-dd');
+    var firstDay = today.getFullYear() + '-' + (today.getMonth() ) + '-' + today.getDate();
+    var lastDay = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(); 
+    console.log(firstDay);
+    console.log(lastDay);
+    this.setState({startDate:firstDay,endDate:lastDay})
+   }
   componentWillMount() {
+    this.setDate();
     this.getUserData();
     this.getItemData();
     this.getRequestData();
@@ -150,6 +162,7 @@ class Statistics extends Component {
           title="Number of registered Service"
           ylabel="Number of service"
           xlabel="Date"
+          type='service'
         />{" "}
       </Col>
       <Col>
@@ -158,6 +171,7 @@ class Statistics extends Component {
           title="Number of registered items"
           ylabel="Number of items"
           xlabel="Date"
+          type='item'
         />
       </Col>
     </Row>
@@ -168,6 +182,7 @@ class Statistics extends Component {
           title="Number of registered users"
           ylabel="Number of users"
           xlabel="Date"
+          type='user'
         />{" "}
       </Col>
       <Col>
@@ -176,6 +191,7 @@ class Statistics extends Component {
           title="Number of flagged items"
           ylabel="Number of Flagged items"
           xlabel="Date"
+          type='flag'
         />
       </Col>
     </Row>
@@ -186,6 +202,7 @@ class Statistics extends Component {
           title="Number of Request"
           ylabel="Number of Requests"
           xlabel="Date"
+          type='request'
         />{" "}
       </Col>
     </Row>
