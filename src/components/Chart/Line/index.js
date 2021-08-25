@@ -14,8 +14,8 @@ class Line extends Component {
     super(props);
     this.state={
       dataPoints:this.props.dataPoints,
-      startDate:new Date("2016-01-04"),
-      endDate:new Date("2016-01-04"),
+      startDate:new Date(),
+      endDate:new Date(),
     }
 
   }
@@ -23,7 +23,8 @@ class Line extends Component {
     var data={};
     var lineData=[]; 
      this.setState({ column: this.COLUMNS });
-     await axios.get(ROUTES.API_GET_USER_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate)
+     await axios.get(ROUTES.API_GET_USER_COUNT_DATE+'/created_at/'+this.state.startDate.getFullYear().toString() + '-' + (this.state.startDate.getMonth()+ 1 ).toString() + '-' + this.state.startDate.getDate().toString()
+     +'/'+this.state.endDate.getFullYear().toString() + '-' + (this.state.endDate.getMonth() + 1).toString() + '-' + this.state.endDate.getDate().toString())
              .then((response) => {
        console.log(response.data);
        data=response.data;
@@ -45,7 +46,9 @@ class Line extends Component {
      var data={};
      var lineData=[]; 
       this.setState({ column: this.COLUMNS });
-      await axios.get(ROUTES.API_GET_ITEM_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
+      await axios.get(ROUTES.API_GET_ITEM_COUNT_DATE+'/created_at/'+this.state.startDate.getFullYear().toString() + '-' + (this.state.startDate.getMonth()+ 1 ).toString() + '-' + this.state.startDate.getDate().toString()
+      +'/'+this.state.endDate.getFullYear().toString() + '-' + (this.state.endDate.getMonth() + 1).toString() + '-' + this.state.endDate.getDate().toString())
+      .then((response) => {
         console.log(response.data);
         data=response.data;
        if (this.state.loadingData) {
@@ -66,7 +69,9 @@ class Line extends Component {
      var data={};
      var lineData=[]; 
       this.setState({ column: this.COLUMNS });
-      await axios.get(ROUTES.API_GET_REQUEST_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
+      await axios.get(ROUTES.API_GET_REQUEST_COUNT_DATE+'/created_at/'+this.state.startDate.getFullYear().toString() + '-' + (this.state.startDate.getMonth()+ 1 ).toString() + '-' + this.state.startDate.getDate().toString()
+      +'/'+this.state.endDate.getFullYear().toString() + '-' + (this.state.endDate.getMonth() + 1).toString() + '-' + this.state.endDate.getDate().toString())
+      .then((response) => {
         console.log(response.data);
         data=response.data;
        if (this.state.loadingData) {
@@ -87,7 +92,9 @@ class Line extends Component {
      var data={};
      var lineData=[]; 
       this.setState({ column: this.COLUMNS });
-      await axios.get(ROUTES.API_GET_SERVICE_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
+      await axios.get(ROUTES.API_GET_SERVICE_COUNT_DATE+'/created_at/'+this.state.startDate.getFullYear().toString() + '-' + (this.state.startDate.getMonth()+ 1 ).toString() + '-' + this.state.startDate.getDate().toString()
+      +'/'+this.state.endDate.getFullYear().toString() + '-' + (this.state.endDate.getMonth() + 1).toString() + '-' + this.state.endDate.getDate().toString())
+      .then((response) => {
         console.log(response.data);
         data=response.data;
        if (this.state.loadingData) {
@@ -108,7 +115,9 @@ class Line extends Component {
      var data={};
      var lineData=[]; 
       this.setState({ column: this.COLUMNS });
-      await axios.get(ROUTES.API_GET_FLAG_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
+      await axios.get(ROUTES.API_GET_FLAG_COUNT_DATE+'/created_at/'+this.state.startDate.getFullYear().toString() + '-' + (this.state.startDate.getMonth()+ 1 ).toString() + '-' + this.state.startDate.getDate().toString()
+      +'/'+this.state.endDate.getFullYear().toString() + '-' + (this.state.endDate.getMonth() + 1).toString() + '-' + this.state.endDate.getDate().toString())
+      .then((response) => {
         console.log(response.data);
         data=response.data;
        if (this.state.loadingData) {
@@ -143,6 +152,7 @@ class Line extends Component {
         this.getUserData();
         break;
     }
+    event.preventDefault();
   }
   render() {
     const options = {
@@ -160,8 +170,7 @@ class Line extends Component {
         title: this.props.xlabel 
       },
       data: [
-        { 
-          xValueFormatString: "MMM, YYYY",
+        {  
           type: "line", 
           dataPoints: this.state.dataPoints
         },
@@ -170,16 +179,16 @@ class Line extends Component {
 
     return (
       <div> 
-        <Form.Label for="start">Start date:</Form.Label>
-        <DatePicker
+        <Form.Label for="start">Start date</Form.Label>
+        <DatePicker style={{display:'inline !important'}}  
        selected={this.state.startDate}
        selectsStart
        dateFormat='yyyy-MM-dd'
        startDate={this.state.startDate}
        endDate={this.state.endDate}
        onChange={date => this.setState({ startDate: date })}
-     /> <label for="start">End date:</label>
-     <DatePicker
+     /> <label for="start">End date</label>
+     <DatePicker style={{display:'inline'}}
        selected={this.state.endDate}
        selectsEnd
        dateFormat='yyyy-MM-dd'
@@ -188,8 +197,8 @@ class Line extends Component {
        minDate={this.state.startDate}
        onChange={date => this.setState({ endDate: date })}
      />
-     <button onClick={this.onClick}>
-          Update graph
+     <button onClick={this.onClick} style={{display:'inline'}}>
+          Update
         </button>
         <CanvasJSChart
           options={options}

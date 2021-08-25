@@ -14,7 +14,7 @@ const Navigation = () => (
     style={{background: THEME.HeaderColor, color: THEME.HeaderFontColor,zIndex:10 }}
   >
     <Navbar.Brand  >
-      <Link to={ROUTES.LANDING} class="nav-link" style={{ color: '#fff!important' }}>
+      <Link to={ROUTES.LANDING} class="nav-link" id='headerTitle' style={{ color: '#fff!important' }}>
       {THEME.AppNameAdmin}
       </Link>
     </Navbar.Brand>

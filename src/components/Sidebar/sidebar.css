@@ -38,14 +38,14 @@
 #header .pro-sidebar-inner .pro-sidebar-layout .logotext p {
   font-size: 20px;
   padding: 0 20px;
-  color: #fff;
+  color: #d4a99e;
   font-weight: bold;
 }
 #header .pro-sidebar-inner .pro-sidebar-layout ul {
   padding: 0 5px;
 }
 #header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
-  color: #fff;
+  color: #d4a99e;
   overflow-wrap: normal;
   margin: 10px 0px;
   font-weight: bold;
@@ -56,8 +56,8 @@
   ul
   .pro-inner-item
   .pro-icon-wrapper {
-  background-color: #3f2c37;
-  color: #fff;
+  background-color: #5e312b;
+  color: #d4a99e;
   border-radius: 3px;
 }
 #header

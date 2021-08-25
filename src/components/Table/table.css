@@ -22,8 +22,8 @@ table th, tfoot td {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #3f2c37;
-  color: white;
+  background-color: #d4a99e;
+  color: #3f2c37;
 }
 input[type="checkbox"]#checkbox1:checked {
   border-color: #3f2c37!important;

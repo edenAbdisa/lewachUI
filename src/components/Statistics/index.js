@@ -8,6 +8,7 @@ import axios from "axios";
 class Statistics extends Component {
   constructor(props) {
     super(props);
+    var today = new Date();
     this.state={
       data:{},
       forUserLineData:[],
@@ -16,8 +17,8 @@ class Statistics extends Component {
       forFlagLineData:[],
       forRequestLineData:[],
       arr:[],
-      startDate:new Date(),
-      endDate:new Date(),
+      startDate:today.getFullYear().toString() + '-' + (today.getMonth().toString() ) + '-' + today.getDate().toString(),
+      endDate:today.getFullYear().toString() + '-' + (today.getMonth() + 1).toString() + '-' + today.getDate().toString()
     }
   }
   async getUserData() {
@@ -126,16 +127,8 @@ class Statistics extends Component {
        this.setState({ loadingData: false, forFlagLineData:lineData});
      });    
    }
-   setDate = () => { 
-    var today = new Date('yyyy-MM-dd');
-    var firstDay = today.getFullYear() + '-' + (today.getMonth() ) + '-' + today.getDate();
-    var lastDay = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(); 
-    console.log(firstDay);
-    console.log(lastDay);
-    this.setState({startDate:firstDay,endDate:lastDay})
-   }
-  componentWillMount() {
-    this.setDate();
+  
+  componentWillMount() { 
     this.getUserData();
     this.getItemData();
     this.getRequestData();
