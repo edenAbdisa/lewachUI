@@ -10,7 +10,7 @@ import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 require('dotenv').config(); 
 var GeoJSON=require('geojson');
 mapboxgl.accessToken =process.env.REACT_APP_MAPBOX_API_KEY;
-mapboxgl.workerClass = MapboxWorker.default;
+mapboxgl.workerClass = MapboxWorker;
 const Map = () => {
   const mapContainerRef = useRef(null);
 
