@@ -4,10 +4,13 @@ import * as ROUTES from "../../constants/routes";
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './Map.css';
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
+
 require('dotenv').config(); 
 var GeoJSON=require('geojson');
 mapboxgl.accessToken =process.env.REACT_APP_MAPBOX_API_KEY;
-//mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+mapboxgl.workerClass = MapboxWorker.default;
 const Map = () => {
   const mapContainerRef = useRef(null);
 
