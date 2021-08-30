@@ -7,7 +7,7 @@ import * as THEME from "../../constants/theme";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
-import ReCaptchaV2 from 'react-google-recaptcha'
+import ReCaptchaV2 from 'react-google-recaptcha';
 
 const defaultForm = { 
   email: '',
@@ -96,11 +96,7 @@ class SignIn extends Component {
     return (
 <div className="outer ">
   <div className="signin_inner">
-  <ReCaptchaV2
-            sitekey={process.env.REACT_APP_SITE_KEY}
-            onChange={this.handleToken}
-            onExpire={this.handleExpire}
-          /> 
+  
   <Form onSubmit={(e) => this.onSubmit(e)} style={{    textAlign: 'center'}}>
         <Form.Group controlId="formBasicAddCategory">
               <Form.Label>Sign In</Form.Label>
@@ -108,7 +104,7 @@ class SignIn extends Component {
           name="email"
           value={email}
           onChange={this.onChange}
-          type="text"
+          type="email"
           placeholder="Email Address"
         />
         <Form.Control
@@ -133,7 +129,13 @@ class SignIn extends Component {
         {error && <p>{error.message}</p>}
       </Form>
       </div>
-      </div>
+      
+      <ReCaptchaV2
+            sitekey={process.env.REACT_APP_SITE_KEY}
+            onChange={this.handleToken}
+            onExpire={this.handleExpire}
+          />    
+  </div>
     );
   }
 }
