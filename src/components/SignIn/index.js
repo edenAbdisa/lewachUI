@@ -7,10 +7,18 @@ import * as THEME from "../../constants/theme";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
+import ReCaptchaV2 from 'react-google-recaptcha'
+
+const defaultForm = { 
+  email: '',
+  password: '', 
+  token: '',
+}
 const INITIAL_STATE = {
   email: "",
   password: "",
   error: null,
+  form:defaultForm
 };
 
 const ERROR_CODE_ACCOUNT_EXISTS =
@@ -22,11 +30,22 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   this account instead and associate your social accounts on
   your personal account page.
 `;
+ 
 
 class SignIn extends Component {
   constructor(props) {
     super(props); 
     this.state = { ...INITIAL_STATE };
+  }
+   handleToken = (token) => {
+    this.setState({token:token}) ;
+  }
+
+  /**
+   * Removes the token from the from object
+   */
+   handleExpire = () => {
+    this.setState({token:null}) ;
   }
  async login(){   
   const { email, password } = this.state; 
@@ -68,7 +87,7 @@ class SignIn extends Component {
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
-
+  
   render() {
     const { email, password, error } = this.state;
 
@@ -95,6 +114,12 @@ class SignIn extends Component {
           placeholder="Password"
         />
         </Form.Group>
+         
+          <ReCaptchaV2
+            sitekey={process.env.REACT_APP_SITE_KEY}
+            onChange={this.handleToken}
+            onExpire={this.handleExpire}
+          /> 
         <Button
               variant="primary"
               type="submit"
