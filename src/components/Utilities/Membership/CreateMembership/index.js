@@ -39,6 +39,7 @@ class AddMembership extends Component {
       this.setState({ loadingData: false,
         error:"Membership added successfully."});
       console.log(response);
+      this.props.refresh(); 
     }).catch(e=>{
       //this.setState({ error:e});
       this.setState({ loadingData: false});
@@ -59,6 +60,7 @@ class AddMembership extends Component {
         this.setState({ loadingData: false,
           error:"Membership edited successfully."});
         console.log(response);
+        this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while editing membership.";
@@ -74,6 +76,7 @@ class AddMembership extends Component {
         this.setState({ loadingData: false,
           error:"Membership deleted successfully."});
         console.log(response);
+        this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while deleting membership.";
@@ -89,7 +92,7 @@ class AddMembership extends Component {
       this.editMembership();
     } else {
       this.deleteMembership();
-    }
+    } 
     event.preventDefault();
   };
   onChange = (event) => {

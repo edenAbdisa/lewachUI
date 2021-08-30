@@ -35,6 +35,7 @@ class AddCategory extends Component {
     }).then((response) => {
       this.setState({ loadingData: false,
         error:"Category added successfully."});
+        this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
       this.state.error="Error happened while adding category.";
@@ -51,6 +52,7 @@ class AddCategory extends Component {
       .then((response) => {
         this.setState({ loadingData: false,
           error:"Category edited successfully."});
+          this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while editing category.";
@@ -66,6 +68,8 @@ class AddCategory extends Component {
         this.setState({ loadingData: false,
           error:"Category deleted successfully."});
         console.log(response);
+        //this.props.closePopup();
+        this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while deleting category.";
@@ -81,7 +85,7 @@ class AddCategory extends Component {
       this.editCategory();
     } else {
       this.deleteCategory();
-    }
+    } 
     event.preventDefault();
     //this.props.refresh();
     //this.props.closePopup();

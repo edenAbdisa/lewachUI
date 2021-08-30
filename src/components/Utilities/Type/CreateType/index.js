@@ -42,8 +42,8 @@ class AddType extends Component {
     }).then((response) => {
       this.setState({ loadingData: false,
         error:"Type added successfully."});
-
       console.log(response);
+      this.props.refresh(); 
     }).catch(e=>{
       //this.setState({ error:e});
       this.setState({ loadingData: false});
@@ -63,6 +63,7 @@ class AddType extends Component {
         this.setState({ loadingData: false,
           error:"Type edited successfully."});
         console.log(response);
+        this.props.refresh(); 
       }).catch(e=>{
         //this.setState({ error:e});
         this.setState({ loadingData: false});
@@ -78,7 +79,8 @@ class AddType extends Component {
       .then((response) => {
         this.setState({ loadingData: false,
           error:"Type deleted successfully."});
-        console.log(response);
+        console.log(response); 
+        this.props.refresh(); 
       }).catch(e=>{
         //this.setState({ error:e});
         this.setState({ loadingData: false});
@@ -106,6 +108,7 @@ class AddType extends Component {
     } else {
       this.deleteType();
     }
+    
     event.preventDefault();
   };
   onChange = (event) => {

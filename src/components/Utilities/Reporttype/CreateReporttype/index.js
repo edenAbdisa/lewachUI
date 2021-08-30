@@ -36,8 +36,8 @@ class Reporttype extends Component {
     }).then((response) => {
       this.setState({ loadingData: false,
         error:"Report type added successfully."});
-
       console.log(response);
+      this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
       this.state.error="Error happened while adding report type.";
@@ -56,6 +56,7 @@ class Reporttype extends Component {
         this.setState({ loadingData: false,
           error:"Report type edited successfully."});
         console.log(response);
+        this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while editing report type.";
@@ -70,8 +71,8 @@ class Reporttype extends Component {
       .then((response) => {
         this.setState({ loadingData: false,
           error:"Report type deleted successfully."});
-
         console.log(response);
+        this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         this.state.error="Error happened while deleting the report type.";
@@ -88,6 +89,7 @@ class Reporttype extends Component {
     } else {
       this.deleteReporttype();
     }
+    this.props.history.push(ROUTES.UTILITIES);
     event.preventDefault();
     //this.props.refresh();
     //this.props.closePopup();

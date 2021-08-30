@@ -11,7 +11,7 @@ require('dotenv').config();
 var GeoJSON=require('geojson');
 mapboxgl.accessToken =process.env.REACT_APP_MAPBOX_API_KEY;
 mapboxgl.workerClass = MapboxWorker;
-const Map = () => {
+const Map = (props) => {
   const mapContainerRef = useRef(null);
 
   const [lng, setLng] = useState(38);
@@ -38,26 +38,7 @@ const Map = () => {
         mapboxgl: mapboxgl
         })
         );
-    map.on('click', function(e) {
-          // If the user clicked on one of your markers, get its information.
-          var features = map.queryRenderedFeatures(e.point, {
-            layers: ['point'] // replace with your layer name
-          });
-          if (!features.length) {
-            return;
-          }
-          var feature = features[0];
-        
-          // Code from the next step will go here.
-          var popup = new mapboxgl.Popup({ offset: [0, -15] })
-          .setLngLat(feature.geometry.coordinates)
-          .setHTML(
-            
-            '<p>' + feature.properties.type + '</p>'+
-            '<p>' + feature.geometry.coordinates + '</p>'
-            )
-          .addTo(map);    
-    });
+   
 var json = JSON.stringify();
 map.on('load', function () {
   map.loadImage(
@@ -104,13 +85,38 @@ map.on('load', function () {
       'icon-size': 0.02
     }
   });
-});
-});
-    map.on('move', () => {
-      setLng(map.getCenter().lng.toFixed(4));
-      setLat(map.getCenter().lat.toFixed(4));
-      setZoom(map.getZoom().toFixed(2));
+  const popup = new  mapboxgl.Popup({
+    
+    closeButton: false,
+    closeOnClick: false
     });
+  map.on('mouseenter', 'point', (e) => {
+      // Change the cursor style as a UI indicator.
+      map.getCanvas().style.cursor = 'pointer';
+
+      // Copy coordinates array.
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const description = e.features[0].properties.type;
+       
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+       
+      // Populate the popup and set its coordinates
+      // based on the feature found.
+      popup.setLngLat(coordinates).setHTML(description).addTo(map);
+      });
+       
+      map.on('mouseleave', 'point', () => {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+      });  
+});
+});
+     
 
     // Clean up on unmount
     return () => map.remove();
