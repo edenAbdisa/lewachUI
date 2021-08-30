@@ -18,7 +18,7 @@ const INITIAL_STATE = {
   email: "",
   password: "",
   error: null,
-  form:defaultForm
+  token: ''
 };
 
 const ERROR_CODE_ACCOUNT_EXISTS =
@@ -89,13 +89,18 @@ class SignIn extends Component {
   };
   
   render() {
-    const { email, password, error } = this.state;
+    const { email, password,token, error } = this.state;
 
-    const isInvalid = password === "" || email === "";
+    const isInvalid = password === "" || email === "" || token==="";
 
     return (
 <div className="outer ">
   <div className="signin_inner">
+  <ReCaptchaV2
+            sitekey={process.env.REACT_APP_SITE_KEY}
+            onChange={this.handleToken}
+            onExpire={this.handleExpire}
+          /> 
   <Form onSubmit={(e) => this.onSubmit(e)} style={{    textAlign: 'center'}}>
         <Form.Group controlId="formBasicAddCategory">
               <Form.Label>Sign In</Form.Label>
@@ -115,11 +120,7 @@ class SignIn extends Component {
         />
         </Form.Group>
          
-          <ReCaptchaV2
-            sitekey={process.env.REACT_APP_SITE_KEY}
-            onChange={this.handleToken}
-            onExpire={this.handleExpire}
-          /> 
+          
         <Button
               variant="primary"
               type="submit"
