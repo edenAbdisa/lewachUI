@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CanvasJSReact from "../../../css/canvasjs.react";
 import "./../../../css/slider.css";
-import { Form} from "react-bootstrap";
+import { Form,Button} from "react-bootstrap";
 import * as THEME from "../../../constants/theme.js";
 import * as ROUTES from "../../../constants/routes.js";
 import axios from "axios";
@@ -17,7 +17,6 @@ class Line extends Component {
       startDate:new Date(),
       endDate:new Date(),
     }
-
   }
   async getUserData() {
     var data={};
@@ -35,8 +34,7 @@ class Line extends Component {
        lineData.push(
          {
            x:new Date(key),
-           y:data[key]
-           
+           y:data[key]           
          }) 
      });
        this.setState({ loadingData: false, dataPoints:lineData});
@@ -197,9 +195,12 @@ class Line extends Component {
        minDate={this.state.startDate}
        onChange={date => this.setState({ endDate: date })}
      />
-     <button onClick={this.onClick} style={{display:'inline'}}>
+     <Button 
+     variant="primary"
+     onClick={this.onClick} 
+     style={{display:'inline', backgroundImage: '#4d4f53' }}>
           Update
-        </button>
+        </Button>
         <CanvasJSChart
           options={options}
           /* onRef={ref => this.chart = ref} */
