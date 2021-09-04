@@ -13,8 +13,10 @@ import {
 import "./sidebar.css";
 //import icons from react icons
 import { FaList, FaRegHeart } from "react-icons/fa";
-import { FiHome, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
-import { RiPencilLine } from "react-icons/ri";
+import { FcStatistics} from "react-icons/fc";
+import { VscOrganization} from "react-icons/vsc";
+import { FiHome, FiArrowLeftCircle, FiArrowRightCircle, FiMapPin,FiFlag} from "react-icons/fi";
+import { RiPencilLine, RiUserSettingsLine} from "react-icons/ri";
 import { BiCog } from "react-icons/bi";
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
@@ -46,21 +48,21 @@ const Sidebar = () => {
           </SidebarHeader>
           <SidebarContent style={{backgroundColor:THEME.SidebarColor}}>
             <Menu iconShape="square" style={{backgroundColor:THEME.SidebarColor}}>
-            <MenuItem icon={<FiHome />} style={{backgroundColor:THEME.SidebarColor}}>
+            <MenuItem icon={<FiMapPin />} style={{backgroundColor:THEME.SidebarColor}}>
                 <Link to={ROUTES.MAPBOX}>Users <br/> Map  </Link>
               </MenuItem>
-              <MenuItem icon={<FiHome />} style={{backgroundColor:THEME.SidebarColor}}>
+              <MenuItem icon={<FaList />} style={{backgroundColor:THEME.SidebarColor}}>
                 <Link to={ROUTES.REPORT}>Report </Link>
               </MenuItem>
-              <MenuItem icon={<FaList />}>
+              <MenuItem icon={<FcStatistics />}>
                 <Link to={ROUTES.STATISTICS}>Statistics</Link>
               </MenuItem>
-              <MenuItem icon={<FaRegHeart />}>
+              <MenuItem icon={<FiFlag />}>
                 <Link to={ROUTES.FLAGGEDITEMS}>
                   Flagged <br /> Items
                 </Link>
               </MenuItem>
-              <MenuItem icon={<RiPencilLine />}>
+              <MenuItem icon={<VscOrganization />}>
                 <Link to={ROUTES.MEMBERSHIP}>
                   {" "}
                   Organization <br /> Managment{" "}
@@ -71,7 +73,7 @@ const Sidebar = () => {
                   Utilities <br /> Managment
                 </Link>
               </MenuItem>
-              <MenuItem icon={<RiPencilLine />}>
+              <MenuItem icon={<RiUserSettingsLine />}>
                 <Link to={ROUTES.ACCOUNT}>
                   Internal <br /> User
                 </Link>

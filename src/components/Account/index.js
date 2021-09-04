@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as THEME from "../../constants/theme";
 import * as ROUTES from "../../constants/routes";
 import Users from "./Users";
-import { GrAdd } from "react-icons/gr";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import axios from "axios";
 import RowSelection from "../Table";
 
@@ -98,7 +98,7 @@ class Account extends Component {
         </h3>
 
         <p onClick={this.addUserViewPopup.bind(this)}>
-          <GrAdd /> Add Users
+          <AiOutlineUserAdd /> Add Users
         </p>
         <RowSelection
           showButton={false}
