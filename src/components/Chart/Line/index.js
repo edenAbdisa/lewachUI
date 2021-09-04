@@ -198,7 +198,7 @@ class Line extends Component {
      <Button 
      variant="primary"
      onClick={this.onClick} 
-     style={{display:'inline', backgroundImage: '#4d4f53' }}>
+     style={{display:'inline', backgroundColor: '#4d4f53' }}>
           Update
         </Button>
         <CanvasJSChart
