@@ -151,7 +151,8 @@ class Statistics extends Component {
     <Row style={{ textAlign: "-webkit-center", padding: 9, marginTop: 15 }}>
       <Col>
         <Line
-        dataPoints={this.state.forServiceLineData}
+          data-cy="forServiceLine"
+          dataPoints={this.state.forServiceLineData}
           title="Number of registered Service"
           ylabel="Number of service"
           xlabel="Date"
@@ -160,6 +161,7 @@ class Statistics extends Component {
       </Col>
       <Col>
         <Line
+         data-cy="forItemLine"
           dataPoints={this.state.forItemLineData}
           title="Number of registered items"
           ylabel="Number of items"
@@ -171,7 +173,8 @@ class Statistics extends Component {
     <Row style={{ textAlign: "-webkit-center", padding: 9, marginTop: 15 }}>
       <Col>
         <Line
-        dataPoints={this.state.forUserLineData}
+          data-cy="forUserLine"
+          dataPoints={this.state.forUserLineData}
           title="Number of registered users"
           ylabel="Number of users"
           xlabel="Date"

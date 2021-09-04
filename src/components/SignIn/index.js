@@ -118,6 +118,7 @@ class SignIn extends Component {
          
           
         <Button
+              data-cy="signinSubmit"
               variant="primary"
               type="submit"
               disabled={isInvalid}
@@ -130,7 +131,7 @@ class SignIn extends Component {
       </Form>
       </div>
       
-      <ReCaptchaV2
+      <ReCaptchaV2 
             sitekey={process.env.REACT_APP_SITE_KEY}
             onChange={this.handleToken}
             onExpire={this.handleExpire}

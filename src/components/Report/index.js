@@ -8,6 +8,7 @@ import * as THEME from "../../constants/theme.js";
 const Report = () => (
   <>
     <h3
+      data-cy="h3title"
       style={{
         textAlign: "center",
         color: THEME.TitleColor,
@@ -16,14 +17,16 @@ const Report = () => (
     >
       Report
     </h3>
-    <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
-      <Tab eventKey="home" title="Item">
+    <Tabs defaultActiveKey="item" id="uncontrolled-tab-example" 
+      data-cy="reporttab"
+    >
+      <Tab eventKey="item" title="Item" data-cy="reportTabItem">
         <ItemReport />
       </Tab>
-      <Tab eventKey="profile" title="Service">
+      <Tab eventKey="service" title="Service" data-cy="reportTabService">
         <ServiceReport />
       </Tab>
-      <Tab eventKey="contact" title="User">
+      <Tab eventKey="user" title="User" data-cy="reportTabUser">
         <UserReport />
       </Tab>
     </Tabs>

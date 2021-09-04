@@ -11,6 +11,7 @@ import "../../css/nav.css";
 const Utilities = () => (
   <>
     <h3
+      data-cy="h3title"
       style={{
         textAlign: "center",
         color: THEME.TitleColor,
@@ -20,7 +21,9 @@ const Utilities = () => (
       Utilities
     </h3>
 
-    <Tabs defaultActiveKey="category" id="uncontrolled-tab-examples">
+    <Tabs defaultActiveKey="category" id="uncontrolled-tab-example"
+    data-cy="utilitiestab"
+    >
       <Tab eventKey="category" title="Category" >
         <Category />
       </Tab>
