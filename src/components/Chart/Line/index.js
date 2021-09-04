@@ -195,8 +195,7 @@ class Line extends Component {
        minDate={this.state.startDate}
        onChange={date => this.setState({ endDate: date })}
      />
-     <Button 
-     variant="primary"
+     <Button  
      onClick={this.onClick} 
      style={{display:'inline', backgroundColor: '#4d4f53' }}>
           Update
