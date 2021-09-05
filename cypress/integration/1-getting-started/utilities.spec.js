@@ -74,17 +74,15 @@ it('Add membership', () => {
     .click()
     cy.get('.form-group')
     cy.get('#formBasicAddMembership').type('NewMembership{enter}') 
-    cy.get('transactionLimit').type('45{enter}') 
-    cy.get('limitOfPost').type('45{enter}') 
-    cy.get('[data-cy=membershipSubmit]') 
-    .click()
+    cy.get('[data-cy=transactionLimit]').type('45{enter}') 
+    cy.get('[data-cy=limitOfPost]').type('45{enter}') 
+    cy.get('[data-cy=membershipSubmit]').click()
     cy.wait(500);
-    cy.get('[data-cy=closeMembershippopup]') 
-    .click()
+    cy.get('[data-cy=closeMembershippopup]').click()
     cy.wait(500);
 })
 it('Get list of report type', () => {
-  cy.get('#uncontrolled-tab-example-tab-reporttype').next().click() 
+  cy.get('#uncontrolled-tab-example-tab-reporttype').click() 
   cy.request('GET', ROUTE.API_GET_REPORTTYPE).as('listofreporttype')
   cy.get('@listofreporttype').should((response) => {
       expect(response.status).to.eq(200)
@@ -95,7 +93,7 @@ it('Add report type', () => {
   cy.get('[data-cy=addReporttype]')
     .click()
     cy.get('.form-group')
-    cy.get('#formBasicAddReporttype').type('NewReporttype{enter}') 
+    cy.get('[data-cy=reporttypeName]').type('NewReporttype{enter}') 
     cy.get('#exampleForm\\.ControlSelect2').select('Users') 
     cy.get('[data-cy=reporttypeSubmit]') 
     .click()

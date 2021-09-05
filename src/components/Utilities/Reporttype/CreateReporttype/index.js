@@ -88,8 +88,7 @@ class Reporttype extends Component {
       this.editReporttype();
     } else {
       this.deleteReporttype();
-    }
-    this.props.history.push(ROUTES.UTILITIES);
+    } 
     event.preventDefault();
     //this.props.refresh();
     //this.props.closePopup();
