@@ -140,6 +140,7 @@ class AddMembership extends Component {
               />
               <Form.Label>Transaction limit</Form.Label>
               <Form.Control
+              data-cy="transactionLimit"
                 type="number"
                 placeholder={
                   this.state.isCreate
@@ -153,6 +154,7 @@ class AddMembership extends Component {
               />
               <Form.Label>Limit of post</Form.Label>
               <Form.Control
+              data-cy="limitOfPost"
                 type="number"
                 placeholder={
                   this.state.isCreate

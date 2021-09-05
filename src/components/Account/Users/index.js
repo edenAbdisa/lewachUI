@@ -137,6 +137,7 @@ class Users extends Component {
               <Form.Label>First Name</Form.Label>
 
               <Form.Control
+               data-cy="firstname"
                 name="firstname"
                 value={firstname}
                 onChange={this.onChange}
@@ -149,6 +150,7 @@ class Users extends Component {
               />
               <Form.Label>Last Name</Form.Label>
               <Form.Control
+               data-cy="lastname"
                 name="lastname"
                 value={lastname}
                 onChange={this.onChange}
@@ -157,6 +159,7 @@ class Users extends Component {
               />
               <Form.Label>Email</Form.Label>
               <Form.Control
+              data-cy="email"
                 name="email"
                 value={email}
                 onChange={this.onChange}
@@ -165,6 +168,7 @@ class Users extends Component {
               />
               <Form.Label>Password</Form.Label>
               <Form.Control
+              data-cy="passwordOne"
                 name="passwordOne"
                 value={passwordOne}
                 onChange={this.onChange}
@@ -175,6 +179,7 @@ class Users extends Component {
               <Form.Label>{this.state.passworderr}</Form.Label>
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
+              data-cy="passwordTwo"
                 name="passwordTwo"
                 value={passwordTwo}
                 onChange={this.onChange}

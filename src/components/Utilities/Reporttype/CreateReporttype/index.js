@@ -123,6 +123,7 @@ class Reporttype extends Component {
               </Form.Text>
               <Form.Label>Report type Name</Form.Label>
               <Form.Control
+                data-cy="reporttypeName"
                 type="text"
                 placeholder={
                   this.state.isCreate
