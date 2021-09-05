@@ -79,7 +79,9 @@ class Reporttype extends Component {
   render() {
     return (
       <>
-        <p onClick={this.addReporttypeViewPopup.bind(this)}>
+        <p onClick={this.addReporttypeViewPopup.bind(this)}
+        data-cy="addReporttype"
+        >
           <GrAdd /> Add reporttype
         </p>
 

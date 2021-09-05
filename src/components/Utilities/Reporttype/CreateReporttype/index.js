@@ -110,7 +110,8 @@ class Reporttype extends Component {
     return (
       <div className="popup">
         <div className="popup_inner">
-          <p onClick={this.props.closePopup} style={{ float: "right" }}>
+          <p onClick={this.props.closePopup} style={{ float: "right" }}
+          data-cy="closeReporttypepopup">
             <AiFillCloseCircle />
           </p>
 
@@ -156,6 +157,7 @@ class Reporttype extends Component {
               </Form.Control>
             </Form.Group>
             <Button
+              data-cy="reporttypeSubmit"
               variant="primary"
               type="submit"
               disabled={this.state.isDelete?false:isInvalid}

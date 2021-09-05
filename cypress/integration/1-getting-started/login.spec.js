@@ -1,11 +1,11 @@
 it('loads', () => {
-  cy.visit('localhost:3000')
+  cy.visit('/')
 })
 describe('log in page', () => {
   it('Check if input appears', () => {   
     cy.get('.form-group')
-    cy.get('[name="email"]').type('string@gmail.com{enter}')
-    cy.get('[name="password"]').type('pass{enter}') 
+    cy.get('[name="email"]').type('liwach2021@gmail.com{enter}')
+    cy.get('[name="password"]').type('password{enter}') 
     /* cy.wait(500);
     cy.window().then(win => {
       win.document

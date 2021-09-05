@@ -3,8 +3,8 @@ import * as THEME from "../../../src/constants/theme.js";
 before(() => {
     cy.visit('/')
     cy.get('.form-group')
-    cy.get('[name="email"]').type('string@gmail.com{enter}')
-    cy.get('[name="password"]').type('pass{enter}') 
+    cy.get('[name="email"]').type('liwach2021@gmail.com{enter}')
+    cy.get('[name="password"]').type('password{enter}') 
     /* cy.wait(500);
     cy.window().then(win => {
       win.document
@@ -37,7 +37,7 @@ it('Get list of service', () => {
       })
 })
 it('Get list of user', () => {
-    cy.get('#uncontrolled-tab-example-tab-user').next().click()
+    cy.get('#uncontrolled-tab-example-tab-user').click()
     cy.get('[data-cy=h3title]').should('contain', 'Report') 
     cy.request('GET', ROUTE.API_GET_USER).as('listofuser')
     cy.get('@listofuser').should((response) => {

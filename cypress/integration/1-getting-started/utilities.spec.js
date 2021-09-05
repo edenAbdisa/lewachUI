@@ -3,8 +3,8 @@ import * as THEME from "../../../src/constants/theme.js";
 before(() => {
     cy.visit('/')
     cy.get('.form-group')
-    cy.get('[name="email"]').type('string@gmail.com{enter}')
-    cy.get('[name="password"]').type('pass{enter}') 
+    cy.get('[name="email"]').type('liwach2021@gmail.com{enter}')
+    cy.get('[name="password"]').type('password{enter}') 
     /* cy.wait(500);
     cy.window().then(win => {
       win.document
@@ -16,7 +16,7 @@ before(() => {
     .invoke('attr', 'disabled', false)
     .click()
     cy.wait(500);
-    cy.url().should('include', '/utilities')
+    cy.url().should('include', '/report')
   })
  
 it('Get list of category', () => {
@@ -27,6 +27,14 @@ it('Get list of category', () => {
         expect(response.status).to.eq(200)
         expect(response).to.have.property('headers') 
       })
+})
+it('Add category', () => { 
+  cy.get('[data-cy=addCategory]')
+    .click()
+    cy.get('.form-group')
+    cy.get('#formBasicAddCategory').type('CategoryNewForTest{enter}') 
+    cy.get('[data-cy=categorySubmit]') 
+    .click()
 })
 it('Get list of type', () => {
     cy.get('#uncontrolled-tab-example-tab-type').first().click() 

@@ -73,7 +73,9 @@ class Category extends Component {
   render() {
     return (
       <>
-        <p onClick={this.addCategoryViewPopup.bind(this)}>
+        <p onClick={this.addCategoryViewPopup.bind(this)}
+         data-cy="addCategory"
+        >
           <GrAdd /> Add category
         </p>
 

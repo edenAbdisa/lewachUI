@@ -78,7 +78,8 @@ class Type extends Component {
   render() {
     return (
       <>
-        <p onClick={this.addTypeViewPopup.bind(this)}>
+        <p onClick={this.addTypeViewPopup.bind(this)}
+        data-cy="addType">
           <GrAdd /> Add Type
         </p>
 

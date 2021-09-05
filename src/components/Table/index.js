@@ -148,21 +148,21 @@ const RowSelection = (props) => {
                 </th>
               ))}
               { props.showButton? (<>
-              <th onClick={handleEdit}>
+              <th onClick={handleEdit} data-cy="editSelectedItem">
                 <AiOutlineEdit />
               </th>
-              <th onClick={handleDelete}>
+              <th onClick={handleDelete} data-cy="deleteSelectedItem">
                 <AiOutlineDelete />
               </th></>):null
               }
               { props.showApprove? (<>
-              <th onClick={handleApprove}>
+              <th onClick={handleApprove} data-cy="approveSelectedItem">
                 <FcApprove />
               </th>
               </>):null
               }
               { props.showRemove? (<>
-                <th onClick={handleView}>
+                <th onClick={handleView} data-cy="viewSelectedItem">
                 <AiOutlineFolderView/>
               </th> 
               </>):null

@@ -88,7 +88,9 @@ class Membership extends Component {
   render() {
     return (
       <>
-        <p onClick={this.addMembershipViewPopup.bind(this)}>
+        <p onClick={this.addMembershipViewPopup.bind(this)}
+        data-cy="addMembership"
+        >
           <GrAdd /> Add Membership
         </p>
 

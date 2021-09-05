@@ -113,7 +113,8 @@ class AddMembership extends Component {
     return (
       <div className="popup">
         <div className="popup_inner">
-          <p onClick={this.props.closePopup} style={{ float: "right" }}>
+          <p onClick={this.props.closePopup} style={{ float: "right" }}
+          data-cy="closeMembershippopup">
             <AiFillCloseCircle />
           </p>
 
@@ -165,6 +166,7 @@ class AddMembership extends Component {
               />
             </Form.Group>
             <Button
+              data-cy="membershipSubmit"
               variant="primary"
               type="submit"
               disabled={this.state.isDelete?false:isInvalid}

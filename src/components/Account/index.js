@@ -97,7 +97,7 @@ class Account extends Component {
           Internal Account management
         </h3>
 
-        <p onClick={this.addUserViewPopup.bind(this)}>
+        <p onClick={this.addUserViewPopup.bind(this)} data-cy="addUser">
           <AiOutlineUserAdd /> Add Users
         </p>
         <RowSelection

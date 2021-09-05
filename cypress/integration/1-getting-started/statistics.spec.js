@@ -3,8 +3,8 @@ import * as THEME from "../../../src/constants/theme.js";
 before(() => {
     cy.visit('/')
     cy.get('.form-group')
-    cy.get('[name="email"]').type('string@gmail.com{enter}')
-    cy.get('[name="password"]').type('pass{enter}') 
+    cy.get('[name="email"]').type('liwach2021@gmail.com{enter}')
+    cy.get('[name="password"]').type('password{enter}')  
     /* cy.wait(500);
     cy.window().then(win => {
       win.document
@@ -14,17 +14,17 @@ before(() => {
     }); */ 
     cy.get('[data-cy=signinSubmit]')
     .invoke('attr', 'disabled', false)
-    .click()
+    .click();
     cy.wait(500);
-    cy.url().should('include', '/report')
+    cy.url().should('include', '/report');
   })
  
 it('Get graph of item', () => {
   cy.visit('/statistics') 
     cy.get('[data-cy=h3title]').should('contain', 'Statistics') 
-    /* cy.get('input[name="Date"]').invoke('val').then((text) => {
+    cy.get('input[name="Date"]').invoke('val').then((text) => {
       expect('08/05/2019').to.equal(text);
-  }); */
+  }); 
   cy.request('GET', ROUTE.API_GET_ITEM_COUNT_DATE).as('listofITEM')
     cy.get('@listofitem').should((response) => {
         expect(response.status).to.eq(200)

@@ -124,7 +124,9 @@ class Users extends Component {
     return (
       <div className="popup ">
         <div className="popup_inner">
-          <p onClick={this.props.closePopup} style={{ float: "right" }}>
+          <p onClick={this.props.closePopup} style={{ float: "right" }}
+          data-cy="closeUserpopup"
+          >
             <AiFillCloseCircle />
           </p>
           <Form onSubmit={(e) => this.onSubmit(e)}>
@@ -191,7 +193,7 @@ class Users extends Component {
                 <option value="data handler">Data Handler</option>
               </Form.Control> 
             
-            <Button
+            <Button data-cy="userSubmit"
               variant="primary"
               type="submit"
               disabled={isInvalid}
