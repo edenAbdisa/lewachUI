@@ -176,10 +176,32 @@ const RowSelection = (props) => {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
-                  return (
+                  return (<>
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    {props.showButton? (<>
+                      <td onClick={handleEdit} data-cy="editSelectedItem">
+                        <AiOutlineEdit />
+                      </td>
+                      <td onClick={handleDelete} data-cy="deleteSelectedItem">
+                        <AiOutlineDelete />
+                      </td></>):null
+                      }
+                      { props.showApprove? (<>
+                      <td onClick={handleApprove} data-cy="approveSelectedItem">
+                        <FcApprove />
+                      </td>
+                      </>):null
+                      }
+                      { props.showRemove? (<>
+                        <td onClick={handleView} data-cy="viewSelectedItem">
+                        <AiOutlineFolderView/>
+                      </td> 
+                      </>):null
+                      }
+                      </>
                   );
                 })}
+
               </tr>
             );
           })}

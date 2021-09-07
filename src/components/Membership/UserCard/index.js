@@ -62,7 +62,7 @@ class UserCard extends Component {
           </p>
 
   <Card style={{ width: "18rem" }} class="membership">
-    <Card.Img variant="top" src={logo} />
+    <Card.Img variant="top" src={this.props.singleData.TIN_picture} />
     <Card.Body>
       <Card.Title> {this.props.singleData.first_name}</Card.Title>
     </Card.Body>

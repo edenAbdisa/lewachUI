@@ -48,6 +48,12 @@ class Membership extends Component {
       accessor: "phone_number",
       sticky: "left",
     },
+    {
+      Header: "Picture",
+      Footer: "Picture",
+      accessor: "TIN_picture",
+      sticky: "left",
+    }
   ];
 
   async getData() {

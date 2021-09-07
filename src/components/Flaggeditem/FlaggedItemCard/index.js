@@ -84,7 +84,7 @@ class FlaggedItemCard extends Component {
             <AiFillCloseCircle />
           </p>
           <Card style={{ width: "18rem" }} class="flagged">
-            <Card.Img variant="top" src={logo} />
+            <Card.Img variant="top" src={this.props.singleData["flagged_item.picture"]} />
             <Card.Body>
               <Card.Title>
                 {" "}
