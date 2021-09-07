@@ -59,20 +59,9 @@ const RowSelection = (props) => {
     useGlobalFilter,
     useSortBy,
     usePagination,
-    useRowSelect,
+    useRowSelect
 
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => [
-        {
-          id: "selection",
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <Checkbox {...getToggleAllRowsSelectedProps()} />
-          ),
-          Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />,
-        },
-        ...columns,
-      ]);
-    }
+    
   );
   const { globalFilter, pageIndex, pageSize } = state; 
   const handleEdit = (e) => {
