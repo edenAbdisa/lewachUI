@@ -175,10 +175,8 @@ const RowSelection = (props) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (<>
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                    {props.showButton? (<>
+                <>
+                {props.showButton? (<>
                       <td onClick={handleEdit} data-cy="editSelectedItem">
                         <AiOutlineEdit />
                       </td>
@@ -199,6 +197,9 @@ const RowSelection = (props) => {
                       </>):null
                       }
                       </>
+                {row.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>                    
                   );
                 })}
 
