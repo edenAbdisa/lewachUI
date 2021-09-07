@@ -75,6 +75,10 @@ const RowSelection = (props) => {
     }
   );
   const { globalFilter, pageIndex, pageSize } = state;
+  const rowEdit = (e,row) => {     
+      props.edit(row);
+   
+  };
   const handleEdit = (e) => {
     if (props.edit) {
       if (selectedFlatRows.length===0){}else{props.edit(selectedFlatRows[0].values);}
@@ -109,8 +113,6 @@ const RowSelection = (props) => {
   };
   return (
     <>
-      
-
       <div style={{ display: "flex" }}>
         <div style={{ marginRight: 5 }}>
           <Checkbox {...getToggleHideAllColumnsProps()} /> Toggle All
@@ -130,23 +132,6 @@ const RowSelection = (props) => {
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}                  
-                  <span>
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <TiArrowSortedDown />
-                      ) : (
-                        <TiArrowSortedUp />
-                      )
-                    ) : (
-                      ""
-                    )}
-                  </span>
-                 
-                </th>
-              ))}
               { props.showButton? (<>
               <th onClick={handleEdit} data-cy="editSelectedItem">
                 <AiOutlineEdit />
@@ -167,6 +152,25 @@ const RowSelection = (props) => {
               </th> 
               </>):null
               }
+
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}                  
+                  <span>
+                    {column.isSorted ? (
+                      column.isSortedDesc ? (
+                        <TiArrowSortedDown />
+                      ) : (
+                        <TiArrowSortedUp />
+                      )
+                    ) : (
+                      ""
+                    )}
+                  </span>
+                 
+                </th>
+              ))}
+              
             </tr>
           ))}
         </thead>
@@ -177,7 +181,7 @@ const RowSelection = (props) => {
               <tr {...row.getRowProps()}>
                 <>
                 {props.showButton? (<>
-                      <td onClick={handleEdit} data-cy="editSelectedItem">
+                      <td onClick={handleEdit(row)} data-cy="editSelectedItem">
                         <AiOutlineEdit />
                       </td>
                       <td onClick={handleDelete} data-cy="deleteSelectedItem">
