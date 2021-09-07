@@ -74,11 +74,7 @@ const RowSelection = (props) => {
       ]);
     }
   );
-  const { globalFilter, pageIndex, pageSize } = state;
-  const rowEdit = (rowVal) => {     
-      props.edit(rowVal);
-   
-  };
+  const { globalFilter, pageIndex, pageSize } = state; 
   const handleEdit = (e) => {
     if (props.edit) {  
       if (selectedFlatRows.length===0){}else{props.edit(selectedFlatRows[0].values);}
@@ -181,21 +177,21 @@ const RowSelection = (props) => {
               <tr {...row.getRowProps()}>
                 <>
                 {props.showButton? (<>
-                      <td onClick={()=>rowEdit(row.values)} data-cy="editSelectedItem">
+                      <td onClick={()=>props.edit(row.values)} data-cy="editSelectedItem">
                         <AiOutlineEdit />
                       </td>
-                      <td onClick={handleDelete} data-cy="deleteSelectedItem">
+                      <td onClick={()=>props.delete(row.values)} data-cy="deleteSelectedItem">
                         <AiOutlineDelete />
                       </td></>):null
                       }
                       { props.showApprove? (<>
-                      <td onClick={handleApprove} data-cy="approveSelectedItem">
+                      <td onClick={()=>props.approve(row.values)} data-cy="approveSelectedItem">
                         <FcApprove />
                       </td>
                       </>):null
                       }
                       { props.showRemove? (<>
-                        <td onClick={handleView} data-cy="viewSelectedItem">
+                        <td onClick={()=>props.view(row.values)} data-cy="viewSelectedItem">
                         <AiOutlineFolderView/>
                       </td> 
                       </>):null
