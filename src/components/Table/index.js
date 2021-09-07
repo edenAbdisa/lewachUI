@@ -181,7 +181,7 @@ const RowSelection = (props) => {
               <tr {...row.getRowProps()}>
                 <>
                 {props.showButton? (<>
-                      <td onClick={()=>this.rowEdit(row.values)} data-cy="editSelectedItem">
+                      <td onClick={()=>rowEdit(row.values)} data-cy="editSelectedItem">
                         <AiOutlineEdit />
                       </td>
                       <td onClick={handleDelete} data-cy="deleteSelectedItem">
