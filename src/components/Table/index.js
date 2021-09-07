@@ -75,7 +75,7 @@ const RowSelection = (props) => {
     }
   );
   const { globalFilter, pageIndex, pageSize } = state;
-  const rowEdit = (e,row) => {     
+  const rowEdit = (row) => {     
       props.edit(row);
    
   };
@@ -181,7 +181,7 @@ const RowSelection = (props) => {
               <tr {...row.getRowProps()}>
                 <>
                 {props.showButton? (<>
-                      <td onClick={rowEdit(row)} data-cy="editSelectedItem">
+                      <td onClick={rowEdit(row.values)} data-cy="editSelectedItem">
                         <AiOutlineEdit />
                       </td>
                       <td onClick={handleDelete} data-cy="deleteSelectedItem">
