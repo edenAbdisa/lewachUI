@@ -130,6 +130,7 @@ class AddType extends Component {
   };
 
   render() {
+    const { name,categoryId, error } = this.state;
     const isInvalid = name === "";
     this.state.isDelete= this.props.type === "delete" ;
     this.state.isCreate=this.props.type === "create" ;
@@ -137,7 +138,7 @@ class AddType extends Component {
     this.state.itemId= this.props.type === "create" ? null : this.props.singleData.id;
     this.state.name= this.props.type === "create" ? null : this.props.singleData.name; 
     //this.state.categoryId= this.props.type === "create" ? null : this.props.singleData.categoryId;     
-    const { name,categoryId, error } = this.state;
+   
     return (
       <div className="popup">
         <div className="popup_inner">
