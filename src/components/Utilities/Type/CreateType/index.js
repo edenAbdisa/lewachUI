@@ -76,9 +76,7 @@ class AddType extends Component {
         this.setState({ loadingData: false});
         if(e.response.status === 400){
           this.state.error=(e.response.data.errors[0].message.name?JSON.stringify(e.response.data.errors[0].message.name):"")
-          +'\n'+ (e.response.data.errors[0].message.category_id?JSON.stringify(e.response.data.errors[0].message.category_id):"");
-          
-          
+          +'\n'+ (e.response.data.errors[0].message.category_id?JSON.stringify(e.response.data.errors[0].message.category_id):""); 
         }else{
         this.state.error=e.response.data.errors[0].message;
         }
@@ -130,13 +128,14 @@ class AddType extends Component {
   };
 
   render() {
-    const { name,categoryId, error } = this.state;
     const isInvalid = name === "";
     this.state.isDelete= this.props.type === "delete" ;
     this.state.isCreate=this.props.type === "create" ;
     this.state.isEdit=this.props.type === "edit" ;
     this.state.itemId= this.props.type === "create" ? null : this.props.singleData.id;
-
+    this.state.name= this.props.type === "create" ? null : this.props.singleData.name; 
+    //this.state.categoryId= this.props.type === "create" ? null : this.props.singleData.categoryId;     
+    const { name,categoryId, error } = this.state;
     return (
       <div className="popup">
         <div className="popup_inner">

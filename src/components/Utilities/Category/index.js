@@ -31,6 +31,12 @@ class Category extends Component {
       Footer: "Name",
       accessor: "name",
       sticky: "left",
+    },
+    {
+      Header: "Used for",
+      Footer: "Used for",
+      accessor: "used_for",
+      sticky: "left",
     }
   ];
 

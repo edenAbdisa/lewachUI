@@ -110,13 +110,14 @@ class AddCategory extends Component {
   };
 
   render() {
-    const { name, error, used_for, } = this.state;
-    const isInvalid = name === "" || used_for==="";
     this.state.isDelete= this.props.type === "delete" ;
     this.state.isCreate=this.props.type === "create" ;
     this.state.isEdit=this.props.type === "edit" ;
     this.state.itemId= this.state.isCreate ? null : this.props.singleData.id;
-
+    this.state.name= this.props.type === "create" ? null : this.props.singleData.name; 
+    this.state.used_for= this.props.type === "create" ? null : this.props.singleData.used_for; 
+    const { name, error, used_for, } = this.state;
+    const isInvalid = name === "" || used_for==="";
 
     return (
       <div className="popup">
