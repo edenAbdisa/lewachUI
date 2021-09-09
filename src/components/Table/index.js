@@ -33,7 +33,6 @@ const RowSelection = (props) => {
     headerGroups,
     prepareRow,
     rows,
-    page,
     allColumns,
     selectedFlatRows,
     getToggleHideAllColumnsProps,
@@ -53,7 +52,7 @@ const RowSelection = (props) => {
     {
       columns,
       data,
-      initialState: { pageSize: 10 },
+      initialState: { pageSize: 15 },
       defaultColumn
     },
     useFilters,
@@ -64,7 +63,7 @@ const RowSelection = (props) => {
 
     
   );
-  const { globalFilter, pageIndex, pageSize } = state;  
+  const { globalFilter, pageIndex, pageSize } = state; 
   const handleEdit = (e) => {
     if (props.edit) {  
       if (selectedFlatRows.length===0){}else{props.edit(selectedFlatRows[0].values);}
@@ -235,7 +234,7 @@ const RowSelection = (props) => {
           value={pageSize}
           onChange={(e) => setPageSize(Number(e.target.value))}
         >
-          {[5, 15, 25].map((pageSize) => (
+          {[5, 25, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>
