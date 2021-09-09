@@ -14,7 +14,8 @@ const INITIAL_STATE = {
   isCreate: false,
   isEdit: false,
   loadingData: true,
-  messages:""
+  messages:"",
+  used_for:""
 };
 
 class AddCategory extends Component {
@@ -31,6 +32,7 @@ class AddCategory extends Component {
       },
       data: JSON.stringify({
         name: this.state.name,
+        used_for:this.state.used_for
       }),
     }).then((response) => {
       this.setState({ loadingData: false,
@@ -48,6 +50,7 @@ class AddCategory extends Component {
     await axios
       .put(ROUTES.API_GET_CATEGORY + "/" + this.state.itemId, {
         name: this.state.name,
+        used_for:this.state.used_for
       })
       .then((response) => {
         this.setState({ loadingData: false,
@@ -95,8 +98,8 @@ class AddCategory extends Component {
   };
 
   render() {
-    const { name, error } = this.state;
-    const isInvalid = name === "";
+    const { name, error, used_for, } = this.state;
+    const isInvalid = name === "" || used_for==="";
     this.state.isDelete= this.props.type === "delete" ;
     this.state.isCreate=this.props.type === "create" ;
     this.state.isEdit=this.props.type === "edit" ;
@@ -131,6 +134,26 @@ class AddCategory extends Component {
                 name="name"
                 disabled={this.state.isDelete}
               />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect2">
+              <Form.Label>
+                {" "}
+                {this.state.isCreate
+                  ? "Used for"
+                  : this.props.singleData.used_for}{" "}
+              </Form.Label>
+              <Form.Control
+                as="select"
+                name="used_for"
+                size="sm"
+                value={used_for}
+                disabled={this.state.isDelete}
+                onChange={this.onChange}
+              >
+                <option value="user">Users</option>
+                <option value="item">Item</option>
+                <option value="service">Service</option>
+              </Form.Control>
             </Form.Group>
             <Button
               data-cy="categorySubmit"
