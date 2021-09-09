@@ -7,21 +7,21 @@ import * as ROUTES from "../../../../constants/routes.js";
 import axios from "axios";
 
 const INITIAL_STATE = {
-  name: "",
-  itemId: 0,
-  error: null,
-  isDelete: false,
-  isCreate: false,
-  isEdit: false,
-  loadingData: true,
-  messages:"",
-  used_for:""
+  
 };
 
 class AddCategory extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...INITIAL_STATE };
+    this.state = {name: this.props.type === "create" ? "" : this.props.singleData.name,
+    itemId: 0,
+    error: null,
+    isDelete: false,
+    isCreate: false,
+    isEdit: false,
+    loadingData: true,
+    messages:"",
+    used_for:this.props.type === "create" ? "" : this.props.singleData.used_for };
   }
   async createCategory() {
     await axios({
@@ -110,13 +110,12 @@ class AddCategory extends Component {
   };
 
   render() {
+    
+    const { name, error, used_for, } = this.state;
     this.state.isDelete= this.props.type === "delete" ;
     this.state.isCreate=this.props.type === "create" ;
     this.state.isEdit=this.props.type === "edit" ;
-    this.state.itemId= this.state.isCreate ? null : this.props.singleData.id;
-    this.state.name= this.props.type === "create" ? null : this.props.singleData.name; 
-    this.state.used_for= this.props.type === "create" ? null : this.props.singleData.used_for; 
-    const { name, error, used_for, } = this.state;
+    this.state.itemId= this.state.isCreate ? null : this.props.singleData.id;  
     const isInvalid = name === "" || used_for==="";
 
     return (
