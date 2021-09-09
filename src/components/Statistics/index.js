@@ -129,14 +129,13 @@ class Statistics extends Component {
    }
   
   componentWillMount() { 
-    
-  }
-  render(){
     this.getUserData();
     this.getItemData();
     this.getRequestData();
     this.getServiceData();
     this.getFlagData();
+  }
+  render(){
   return(
   <> 
     <h3

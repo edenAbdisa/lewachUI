@@ -33,6 +33,7 @@ const RowSelection = (props) => {
     headerGroups,
     prepareRow,
     rows,
+    page,
     allColumns,
     selectedFlatRows,
     getToggleHideAllColumnsProps,
@@ -160,7 +161,7 @@ const RowSelection = (props) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
+          {page.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -234,7 +235,7 @@ const RowSelection = (props) => {
           value={pageSize}
           onChange={(e) => setPageSize(Number(e.target.value))}
         >
-          {[5, 25, 50].map((pageSize) => (
+          {[5, 15, 25].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>
