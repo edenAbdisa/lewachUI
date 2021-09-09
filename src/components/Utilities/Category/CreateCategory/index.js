@@ -36,7 +36,7 @@ class AddCategory extends Component {
       }),
     }).then((response) => {
       this.setState({ loadingData: false,
-        error:"Category added successfully."});
+        error:response.errors.message});
         this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
