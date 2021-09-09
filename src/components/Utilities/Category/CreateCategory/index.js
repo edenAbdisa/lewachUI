@@ -40,7 +40,12 @@ class AddCategory extends Component {
         this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
+      if(e.response.status === 400){
+        this.state.error=e.response.data.errors.message.name +'\n'+
+        e.response.data.errors.message.used_for;
+      }else{
       this.state.error=e.response.data.errors[0].message;
+      }
     });
     if (this.state.loadingData) {
       this.createCategory();
