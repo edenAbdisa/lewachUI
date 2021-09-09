@@ -12,10 +12,11 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class Line extends Component {
   constructor(props){
     super(props);
+    var today = new Date();
     this.state={
       dataPoints:this.props.dataPoints,
-      startDate:new Date(),
-      endDate:new Date(),
+      startDate:today.getFullYear().toString() + '-' + (today.getMonth().toString() ) + '-' + today.getDate().toString(),
+      endDate:today.getFullYear().toString() + '-' + (today.getMonth() + 1).toString() + '-' + today.getDate().toString()
     }
   }
   async getUserData() {
