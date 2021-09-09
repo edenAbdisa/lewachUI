@@ -36,11 +36,11 @@ class AddCategory extends Component {
       }),
     }).then((response) => {
       this.setState({ loadingData: false,
-        error:response.errors[0].message});
+        error:response.data.errors[0].message});
         this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
-      this.state.error="Error happened while adding category.";
+      this.state.error=e.response.data.errors[0].message;
     });
     if (this.state.loadingData) {
       this.createCategory();
