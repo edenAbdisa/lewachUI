@@ -61,13 +61,20 @@ class Reporttype extends Component {
       })
       .then((response) => {
         this.setState({ loadingData: false,
-          error:"Report type edited successfully."});
+          error:response.data.errors[0].message});
         console.log(response);
         this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
-        this.state.error="Error happened while editing report type.";
-      });
+        if(e.response.status === 400){
+          this.state.error=(e.response.data.errors[0].message.report_detail?JSON.stringify(e.response.data.errors[0].message.report_detail):"")
+          +'\n'+ (e.response.data.errors[0].message.type_for?JSON.stringify(e.response.data.errors[0].message.type_for):"");
+          
+          
+        }else{
+        this.state.error=e.response.data.errors[0].message;
+        }
+         });
     if (this.state.loadingData) {
       this.editReporttype();
     }

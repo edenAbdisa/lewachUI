@@ -68,13 +68,20 @@ class AddType extends Component {
       })
       .then((response) => {
         this.setState({ loadingData: false,
-          error:"Type edited successfully."});
+          error:response.data.errors[0].message});
         console.log(response);
         this.props.refresh(); 
       }).catch(e=>{
         //this.setState({ error:e});
         this.setState({ loadingData: false});
-        this.state.error="Error happened while editing type.";
+        if(e.response.status === 400){
+          this.state.error=(e.response.data.errors[0].message.name?JSON.stringify(e.response.data.errors[0].message.name):"")
+          +'\n'+ (e.response.data.errors[0].message.category_id?JSON.stringify(e.response.data.errors[0].message.category_id):"");
+          
+          
+        }else{
+        this.state.error=e.response.data.errors[0].message;
+        }
       });
     if (this.state.loadingData) {
       this.editType();

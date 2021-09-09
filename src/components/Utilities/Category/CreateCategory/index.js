@@ -60,11 +60,17 @@ class AddCategory extends Component {
       })
       .then((response) => {
         this.setState({ loadingData: false,
-          error:"Category edited successfully."});
+          error:response.data.errors[0].message});
           this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
-        this.state.error="Error happened while editing category.";
+        if(e.response.status === 400){
+          this.state.error=(e.response.data.errors[0].message.name?JSON.stringify(e.response.data.errors[0].message.name):"")
+          +'\n'+ (e.response.data.errors[0].message.used_for?JSON.stringify(e.response.data.errors[0].message.used_for):"");
+  
+        }else{
+        this.state.error=e.response.data.errors[0].message;
+        }
       });
     if (this.state.loadingData) {
       this.editCategory();
