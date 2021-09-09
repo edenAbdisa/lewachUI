@@ -53,7 +53,7 @@ const RowSelection = (props) => {
     {
       columns,
       data,
-      initialState: { pageIndex: 2 },
+      initialState: { pageSize: 10 },
       defaultColumn
     },
     useFilters,
@@ -64,8 +64,7 @@ const RowSelection = (props) => {
 
     
   );
-  const { globalFilter, pageIndex, pageSize } = state; 
-  pageSize=(data.length > 10) ? 10 : data.length;
+  const { globalFilter, pageIndex, pageSize } = state;  
   const handleEdit = (e) => {
     if (props.edit) {  
       if (selectedFlatRows.length===0){}else{props.edit(selectedFlatRows[0].values);}
