@@ -41,13 +41,13 @@ class AddType extends Component {
       }),
     }).then((response) => {
       this.setState({ loadingData: false,
-        error:"Type added successfully."});
+        error:response.data.errors[0].message});
       console.log(response);
       this.props.refresh(); 
     }).catch(e=>{
       //this.setState({ error:e});
       this.setState({ loadingData: false});
-      this.state.error="Error happened while adding type.";
+      this.state.error=e.response.data.errors[0].message;
     });
     if (this.state.loadingData) {
       this.createType();
