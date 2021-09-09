@@ -15,7 +15,7 @@ class Line extends Component {
     var today = new Date();
     this.state={
       dataPoints:this.props.dataPoints,
-      startDate:today.getFullYear().toString() + '-' + (today.getMonth()-1).toString()  + '-' + (today.getDate()-3).toString(),
+      startDate:today.getFullYear().toString() + '-' + (today.getMonth()-1).toString()  + '-' + (today.getDate()).toString(),
       endDate:today.getFullYear().toString() + '-' + today.getMonth().toString() + '-' + today.getDate().toString()
     }
   }
