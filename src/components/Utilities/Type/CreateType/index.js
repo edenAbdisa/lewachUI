@@ -8,22 +8,24 @@ import axios from "axios";
 import { Redirect,withRouter } from 'react-router-dom';
 
 const INITIAL_STATE = {
-  name: "",
-  categoryId: 0,
-  itemId: 0,
-  error: null,
-  isDelete: false,
-  isCreate: false,
-  isEdit: false,
-  loadingData: true,
-  categoryList: [],
-  message:""
+ 
 };
 
 class AddType extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...INITIAL_STATE };
+    this.state = { 
+      name:this.props.type === "create" ? "" : this.props.singleData.name,
+      categoryId: 0,
+      itemId: 0,
+      error: null,
+      isDelete: false,
+      isCreate: false,
+      isEdit: false,
+      loadingData: true,
+      categoryList: [],
+      message:""
+    };
   }
   componentWillMount() {
     this.getCategory();

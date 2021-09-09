@@ -7,20 +7,21 @@ import * as ROUTES from "../../../../constants/routes.js";
 import axios from "axios";
 
 const INITIAL_STATE = {
-  report_detail: "",
-  type_for: "",
-  itemId: 0,
-  error: null,
-  isDelete: false,
-  isCreate: false,
-  isEdit: false,
-  loadingData: true,
+  
 };
 
 class Reporttype extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...INITIAL_STATE };
+    this.state = { 
+    report_detail: this.props.type === "create" ? "" : this.props.singleData.report_detail,
+    type_for: this.props.type === "create" ? "" : this.props.singleData.type_for,
+    itemId: 0,
+    error: null,
+    isDelete: false,
+    isCreate: false,
+    isEdit: false,
+    loadingData: true,};
   }
   async createReporttype() {
     await axios({

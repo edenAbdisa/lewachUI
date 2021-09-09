@@ -6,22 +6,20 @@ import * as THEME from "../../../../constants/theme";
 import * as ROUTES from "../../../../constants/routes.js";
 import axios from "axios";
 
-const INITIAL_STATE = {
-  name: "",
-  limitOfPost: 0,
-  transactionLimit: 0,
-  itemId: 0,
-  error: null,
-  isDelete: false,
-  isCreate: false,
-  isEdit: false,
-  loadingData: true,
-};
-
+ 
 class AddMembership extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...INITIAL_STATE };
+    this.state = { 
+    name: this.props.type === "create" ? "" : this.props.singleData.name,
+    limitOfPost: this.props.type === "create" ? "" : this.props.singleData.limit_of_post,
+    transactionLimit: this.props.type === "create" ? "" : this.props.singleData.transaction_limit,
+    itemId: 0,
+    error: null,
+    isDelete: false,
+    isCreate: false,
+    isEdit: false,
+    loadingData: true, };
   }
   async createMembership() {
     await axios({
