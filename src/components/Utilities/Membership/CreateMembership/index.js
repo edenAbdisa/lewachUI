@@ -37,13 +37,21 @@ class AddMembership extends Component {
       }),
     }).then((response) => {
       this.setState({ loadingData: false,
-        error:"Membership added successfully."});
+        error:response.data.errors[0].message});
       console.log(response);
       this.props.refresh(); 
     }).catch(e=>{
       //this.setState({ error:e});
       this.setState({ loadingData: false});
-      this.state.error="Error happened while adding membership.";
+      if(e.response.status === 400){
+        this.state.error=(e.response.data.errors[0].message.name?JSON.stringify(e.response.data.errors[0].message.name):"")
+        +'\n'+ (e.response.data.errors[0].message.limit_of_post?JSON.stringify(e.response.data.errors[0].message.limit_of_post):"")
+        +'\n'+ (e.response.data.errors[0].message.transaction_limit?JSON.stringify(e.response.data.errors[0].message.transaction_limit):"");
+        
+        
+      }else{
+      this.state.error=e.response.data.errors[0].message;
+      }
     });
     if (this.state.loadingData) {
       this.createMembership();
