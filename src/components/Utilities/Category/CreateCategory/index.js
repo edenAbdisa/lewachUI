@@ -41,8 +41,8 @@ class AddCategory extends Component {
     }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
       if(e.response.status === 400){
-        this.state.error=(e.response.data.errors[0].message.name?e.response.data.errors[0].message.name:"")
-        +'\n'+ (e.response.data.errors[0].message.used_for?e.response.data.errors[0].message.used_for:"");
+        this.state.error=(e.response.data.errors[0].message.name?e.response.data.errors[0].message.name.stringify:"")
+        +'\n'+ (e.response.data.errors[0].message.used_for?e.response.data.errors[0].message.used_for.stringify:"");
 
       }else{
       this.state.error=e.response.data.errors[0].message;

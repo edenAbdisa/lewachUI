@@ -48,8 +48,8 @@ class AddType extends Component {
       //this.setState({ error:e});
       this.setState({ loadingData: false});
       if(e.response.status === 400){
-        this.state.error=(e.response.data.errors[0].message.name?e.response.data.errors[0].message.name:"")
-        +'\n'+ (e.response.data.errors[0].message.category_id?e.response.data.errors[0].message.category_id:"");
+        this.state.error=(e.response.data.errors[0].message.name?e.response.data.errors[0].message.name.stringify:"")
+        +'\n'+ (e.response.data.errors[0].message.category_id?e.response.data.errors[0].message.category_id.stringify:"");
         
         
       }else{
