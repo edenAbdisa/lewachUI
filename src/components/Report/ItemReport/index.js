@@ -44,7 +44,12 @@ class ItemReport extends Component {
   ];
   async getData() {
     this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_ITEM).then((response) => {
+    await axios({
+      method: "get",
+      url: ROUTES.API_GET_ITEM,
+      headers: {
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`
+      }}).then((response) => {
       // check if the data is populated
       console.log(response.data.data);
       this.setState({ data: response.data.data });
@@ -62,7 +67,12 @@ class ItemReport extends Component {
     var open=0;
     var bartered=0;
     this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_ITEM_COUNT_BY_STATUS).then((response) => {
+    await await axios({
+      method: "get",
+      url: ROUTES.API_GET_ITEM_COUNT_BY_STATUS,
+      headers: {
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`
+      }}).then((response) => {
       console.log(response.data);
       data=response.data;
     });
