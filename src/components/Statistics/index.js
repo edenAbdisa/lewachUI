@@ -24,9 +24,14 @@ class Statistics extends Component {
   async getUserData() {
    var data={};
    var lineData=[]; 
-    this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_USER_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate)
-            .then((response) => {
+    this.setState({ column: this.COLUMNS }); 
+    await axios({
+      method: "get",
+      url: ROUTES.API_GET_USER_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }) .then((response) => {
       console.log(response.data);
       data=response.data;
      if (this.state.loadingData) {
@@ -46,8 +51,14 @@ class Statistics extends Component {
   async getItemData() {
     var data={};
     var lineData=[]; 
-     this.setState({ column: this.COLUMNS });
-     await axios.get(ROUTES.API_GET_ITEM_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
+     this.setState({ column: this.COLUMNS }); 
+     await axios({
+      method: "get",
+      url: ROUTES.API_GET_ITEM_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }).then((response) => {
        console.log(response.data);
        data=response.data;
       if (this.state.loadingData) {
@@ -67,8 +78,14 @@ class Statistics extends Component {
    async getRequestData() {
     var data={};
     var lineData=[]; 
-     this.setState({ column: this.COLUMNS });
-     await axios.get(ROUTES.API_GET_REQUEST_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
+     this.setState({ column: this.COLUMNS }); 
+     await axios({
+      method: "get",
+      url: ROUTES.API_GET_REQUEST_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }).then((response) => {
        console.log(response.data);
        data=response.data;
       if (this.state.loadingData) {
@@ -88,8 +105,14 @@ class Statistics extends Component {
    async getServiceData() {
     var data={};
     var lineData=[]; 
-     this.setState({ column: this.COLUMNS });
-     await axios.get(ROUTES.API_GET_SERVICE_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
+     this.setState({ column: this.COLUMNS }); 
+     await axios({
+      method: "get",
+      url: ROUTES.API_GET_SERVICE_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }).then((response) => {
        console.log(response.data);
        data=response.data;
       if (this.state.loadingData) {
@@ -109,8 +132,14 @@ class Statistics extends Component {
    async getFlagData() {
     var data={};
     var lineData=[]; 
-     this.setState({ column: this.COLUMNS });
-     await axios.get(ROUTES.API_GET_FLAG_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate).then((response) => {
+     this.setState({ column: this.COLUMNS }); 
+     await axios({
+      method: "get",
+      url: ROUTES.API_GET_FLAG_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }).then((response) => {
        console.log(response.data);
        data=response.data;
       if (this.state.loadingData) {

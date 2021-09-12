@@ -28,7 +28,6 @@ class Account extends Component {
     };
   }
   COLUMNS = [
-   
     {
       Header: "First Name",
       Footer: "First Name",
@@ -46,25 +45,22 @@ class Account extends Component {
       Footer: "Email",
       accessor: "email",
       sticky: "left",
-    }
+    },
   ];
   async getData() {
     this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_INTERNAL_USER+'/active').then((response) => {
-      // check if the data is populated
-      console.log(response.data.data);
-      this.setState({ data: response.data.data });
-      // you tell it that you had the result
-      this.setState({ loadingData: false });
-    });
+    await axios
+      .get(ROUTES.API_GET_INTERNAL_USER + "/active")
+      .then((response) => { 
+        this.setState({ data: response.data.data }); 
+        this.setState({ loadingData: false });
+      });
 
-    if (this.state.loadingData) {
-      // if the result is not ready so you make the axios call
+    if (this.state.loadingData) { 
       this.getData();
     }
   }
-  componentWillMount() {
-    //this.setState({loading:true});
+  componentWillMount() { 
     this.getData();
   }
   addUserViewPopup = () => {

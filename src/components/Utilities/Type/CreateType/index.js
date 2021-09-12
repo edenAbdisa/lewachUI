@@ -35,13 +35,14 @@ class AddType extends Component {
       method: "post",
       url: ROUTES.API_GET_TYPE,
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       data: JSON.stringify({
         name: this.state.name,
         category_id: this.state.categoryId
       }),
-    }).then((response) => {
+    })    
+    .then((response) => {
       this.setState({ loadingData: false,
         error:response.data.errors[0].message});
       console.log(response);
@@ -62,11 +63,19 @@ class AddType extends Component {
       this.createType();
     }
   }
-  async editType() {
-    await axios
-      .put(ROUTES.API_GET_TYPE + "/" + this.state.itemId, {
-        name: this.state.name,
-        category_id: this.state.categoryId
+  async editType() { 
+      await axios({
+        method: "put",
+        url: ROUTES.API_GET_TYPE + "/" + this.state.itemId,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: JSON.stringify(
+          {
+            name: this.state.name,
+            category_id: this.state.categoryId
+          }
+        )
       })
       .then((response) => {
         this.setState({ loadingData: false,
@@ -88,9 +97,13 @@ class AddType extends Component {
     }
   }
   async deleteType() {
-    await axios
-      .delete(ROUTES.API_GET_TYPE + "/" + this.state.itemId)
-      .then((response) => {
+     await axios({
+        method: "delete",
+        url: ROUTES.API_GET_TYPE + "/" + this.state.itemId,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      }).then((response) => {
         this.setState({ loadingData: false,
           error:"Type deleted successfully."});
         console.log(response); 
@@ -104,9 +117,14 @@ class AddType extends Component {
       this.deleteType();
     }
   }
-  async getCategory() {
-    await axios.get(ROUTES.API_GET_CATEGORY)
-              .then((response) => {
+  async getCategory() { 
+    await axios({
+      method: "get",
+      url: ROUTES.API_GET_CATEGORY,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }).then((response) => {
       this.setState({ categoryList: response.data.data,loadingData:false });
       console.log(response);
     });

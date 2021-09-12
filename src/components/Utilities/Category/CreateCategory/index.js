@@ -28,7 +28,7 @@ class AddCategory extends Component {
       method: "post",
       url: ROUTES.API_GET_CATEGORY,
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       data: JSON.stringify({
         name: this.state.name,
@@ -52,11 +52,19 @@ class AddCategory extends Component {
       this.createCategory();
     }
   }
-  async editCategory() {
-    await axios
-      .put(ROUTES.API_GET_CATEGORY + "/" + this.state.itemId, {
-        name: this.state.name,
-        used_for:this.state.used_for
+  async editCategory() { 
+      await axios({
+        method: "put",
+        url: ROUTES.API_GET_CATEGORY + "/" + this.state.itemId,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: JSON.stringify(
+          {
+            name: this.state.name,
+            used_for:this.state.used_for
+          }
+        )
       })
       .then((response) => {
         this.setState({ loadingData: false,
@@ -76,9 +84,14 @@ class AddCategory extends Component {
       this.editCategory();
     }
   }
-  async deleteCategory() {
-    await axios
-      .delete(ROUTES.API_GET_CATEGORY + "/" + this.state.itemId)
+  async deleteCategory() { 
+      await axios({
+        method: "delete",
+        url: ROUTES.API_GET_CATEGORY + "/" + this.state.itemId,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      })
       .then((response) => {
         this.setState({ loadingData: false,
           error:"Category deleted successfully."});

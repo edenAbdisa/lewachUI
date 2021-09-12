@@ -26,7 +26,7 @@ class AddMembership extends Component {
       method: "post",
       url: ROUTES.API_GET_MEMBERSHIP,
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       data: JSON.stringify({
         name: this.state.name,
@@ -55,14 +55,21 @@ class AddMembership extends Component {
       this.createMembership();
     }
   }
-  async editMembership() {
-    await axios
-      .put(ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId, {
-        name: this.state.name,
-        limit_of_post: this.state.limitOfPost,
-        transaction_limit: this.state.transactionLimit
-      })
-      .then((response) => {
+  async editMembership() { 
+      await axios({
+        method: "put",
+        url: ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: JSON.stringify(
+          {
+            name: this.state.name,
+            limit_of_post: this.state.limitOfPost,
+            transaction_limit: this.state.transactionLimit
+          }
+        )
+      }).then((response) => {
         this.setState({ loadingData: false,
           error:response.data.errors[0].message});
         console.log(response);
@@ -83,9 +90,14 @@ class AddMembership extends Component {
     }
   }
   async deleteMembership() {
-    await axios
-      .delete(ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId)
-      .then((response) => {
+   
+    await axios({
+        method: "delete",
+        url: ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      }).then((response) => {
         this.setState({ loadingData: false,
           error:"Membership deleted successfully."});
         console.log(response);

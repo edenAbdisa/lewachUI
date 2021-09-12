@@ -25,10 +25,13 @@ class FlaggedItemCard extends Component {
     this.state = { ...INITIAL_STATE };
   }
   async keepItem(event) {
+   
     await axios({
-      method:"delete",
-      url: ROUTES.API_GET_FLAG + "/" + this.state.flagId
-    })
+      method: "delete",
+      url: ROUTES.API_GET_FLAG + "/" + this.state.flagId,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }})
       .then((response) => {
         this.setState({ loadingData: false });
         console.log(response);
@@ -48,7 +51,7 @@ class FlaggedItemCard extends Component {
       method:"put",
       url: url,
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       data:JSON.stringify({
         status:'removed',
@@ -63,7 +66,10 @@ class FlaggedItemCard extends Component {
     }
     await axios({
       method:"delete",
-      url: ROUTES.API_GET_FLAG + "/" + this.state.flagId
+      url: ROUTES.API_GET_FLAG + "/" + this.state.flagId,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     })
       .then((response) => {
         this.setState({ loadingData: false });

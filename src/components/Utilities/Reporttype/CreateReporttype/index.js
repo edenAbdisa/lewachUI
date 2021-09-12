@@ -28,7 +28,7 @@ class Reporttype extends Component {
       method: "post",
       url: ROUTES.API_GET_REPORTTYPE,
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       data: JSON.stringify({
         report_detail: this.state.report_detail,
@@ -54,13 +54,20 @@ class Reporttype extends Component {
       this.createReporttype();
     }
   }
-  async editReporttype() {
-    await axios
-      .put(ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId, {
-        report_detail: this.state.report_detail,
-        type_for: this.state.type_for
-      })
-      .then((response) => {
+  async editReporttype() { 
+      await axios({
+        method: "put",
+        url: ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: JSON.stringify(
+          {
+            report_detail: this.state.report_detail,
+            type_for: this.state.type_for
+          }
+        )
+      }).then((response) => {
         this.setState({ loadingData: false,
           error:response.data.errors[0].message});
         console.log(response);
@@ -80,10 +87,14 @@ class Reporttype extends Component {
       this.editReporttype();
     }
   }
-  async deleteReporttype() {
-    await axios
-      .delete(ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId)
-      .then((response) => {
+  async deleteReporttype() { 
+    await axios({
+      method: "delete",
+      url: ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }).then((response) => {
         this.setState({ loadingData: false,
           error:"Report type deleted successfully."});
         console.log(response);

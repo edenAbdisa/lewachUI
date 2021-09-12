@@ -67,7 +67,7 @@ class ItemReport extends Component {
     var open=0;
     var bartered=0;
     this.setState({ column: this.COLUMNS });
-    await await axios({
+    await axios({
       method: "get",
       url: ROUTES.API_GET_ITEM_COUNT_BY_STATUS,
       headers: {
@@ -90,9 +90,14 @@ class ItemReport extends Component {
     var data={};
     var declined=0;
     var accepted=0;
-    this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_REQUEST_COUNT+'/item')
-        .then((response) => {
+    this.setState({ column: this.COLUMNS }); 
+    await axios({
+      method: "get",
+      url: ROUTES.API_GET_REQUEST_COUNT+'/item',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    }).then((response) => {
       console.log(response.data);
       this.setState({loadingData: false});
       data=response.data;

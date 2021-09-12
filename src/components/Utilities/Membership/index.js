@@ -48,8 +48,21 @@ class Membership extends Component {
     },
   ];
   async getData() {
-    this.setState({ column: this.COLUMNS });
-    await axios.get(ROUTES.API_GET_MEMBERSHIP).then((response) => {
+    this.setState({ column: this.COLUMNS }); 
+    await axios({
+      method: "get",
+      url: ROUTES.API_GET_MEMBERSHIP,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      data: JSON.stringify(
+        {
+          name: this.state.name,
+          limit_of_post: this.state.limitOfPost,
+          transaction_limit: this.state.transactionLimit
+        }
+      )
+    }).then((response) => {
       // check if the data is populated
       console.log(response.data.data);
       this.setState({ data: response.data.data });

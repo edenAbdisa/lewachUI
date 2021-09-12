@@ -53,7 +53,9 @@ class UserReport extends Component {
  async getData() {
   this.setState({ column: this.COLUMNS });
   await axios.get(ROUTES.API_GET_USER,
-    { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} }).then((response) => {
+    { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} })
+    
+    .then((response) => {
     // check if the data is populated
     console.log(response.data.data);
     this.setState({ data: response.data.data });
@@ -70,8 +72,14 @@ async getUser() {
   var data={};
   var user=0;
   var organization=0; 
-  this.setState({ column: this.COLUMNS });
-  await axios.get(ROUTES.API_GET_USER_COUNT).then((response) => {
+  this.setState({ column: this.COLUMNS }); 
+  await axios({
+    method: "get",
+    url: ROUTES.API_GET_USER_COUNT,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }
+  }).then((response) => {
     console.log(response.data);
     data=response.data;
   });

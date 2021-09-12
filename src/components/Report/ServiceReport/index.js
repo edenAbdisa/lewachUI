@@ -41,8 +41,14 @@ class ServiceReport extends Component {
    }
  ];
  async getData() {
-  this.setState({ column: this.COLUMNS });
-  await axios.get(ROUTES.API_GET_SERVICE).then((response) => {
+  this.setState({ column: this.COLUMNS }); 
+  await axios({
+    method: "get",
+    url: ROUTES.API_GET_SERVICE,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }
+  }).then((response) => {
     // check if the data is populated
     console.log(response.data.data);
     this.setState({ data: response.data.data });
@@ -59,8 +65,14 @@ async getServiceCountByStatus() {
   var data={};    
   var open=0;
   var bartered=0;
-  this.setState({ column: this.COLUMNS });
-  await axios.get(ROUTES.API_GET_SERVICE_COUNT_BY_STATUS).then((response) => {
+  this.setState({ column: this.COLUMNS }); 
+  await axios({
+    method: "get",
+    url: ROUTES.API_GET_SERVICE_COUNT_BY_STATUS,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }
+  }).then((response) => {
     console.log(response.data);
     data=response.data;
   });
@@ -78,8 +90,14 @@ async getRequest() {
   var data={};
   var declined=0;
   var accepted=0;
-  this.setState({ column: this.COLUMNS });
-  await axios.get(ROUTES.API_GET_REQUEST_COUNT+'/service').then((response) => {
+  this.setState({ column: this.COLUMNS }); 
+  await axios({
+    method: "get",
+    url: ROUTES.API_GET_REQUEST_COUNT+'/service',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }
+  }).then((response) => {
     console.log(response.data);
     data=response.data;
   });
