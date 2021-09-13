@@ -63,6 +63,7 @@ const NavigationAuth = () => (
         localStorage.setItem('role', '');
         localStorage.setItem('token', '');
         localStorage.setItem('userId', '');
+        this.props.history.push(ROUTES.SIGNIN);
     // check if the data is populated
     // you tell it that you had the result
    // this.setState({ loadingData: false });
