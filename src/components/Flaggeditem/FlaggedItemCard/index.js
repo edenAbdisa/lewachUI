@@ -42,9 +42,13 @@ class FlaggedItemCard extends Component {
           error:response.data.content[0].error});
       } 
     }).catch((e) => { 
-       
-       this.setState({error:e.response.data.content[0].error});
-}); 
+       if(e.response.status==204){
+        this.props.refresh();
+        this.props.closePopup();
+       }else{
+          this.setState({error:e.response.data.content[0].error});
+       }
+    }); 
     if (this.state.loadingData) {
       this.keepItem();
     }
@@ -75,8 +79,14 @@ class FlaggedItemCard extends Component {
           loadingData: false,
           error:response.data.content[0].error});
       } 
-    }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
-}); 
+    }).catch((e) => { 
+      if(e.response.status===204){
+        this.setState({error:"Successfully removed."});
+       }else{
+          this.setState({error:e.response.data.content[0].error});
+       }
+    });
+ 
     if (this.state.loadingData) {
       this.removeItem();
     }
@@ -96,7 +106,13 @@ class FlaggedItemCard extends Component {
           loadingData: false,
           error:response.data.content[0].error});
       } 
-    }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
+    }).catch((e) => { 
+       if(e.response.status===204){
+      this.props.refresh();
+      this.props.closePopup();
+     }else{
+        this.setState({error:e.response.data.content[0].error});
+     }
 }); 
     if (this.state.loadingData) {
       this.keepItem();

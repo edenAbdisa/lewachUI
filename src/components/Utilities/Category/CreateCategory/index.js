@@ -26,16 +26,15 @@ class AddCategory extends Component {
       name: this.state.name,
       used_for:this.state.used_for
     }));
-    await axios({
-      method: "post",
-      url: ROUTES.API_GET_CATEGORY,
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      },
-      data: JSON.stringify({
+    await axios.post(ROUTES.API_GET_CATEGORY,
+      { 
         name: this.state.name,
         used_for:this.state.used_for
-      }),
+      
+    },{
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
     }).then((response) => {
       if(response.data.success){
         this.setState({
