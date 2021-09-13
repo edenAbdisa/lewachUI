@@ -78,15 +78,13 @@ class SignIn extends Component {
       })
       .catch((e) => {
         var err = e.response.data.content[0].error;
-        if (e.response.status === 400) {
+        
           var err = e.response.data.content[0].error;
           this.state.error =
             (err.email ? JSON.stringify(err.email) : "") +
-            "\n" +
-            (err.password ? JSON.stringify(err.password) : "");
-        } else {
-          this.state.error = err;
-        }
+            "\n" +(err.password ? JSON.stringify(err.password) : "")
+            +"\n"+e.response.data.content[0].message;
+         
       });
   }
   async onSubmit(event) {
