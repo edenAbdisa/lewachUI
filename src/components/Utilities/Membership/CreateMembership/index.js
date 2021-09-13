@@ -67,7 +67,7 @@ class AddMembership extends Component {
         method: "put",
         url: ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         },
         data: JSON.stringify(
           {

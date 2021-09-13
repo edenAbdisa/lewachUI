@@ -41,7 +41,9 @@ class FlaggedItemCard extends Component {
           loadingData: false,
           error:response.data.content[0].error});
       } 
-    }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
+    }).catch((e) => { 
+       
+       this.setState({error:e.response.data.content[0].error});
 }); 
     if (this.state.loadingData) {
       this.keepItem();

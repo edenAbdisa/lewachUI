@@ -28,7 +28,7 @@ class Reporttype extends Component {
       method: "post",
       url: ROUTES.API_GET_REPORTTYPE,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       },
       data: JSON.stringify({
         report_detail: this.state.report_detail,
