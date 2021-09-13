@@ -28,7 +28,7 @@ class Reporttype extends Component {
       method: "post",
       url: ROUTES.API_GET_REPORTTYPE,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
       },
       data: JSON.stringify({
         report_detail: this.state.report_detail,
@@ -66,7 +66,7 @@ class Reporttype extends Component {
         method: "put",
         url: ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         data: JSON.stringify(
           {
@@ -106,7 +106,7 @@ class Reporttype extends Component {
       method: "delete",
       url: ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }
     }).then((response) => {
       if(response.data.success){

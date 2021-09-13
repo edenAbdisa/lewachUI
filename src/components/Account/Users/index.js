@@ -64,7 +64,7 @@ class Users extends Component {
       method: "post",
       url: ROUTES.API_GET_SINGLE_USER,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
       data: JSON.stringify({
         email: this.state.email.toString(),

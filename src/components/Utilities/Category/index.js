@@ -46,7 +46,7 @@ class Category extends Component {
       method: "get",
       url: ROUTES.API_GET_CATEGORY,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }
     }).then((response) => {
       // check if the data is populated

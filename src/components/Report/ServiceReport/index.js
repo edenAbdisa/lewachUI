@@ -46,7 +46,7 @@ class ServiceReport extends Component {
     method: "get",
     url: ROUTES.API_GET_SERVICE,
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Authorization": `Bearer ${localStorage.getItem("token")}`,
     }
   }).then((response) => {
     // check if the data is populated
@@ -70,7 +70,7 @@ async getServiceCountByStatus() {
     method: "get",
     url: ROUTES.API_GET_SERVICE_COUNT_BY_STATUS,
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Authorization": `Bearer ${localStorage.getItem("token")}`,
     }
   }).then((response) => {
     console.log(response.data);
@@ -95,7 +95,7 @@ async getRequest() {
     method: "get",
     url: ROUTES.API_GET_REQUEST_COUNT+'/service',
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Authorization": `Bearer ${localStorage.getItem("token")}`,
     }
   }).then((response) => {
     console.log(response.data);

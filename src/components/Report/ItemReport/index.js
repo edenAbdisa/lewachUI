@@ -95,7 +95,7 @@ class ItemReport extends Component {
       method: "get",
       url: ROUTES.API_GET_REQUEST_COUNT+'/item',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }
     }).then((response) => {
       console.log(response.data);

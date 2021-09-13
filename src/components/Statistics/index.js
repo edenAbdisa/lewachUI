@@ -29,7 +29,7 @@ class Statistics extends Component {
       method: "get",
       url: ROUTES.API_GET_USER_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }
     }) .then((response) => {
       console.log(response.data);
@@ -56,7 +56,7 @@ class Statistics extends Component {
       method: "get",
       url: ROUTES.API_GET_ITEM_COUNT_DATE+'/created_at/'+this.state.startDate+'/'+this.state.endDate,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }
     }).then((response) => {
        console.log(response.data);

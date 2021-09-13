@@ -28,7 +28,7 @@ class AddCategory extends Component {
       method: "post",
       url: ROUTES.API_GET_CATEGORY,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
       },
       data: JSON.stringify({
         name: this.state.name,
@@ -66,7 +66,7 @@ class AddCategory extends Component {
         method: "put",
         url: ROUTES.API_GET_CATEGORY + "/" + this.state.itemId,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         data: JSON.stringify(
           {
@@ -106,7 +106,7 @@ class AddCategory extends Component {
         method: "delete",
         url: ROUTES.API_GET_CATEGORY + "/" + this.state.itemId,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         }
       }).then((response) => {
         if(response.data.success){

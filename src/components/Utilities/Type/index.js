@@ -45,7 +45,7 @@ class Type extends Component {
       method: "get",
       url: ROUTES.API_GET_TYPE,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
       data: JSON.stringify(
         {

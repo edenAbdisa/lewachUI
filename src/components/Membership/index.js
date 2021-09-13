@@ -62,7 +62,7 @@ class Membership extends Component {
       method: "get",
       url: ROUTES.API_GET_ORGANIZATION+'/pending',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }
     })
     .then((response) => {

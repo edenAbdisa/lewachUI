@@ -29,7 +29,7 @@ class FlaggedItemCard extends Component {
       method: "delete",
       url: ROUTES.API_GET_FLAG + "/" + this.state.flagId,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((response) => {
       if(response.data.success){
@@ -60,7 +60,7 @@ class FlaggedItemCard extends Component {
       method: "put",
       url: url,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
       data: JSON.stringify({
         status: "removed",
@@ -84,7 +84,7 @@ class FlaggedItemCard extends Component {
       method: "delete",
       url: ROUTES.API_GET_FLAG + "/" + this.state.flagId,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((response) => {
       if(response.data.success){

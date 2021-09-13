@@ -35,7 +35,7 @@ class AddType extends Component {
       method: "post",
       url: ROUTES.API_GET_TYPE,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
       },
       data: JSON.stringify({
         name: this.state.name,
@@ -72,7 +72,7 @@ class AddType extends Component {
         method: "put",
         url: ROUTES.API_GET_TYPE + "/" + this.state.itemId,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
         data: JSON.stringify(
           {
@@ -110,7 +110,7 @@ class AddType extends Component {
         method: "delete",
         url: ROUTES.API_GET_TYPE + "/" + this.state.itemId,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
       }).then((response) => {
         if(response.data.success){
@@ -137,7 +137,7 @@ class AddType extends Component {
       method: "get",
       url: ROUTES.API_GET_CATEGORY,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }
     }).then((response) => {
       this.setState({ categoryList: response.data.data,loadingData:false });
