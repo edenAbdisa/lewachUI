@@ -83,17 +83,35 @@ class Users extends Component {
         membership_id: 4,
       }),
     })
-      .then((response) => {
-        this.setState({
-          loadingData: false,
-          error: "User created succesfully",
-        });
-        this.state.error = "User added successfully.";
+      .then((response) => {       
+        if(response.data.contents[0].success){
+          this.setState({
+            loadingData: false,
+            error:response.data.contents[0].message});
+        }else{
+          this.setState({
+            loadingData: false,
+            error:response.data.contents[0].error});
+        } 
         this.props.refresh();
       })
-      .catch((e) => {
-        this.setState({ loadingData: false });
-        this.setState({ error: "Error happened while adding user" });
+      .catch((e) => {        
+        var err=e.response.data.content[0].error;
+        if(e.response.status === 400){
+          var err=e.response.data.content[0].error;
+          this.state.error=
+          (err.first_name?JSON.stringify(err.first_name):"")
+          +'\n'+(err.last_name?JSON.stringify(err.last_name):"")
+          +'\n'+(err.email?JSON.stringify(err.email):"")
+          +'\n'+ (err.phone_number?JSON.stringify(err.phone_number):"")
+          +'\n'+(err.birthdate?JSON.stringify(err.birthdate):"")
+          +'\n'+(err.type?JSON.stringify(err.type):"")
+          +'\n'+(err.name?JSON.stringify(err.name):"")
+          +'\n'+ (err.used_for?JSON.stringify(err.used_for):"");
+  
+        }else{
+        this.state.error=err;
+        }
       });
     if (this.state.loadingData) {
       this.createUser();
@@ -214,8 +232,7 @@ class Users extends Component {
               disabled={this.state.isDelete}
             >
               <option value="hr">HR</option>
-              <option value="operations">Operations</option>
-              <option value="data handler">Data Handler</option>
+              <option value="operations">Operations</option> 
             </Form.Control>
 
             <Button

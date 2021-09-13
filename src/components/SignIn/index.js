@@ -60,22 +60,30 @@ class SignIn extends Component {
           password:password
         })
       }).then((response) => {
+          var res=response.data.data;
           // check if the data is populated
-          this.setState({ loadingData: false,messages:"Success"});
-          console.log(response.data);
-          if(response.data.remember_token){        
+          this.setState({ loadingData: false});
+          if(response.data.contents[0].success){
             localStorage.setItem('auth', true);      
-          localStorage.setItem('role', response.data.type.toString());
-          localStorage.setItem('token', response.data.remember_token.toString());
-          localStorage.setItem('userId', response.data.id);  
-          this.props.history.push(ROUTES.REPORT);
-           
-         }
-
+            localStorage.setItem('role', res.type.toString());
+            localStorage.setItem('token', res.remember_token.toString());
+            this.props.history.push(ROUTES.REPORT); 
+          } else{
+            this.setState({error:response.data.contents[0].error});
+          } 
           if (this.state.loadingData) {
             this.login();
           }
-      })
+      }).catch((e) => {        
+        var err=e.response.data.content[0].error;
+        if(e.response.status === 400){
+          var err=e.response.data.content[0].error;
+          this.state.error=(err.email?JSON.stringify(err.email):"")
+          +'\n'+ (err.password?JSON.stringify(err.password):"");  
+        }else{
+        this.state.error=err;
+        }
+      });
 }
   async onSubmit (event) {
     this.login();     
@@ -126,8 +134,7 @@ class SignIn extends Component {
             >
           Sign In
         </Button>
-
-        {error && <p>{error.message}</p>}
+        <p>{error}</p>
       </Form>
       </div>
       

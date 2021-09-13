@@ -74,9 +74,7 @@ class Flagged extends Component {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       }
-    }).then((response) => {
-      // check if the data is populated
-      console.log(response.data.data);
+    }).then((response) => {  
       this.setState({ data: response.data.data });
       // you tell it that you had the result
       this.setState({ loadingData: false });
