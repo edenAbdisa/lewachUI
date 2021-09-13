@@ -50,7 +50,11 @@ class Account extends Component {
   async getData() {
     this.setState({ column: this.COLUMNS });
     await axios
-      .get(ROUTES.API_GET_INTERNAL_USER + "/active")
+      .get(ROUTES.API_GET_INTERNAL_USER + "/active",{
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
       .then((response) => { 
         this.setState({ data: response.data.data }); 
         this.setState({ loadingData: false });

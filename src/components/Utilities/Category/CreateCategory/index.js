@@ -22,10 +22,7 @@ class AddCategory extends Component {
     used_for:this.props.type === "create" ? "" : this.props.singleData.used_for };
   }
   async createCategory() {
-    console.log(JSON.stringify({
-      name: this.state.name,
-      used_for:this.state.used_for
-    }));
+     
     await axios.post(ROUTES.API_GET_CATEGORY,
       { 
         name: this.state.name,
