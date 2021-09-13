@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { compose } from "recompose";
-import { SignUpLink } from "../SignUp";
+import { compose } from "recompose"; 
 import "./signin.css";
 import * as ROUTES from "../../constants/routes";
 import * as THEME from "../../constants/theme";
