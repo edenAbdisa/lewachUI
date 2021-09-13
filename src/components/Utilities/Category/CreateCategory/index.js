@@ -11,7 +11,7 @@ class AddCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      name: this.props.type === "create" ? "" : this.props.singleData.name,
     itemId: 0,
     error: null,
     isDelete: false,
@@ -19,9 +19,13 @@ class AddCategory extends Component {
     isEdit: false,
     loadingData: true,
     messages:"",
-    used_for:"" };
+    used_for:this.props.type === "create" ? "" : this.props.singleData.used_for };
   }
   async createCategory() {
+    console.log(JSON.stringify({
+      name: this.state.name,
+      used_for:this.state.used_for
+    }));
     await axios({
       method: "post",
       url: ROUTES.API_GET_CATEGORY,
