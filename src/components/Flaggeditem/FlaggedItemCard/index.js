@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card,Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import "./card.css";
 import logo from "./../../../logo.svg";
 import * as THEME from "../../../constants/theme";
@@ -16,7 +16,7 @@ const INITIAL_STATE = {
   isCreate: false,
   isEdit: false,
   loadingData: true,
-  type:""
+  type: "",
 };
 
 class FlaggedItemCard extends Component {
@@ -25,64 +25,90 @@ class FlaggedItemCard extends Component {
     this.state = { ...INITIAL_STATE };
   }
   async keepItem(event) {
-   
     await axios({
       method: "delete",
       url: ROUTES.API_GET_FLAG + "/" + this.state.flagId,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
-      }})
-      .then((response) => {
-        this.setState({ loadingData: false });
-        console.log(response);
-      });
+      },
+    }).then((response) => {
+      if(response.data.success){
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].message});
+      }else{
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].error});
+      } 
+    }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
+}); 
     if (this.state.loadingData) {
       this.keepItem();
     }
   }
   async removeItem(event) {
-    var url="";
-    if(this.state.type==='service'){
-      url=ROUTES.API_GET_SERVICE + "/" + this.state.itemId;
-    }else{
-      url=ROUTES.API_GET_ITEM + "/" + this.state.itemId
+    var url = "";
+    if (this.state.type === "service") {
+      url = ROUTES.API_GET_SERVICE + "/" + this.state.itemId;
+    } else {
+      url = ROUTES.API_GET_ITEM + "/" + this.state.itemId;
     }
     await axios({
-      method:"put",
+      method: "put",
       url: url,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      data:JSON.stringify({
-        status:'removed',
+      data: JSON.stringify({
+        status: "removed",
       }),
-    })
-      .then((response) => {
-        this.setState({ loadingData: false });
-        console.log(response);
-      });
+    }).then((response) => {
+      if(response.data.success){
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].message});
+      }else{
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].error});
+      } 
+    }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
+}); 
     if (this.state.loadingData) {
       this.removeItem();
     }
     await axios({
-      method:"delete",
+      method: "delete",
       url: ROUTES.API_GET_FLAG + "/" + this.state.flagId,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    })
-      .then((response) => {
-        this.setState({ loadingData: false });
-        console.log(response);
-      });
+    }).then((response) => {
+      if(response.data.success){
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].message});
+      }else{
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].error});
+      } 
+    }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
+}); 
     if (this.state.loadingData) {
       this.keepItem();
     }
   }
-  componentDidMount(){
-    this.setState({type:this.props.singleData.type,flagId:this.props.singleData.id,itemId:this.props.singleData.flagged_item_id});
+  componentDidMount() {
+    this.setState({
+      type: this.props.singleData.type,
+      flagId: this.props.singleData.id,
+      itemId: this.props.singleData.flagged_item_id,
+    });
   }
   render() {
+    const {error}=this.state;
     return (
       <div className="popup">
         <div className="popup_inner">
@@ -90,7 +116,10 @@ class FlaggedItemCard extends Component {
             <AiFillCloseCircle />
           </p>
           <Card style={{ width: "18rem" }} class="flagged">
-            <Card.Img variant="top" src={this.props.singleData["flagged_item.picture"]} />
+            <Card.Img
+              variant="top"
+              src={this.props.singleData["flagged_item.picture"]}
+            />
             <Card.Body>
               <Card.Title>
                 {" "}
@@ -109,21 +138,22 @@ class FlaggedItemCard extends Component {
               }}
             >
               <Button
-              variant="primary"
-              type="submit"
-              onClick={(e) => this.keepItem(e)} 
-              style={{ backgroundImage: THEME.SubmitGradientButton }}
-            >
-              Keep it
-            </Button>
-            <Button
-              variant="primary"
-              type="submit"
-              onClick={(e) => this.removeItem(e)} 
-              style={{ backgroundImage: THEME.SubmitGradientButton }}
-            >
-              Remove it
-            </Button> 
+                variant="primary"
+                type="submit"
+                onClick={(e) => this.keepItem(e)}
+                style={{ backgroundImage: THEME.SubmitGradientButton }}
+              >
+                Keep it
+              </Button>
+              <Button
+                variant="primary"
+                type="submit"
+                onClick={(e) => this.removeItem(e)}
+                style={{ backgroundImage: THEME.SubmitGradientButton }}
+              >
+                Remove it
+              </Button>
+              <p>{error}</p>
             </Card.Body>
           </Card>
         </div>

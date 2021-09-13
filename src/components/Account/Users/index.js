@@ -84,14 +84,14 @@ class Users extends Component {
       }),
     })
       .then((response) => {       
-        if(response.data.contents[0].success){
+        if(response.data.success){
           this.setState({
             loadingData: false,
-            error:response.data.contents[0].message});
+            error:response.data.content[0].message});
         }else{
           this.setState({
             loadingData: false,
-            error:response.data.contents[0].error});
+            error:response.data.content[0].error});
         } 
         this.props.refresh();
       })
@@ -99,7 +99,7 @@ class Users extends Component {
         var err=e.response.data.content[0].error;
         if(e.response.status === 400){
           var err=e.response.data.content[0].error;
-          this.state.error=
+          this.setState({error:
           (err.first_name?JSON.stringify(err.first_name):"")
           +'\n'+(err.last_name?JSON.stringify(err.last_name):"")
           +'\n'+(err.email?JSON.stringify(err.email):"")
@@ -107,10 +107,10 @@ class Users extends Component {
           +'\n'+(err.birthdate?JSON.stringify(err.birthdate):"")
           +'\n'+(err.type?JSON.stringify(err.type):"")
           +'\n'+(err.name?JSON.stringify(err.name):"")
-          +'\n'+ (err.used_for?JSON.stringify(err.used_for):"");
+          +'\n'+ (err.used_for?JSON.stringify(err.used_for):"")});
   
         }else{
-        this.state.error=err;
+          this.setState({error:err});
         }
       });
     if (this.state.loadingData) {

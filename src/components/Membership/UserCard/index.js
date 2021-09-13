@@ -26,11 +26,20 @@ class UserCard extends Component {
       data:JSON.stringify({
         status:'active',
       }),
-    })
-      .then((response) => {
-        this.setState({ loadingData: false });
-        console.log(response);
-      });
+    }).then((response) => {
+      if(response.data.success){
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].message});
+      }else{
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].error});
+      } 
+    }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
+     
+  });
+
     if (this.state.loadingData) {
       this.approveOrganization();
     }
@@ -39,11 +48,19 @@ class UserCard extends Component {
     await axios
       .put(ROUTES.API_GET_USER + "/" + this.state.itemId,{
         status:'declined'
-      })
-      .then((response) => {
-        this.setState({ loadingData: false });
-        console.log(response);
-      });
+      }).then((response) => {
+        if(response.data.success){
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].message});
+        }else{
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].error});
+        } 
+      }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
+       
+    });
     if (this.state.loadingData) {
       this.declineOrganization();
     }
