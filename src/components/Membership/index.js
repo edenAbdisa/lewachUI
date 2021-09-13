@@ -58,7 +58,7 @@ class Membership extends Component {
 
   async getData() {
     this.setState({ column: this.COLUMNS }); 
-    await axios.get(ROUTES.API_GET_ORGANIZATION+'/pending',{ 
+    await axios.get(ROUTES.API_GET_USER+'/pending',{ 
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }

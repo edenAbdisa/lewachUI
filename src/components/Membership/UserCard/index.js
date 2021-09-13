@@ -17,15 +17,12 @@ class UserCard extends Component {
     loadingData: true };
   }
   async approveOrganization(event) {
-    await axios({
-      method:"put",
-      url: ROUTES.API_GET_SINGLE_USER + "/" + this.state.itemId,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data:JSON.stringify({
-        status:'active',
-      }),
+    await axios.put(ROUTES.API_GET_SINGLE_USER + "/" + this.state.itemId,{
+      status:'active',
+      },{
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
     }).then((response) => {
       if(response.data.success){
         this.setState({
@@ -48,6 +45,10 @@ class UserCard extends Component {
     await axios
       .put(ROUTES.API_GET_USER + "/" + this.state.itemId,{
         status:'declined'
+      },{
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
       }).then((response) => {
         if(response.data.success){
           this.setState({
