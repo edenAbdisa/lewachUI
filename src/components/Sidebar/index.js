@@ -65,7 +65,7 @@ const Sidebar = () => {
               <MenuItem icon={<VscOrganization />}>
                 <Link to={ROUTES.MEMBERSHIP}>
                   {" "}
-                  Organization <br /> Managment{" "}
+                  Users <br /> Managment{" "}
                 </Link>
               </MenuItem>
               <MenuItem icon={<BiCog />}>

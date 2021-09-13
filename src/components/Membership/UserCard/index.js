@@ -24,6 +24,7 @@ class UserCard extends Component {
           "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     }).then((response) => {
+      this.props.refresh();
       if(response.data.success){
         this.setState({
           loadingData: false,
@@ -33,7 +34,10 @@ class UserCard extends Component {
           loadingData: false,
           error:response.data.content[0].error});
       } 
-    }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
+      this.props.closePopup();
+    }).catch((e) => {  
+      this.props.refresh();
+      this.setState({error:e.response.data.content[0].error});
      
   });
 
@@ -50,6 +54,7 @@ class UserCard extends Component {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
       }
       }).then((response) => {
+        this.props.refresh();
         if(response.data.success){
           this.setState({
             loadingData: false,
@@ -59,7 +64,10 @@ class UserCard extends Component {
             loadingData: false,
             error:response.data.content[0].error});
         } 
-      }).catch((e) => {  this.setState({error:e.response.data.content[0].error});
+        this.props.closePopup();
+      }).catch((e) => { 
+        this.props.refresh();
+         this.setState({error:e.response.data.content[0].error});
        
     });
     if (this.state.loadingData) {
@@ -70,7 +78,7 @@ class UserCard extends Component {
     this.setState({itemId:this.props.singleData.id});
   }
   render(){
-    
+    const {error}=this.state;
     return(
 
       <div className="popup">
@@ -87,6 +95,7 @@ class UserCard extends Component {
     <ListGroup className="list-group-flush">
       <ListGroupItem>{this.props.singleData.phone_number}</ListGroupItem>
       <ListGroupItem>{this.props.singleData.email}</ListGroupItem>
+      <ListGroupItem> {this.props.singleData["membership.name"]}</ListGroupItem>
     </ListGroup>
     <Card.Body>
     <Button
@@ -104,6 +113,7 @@ class UserCard extends Component {
             >
               Decline
             </Button>
+            <>{error}</>
     </Card.Body>
   </Card>
   </div>

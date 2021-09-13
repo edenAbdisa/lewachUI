@@ -31,9 +31,9 @@ class Membership extends Component {
       sticky: "left",
     },
     {
-      Header: "Status",
-      Footer: "Status",
-      accessor: "status",
+      Header: "Membership",
+      Footer: "Membership",
+      accessor: "membership.name",
       sticky: "left",
     },
     {
@@ -95,7 +95,7 @@ class Membership extends Component {
         color: THEME.TitleColor,
         fontSize: THEME.TitleSize,
       }}
-    >Organization Managment</h3>
+    >User Managment</h3>
         <RowSelection
           data={this.state.data}
           column={this.state.column}
@@ -110,7 +110,7 @@ class Membership extends Component {
             title="Delete category" 
             text="Close Me" 
             closePopup={this.approveOrganizationViewPopup.bind(this)}
-            
+            refresh={this.getData.bind(this)}
           />
         ) : null}
       </>
