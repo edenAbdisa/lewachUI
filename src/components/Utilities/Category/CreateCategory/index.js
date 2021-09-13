@@ -119,6 +119,8 @@ class AddCategory extends Component {
           this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
+        this.props.refresh(); 
+      this.props.closePopup(); 
         if(e.response.status === 400){
           var err=e.response.data.content[0].error;
             this.setState({error:

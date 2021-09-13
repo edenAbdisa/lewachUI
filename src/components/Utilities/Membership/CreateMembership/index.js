@@ -116,8 +116,10 @@ class AddMembership extends Component {
           error:response.data.content[0].error});
       } 
         this.props.refresh(); 
-    }).catch(e=>{
+    }).catch(e=>{ 
       this.setState({ loadingData: false});
+      this.props.refresh(); 
+      this.props.closePopup(); 
       var err=e.response.data.content[0].error; 
       this.setState({error:err}); 
     });

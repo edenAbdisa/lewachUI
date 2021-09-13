@@ -116,7 +116,8 @@ class AddType extends Component {
         } 
           this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false}); 
-         
+      this.props.refresh(); 
+      this.props.closePopup(); 
           this.setState({error:e.response.data.content[0].error});
         
       });
