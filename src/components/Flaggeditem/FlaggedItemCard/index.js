@@ -32,6 +32,7 @@ class FlaggedItemCard extends Component {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((response) => {
+      this.props.refresh();
       if(response.data.success){
         this.setState({
           loadingData: false,
@@ -42,8 +43,9 @@ class FlaggedItemCard extends Component {
           error:response.data.content[0].error});
       } 
     }).catch((e) => { 
+      this.props.refresh();
        if(e.response.status===204){
-        this.props.refresh();
+        
         this.props.closePopup();
        }else{
           this.setState({error:e.response.data.content[0].error});
@@ -67,8 +69,7 @@ class FlaggedItemCard extends Component {
     }).then((response) => {
       if(response.data.success){
         this.setState({
-          loadingData: false,
-          error:response.data.content[0].message});
+          loadingData: false});
       }else{
         this.setState({
           loadingData: false,
@@ -92,6 +93,7 @@ class FlaggedItemCard extends Component {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((response) => {
+      this.props.refresh();
       if(response.data.success){
         this.setState({
           loadingData: false,
