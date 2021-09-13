@@ -63,28 +63,24 @@ class Users extends Component {
     });
   };
   async createUser() {
-    await axios({
-      method: "post",
-      url: ROUTES.API_GET_SINGLE_USER,
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-      },
-      data: JSON.stringify({
+    await axios.post(ROUTES.API_GET_SINGLE_USER,{
         email: this.state.email.toString(),
         first_name: this.state.firstname.toString(),
         last_name: this.state.lastname.toString(),
-        phone_number: "+2519443322",
+        phone_number: this.state.phone_number.toString(),
         password: this.state.passwordOne.toString(),
         type: this.state.role.toString(),
         status: "active",
-        birthdate: "2020-01-27",
+        birthdate: this.state.birthdate.toString(),
         address: {
           latitude: this.state.lat,
           longitude: this.state.lng,
           type: "user",
         },
         membership_id: 4,
-      }),
+      },{headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      },
     })
       .then((response) => {       
         if(response.data.success){

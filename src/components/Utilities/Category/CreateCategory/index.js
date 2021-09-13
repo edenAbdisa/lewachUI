@@ -63,19 +63,16 @@ class AddCategory extends Component {
     }
   }
   async editCategory() { 
-      await axios({
-        method: "put",
-        url: ROUTES.API_GET_CATEGORY + "/" + this.state.itemId,
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-        data: JSON.stringify(
-          {
-            name: this.state.name,
-            used_for:this.state.used_for
-          }
-        )
-      }).then((response) => {
+    await axios.put(ROUTES.API_GET_CATEGORY+"/" + this.state.itemId,
+      {
+        name: this.state.name,
+        used_for:this.state.used_for
+      },        
+      {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      }
+    }).then((response) => {
         if(response.data.success){
           this.setState({
             loadingData: false,

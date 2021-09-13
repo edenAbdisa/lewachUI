@@ -22,17 +22,14 @@ class AddMembership extends Component {
     loadingData: true, };
   }
   async createMembership() {
-    await axios({
-      method: "post",
-      url: ROUTES.API_GET_MEMBERSHIP,
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-      },
-      data: JSON.stringify({
-        name: this.state.name,
+    await axios.post( ROUTES.API_GET_MEMBERSHIP,{
+      name: this.state.name,
         limit_of_post: this.state.limitOfPost,
         transaction_limit: this.state.transactionLimit
-      }),
+    } ,{
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      }
     }).then((response) => {
       if(response.data.success){
         this.setState({
@@ -63,19 +60,14 @@ class AddMembership extends Component {
     }
   }
   async editMembership() { 
-      await axios({
-        method: "put",
-        url: ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId,
+      await axios.put(ROUTES.API_GET_MEMBERSHIP + "/" + this.state.itemId,{
+        name: this.state.name,
+        limit_of_post: this.state.limitOfPost,
+        transaction_limit: this.state.transactionLimit
+      },{
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`
-        },
-        data: JSON.stringify(
-          {
-            name: this.state.name,
-            limit_of_post: this.state.limitOfPost,
-            transaction_limit: this.state.transactionLimit
-          }
-        )
+        }
       }).then((response) => {
         if(response.data.success){
           this.setState({

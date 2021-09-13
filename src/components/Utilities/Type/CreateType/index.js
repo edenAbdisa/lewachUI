@@ -31,16 +31,13 @@ class AddType extends Component {
     this.getCategory();
   }
   async createType() {
-    await axios({
-      method: "post",
-      url: ROUTES.API_GET_TYPE,
+    await axios.post(ROUTES.API_GET_TYPE,{
+      name: this.state.name,
+      category_id: this.state.categoryId
+    },{
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
-      },
-      data: JSON.stringify({
-        name: this.state.name,
-        category_id: this.state.categoryId
-      }),
+      }
     })  
     .then((response) => {
       if(response.data.success){
@@ -68,18 +65,13 @@ class AddType extends Component {
     }
   }
   async editType() { 
-      await axios({
-        method: "put",
-        url: ROUTES.API_GET_TYPE + "/" + this.state.itemId,
+      await axios.put(ROUTES.API_GET_TYPE + "/" + this.state.itemId,{
+        name: this.state.name,
+            category_id: this.state.categoryId
+          },{
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`
-        },
-        data: JSON.stringify(
-          {
-            name: this.state.name,
-            category_id: this.state.categoryId
-          }
-        )
+        }
       }).then((response) => {
         if(response.data.success){
           this.setState({

@@ -24,16 +24,13 @@ class Reporttype extends Component {
     loadingData: true,};
   }
   async createReporttype() {
-    await axios({
-      method: "post",
-      url: ROUTES.API_GET_REPORTTYPE,
+    await axios.post(ROUTES.API_GET_REPORTTYPE,{
+      report_detail: this.state.report_detail,
+      type_for: this.state.type_for
+    },{
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
-      },
-      data: JSON.stringify({
-        report_detail: this.state.report_detail,
-        type_for: this.state.type_for
-      }),
+      }
     }).then((response) => {
       if(response.data.success){
         this.setState({
@@ -62,18 +59,14 @@ class Reporttype extends Component {
     }
   }
   async editReporttype() { 
-      await axios({
-        method: "put",
-        url: ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId,
+      await axios.put(ROUTES.API_GET_REPORTTYPE + "/" + this.state.itemId,
+      {report_detail: this.state.report_detail,
+        type_for: this.state.type_for
+      },
+        {
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-        data: JSON.stringify(
-          {
-            report_detail: this.state.report_detail,
-            type_for: this.state.type_for
-          }
-        )
+        } 
       }).then((response) => {
         if(response.data.success){
           this.setState({
