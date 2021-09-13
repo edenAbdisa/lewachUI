@@ -15,7 +15,7 @@ class AddType extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      name:this.props.type === "create" ? "" : this.props.singleData.name,
+      name:this.props.type === "create" ? " " : this.props.singleData.name,
       categoryId: 0,
       itemId: 0,
       error: null,
