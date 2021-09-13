@@ -41,23 +41,27 @@ class AddType extends Component {
         name: this.state.name,
         category_id: this.state.categoryId
       }),
-    })    
+    })  
     .then((response) => {
-      this.setState({ loadingData: false,
-        error:response.data.errors[0].message});
-      console.log(response);
-      this.props.refresh(); 
-    }).catch(e=>{
-      //this.setState({ error:e});
-      this.setState({ loadingData: false});
-      if(e.response.status === 400){
-        this.state.error=(e.response.data.errors[0].message.name?JSON.stringify(e.response.data.errors[0].message.name):"")
-        +'\n'+ (e.response.data.errors[0].message.category_id?JSON.stringify(e.response.data.errors[0].message.category_id):"");
-        
-        
+      if(response.data.success){
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].message});
       }else{
-      this.state.error=e.response.data.errors[0].message;
-      }
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].error});
+      } 
+        this.props.refresh(); 
+    }).catch(e=>{this.setState({ loadingData: false}); 
+      if(e.response.status === 400){
+        var err=e.response.data.content[0].error;
+          this.setState({error:(err.name?JSON.stringify(err.name):"")
+          +'\n'+ (err.category_id?JSON.stringify(err.category_id):"")        
+          });
+      }else{
+        this.setState({error:err});
+      } 
     });
     if (this.state.loadingData) {
       this.createType();
@@ -76,21 +80,26 @@ class AddType extends Component {
             category_id: this.state.categoryId
           }
         )
-      })
-      .then((response) => {
-        this.setState({ loadingData: false,
-          error:response.data.errors[0].message});
-        console.log(response);
-        this.props.refresh(); 
-      }).catch(e=>{
-        //this.setState({ error:e});
-        this.setState({ loadingData: false});
-        if(e.response.status === 400){
-          this.state.error=(e.response.data.errors[0].message.name?JSON.stringify(e.response.data.errors[0].message.name):"")
-          +'\n'+ (e.response.data.errors[0].message.category_id?JSON.stringify(e.response.data.errors[0].message.category_id):""); 
+      }).then((response) => {
+        if(response.data.success){
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].message});
         }else{
-        this.state.error=e.response.data.errors[0].message;
-        }
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].error});
+        } 
+          this.props.refresh(); 
+      }).catch(e=>{this.setState({ loadingData: false}); 
+        if(e.response.status === 400){
+          var err=e.response.data.content[0].error;
+            this.setState({error:(err.name?JSON.stringify(err.name):"")
+            +'\n'+ (err.category_id?JSON.stringify(err.category_id):"")        
+            });
+        }else{
+          this.setState({error:err});
+        } 
       });
     if (this.state.loadingData) {
       this.editType();
@@ -104,14 +113,20 @@ class AddType extends Component {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         }
       }).then((response) => {
-        this.setState({ loadingData: false,
-          error:"Type deleted successfully."});
-        console.log(response); 
-        this.props.refresh(); 
-      }).catch(e=>{
-        //this.setState({ error:e});
-        this.setState({ loadingData: false});
-        this.state.error="Error happened while deleting type.";
+        if(response.data.success){
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].message});
+        }else{
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].error});
+        } 
+          this.props.refresh(); 
+      }).catch(e=>{this.setState({ loadingData: false}); 
+         
+          this.setState({error:e.response.data.content[0].error});
+        
       });
     if (this.state.loadingData) {
       this.deleteType();

@@ -35,19 +35,26 @@ class Reporttype extends Component {
         type_for: this.state.type_for
       }),
     }).then((response) => {
-      this.setState({ loadingData: false,
-        error:response.data.errors[0].message});
-      console.log(response);
-      this.props.refresh(); 
-    }).catch(e=>{this.setState({ loadingData: false});
-      //this.setState({ error:e});
-      if(e.response.status === 400){
-        this.state.error=(e.response.data.errors[0].message.report_detail?JSON.stringify(e.response.data.errors[0].message.report_detail):"")
-        +'\n'+ (e.response.data.errors[0].message.type_for?JSON.stringify(e.response.data.errors[0].message.type_for):"");
-        
-        
+      if(response.data.success){
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].message});
       }else{
-      this.state.error=e.response.data.errors[0].message;
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].error});
+      } 
+        this.props.refresh(); 
+    }).catch(e=>{this.setState({ loadingData: false}); 
+      if(e.response.status === 400){
+        var err=e.response.data.content[0].error;
+          this.setState({error:
+            (err.report_detail?JSON.stringify(err.report_detail):"")
+        +'\n'+ (err.type_for?JSON.stringify(err.type_for):"")
+        
+          });
+      }else{
+        this.setState({error:err});
       }
     });
     if (this.state.loadingData) {
@@ -68,21 +75,28 @@ class Reporttype extends Component {
           }
         )
       }).then((response) => {
-        this.setState({ loadingData: false,
-          error:response.data.errors[0].message});
-        console.log(response);
-        this.props.refresh(); 
-      }).catch(e=>{this.setState({ loadingData: false});
-        //this.setState({ error:e});
-        if(e.response.status === 400){
-          this.state.error=(e.response.data.errors[0].message.report_detail?JSON.stringify(e.response.data.errors[0].message.report_detail):"")
-          +'\n'+ (e.response.data.errors[0].message.type_for?JSON.stringify(e.response.data.errors[0].message.type_for):"");
-          
-          
+        if(response.data.success){
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].message});
         }else{
-        this.state.error=e.response.data.errors[0].message;
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].error});
+        } 
+          this.props.refresh(); 
+      }).catch(e=>{this.setState({ loadingData: false}); 
+        if(e.response.status === 400){
+          var err=e.response.data.content[0].error;
+            this.setState({error:
+              (err.report_detail?JSON.stringify(err.report_detail):"")
+          +'\n'+ (err.type_for?JSON.stringify(err.type_for):"")
+          
+            });
+        }else{
+          this.setState({error:err});
         }
-         });
+      });
     if (this.state.loadingData) {
       this.editReporttype();
     }
@@ -95,14 +109,20 @@ class Reporttype extends Component {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       }
     }).then((response) => {
-        this.setState({ loadingData: false,
-          error:"Report type deleted successfully."});
-        console.log(response);
+      if(response.data.success){
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].message});
+      }else{
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].error});
+      } 
         this.props.refresh(); 
-      }).catch(e=>{this.setState({ loadingData: false});
-        //this.setState({ error:e});
-        this.state.error="Error happened while deleting the report type.";
-      });
+    }).catch(e=>{this.setState({ loadingData: false});
+    var err=e.response.data.content[0].error; 
+        this.setState({error:err});
+    });
     if (this.state.loadingData) {
       this.deleteReporttype();
     }

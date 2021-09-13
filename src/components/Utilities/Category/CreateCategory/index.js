@@ -35,17 +35,26 @@ class AddCategory extends Component {
         used_for:this.state.used_for
       }),
     }).then((response) => {
-      this.setState({ loadingData: false,
-        error:response.data.errors[0].message});
+      if(response.data.success){
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].message});
+      }else{
+        this.setState({
+          loadingData: false,
+          error:response.data.content[0].error});
+      } 
         this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
       if(e.response.status === 400){
-        this.state.error=(e.response.data.errors[0].message.name?JSON.stringify(e.response.data.errors[0].message.name):"")
-        +'\n'+ (e.response.data.errors[0].message.used_for?JSON.stringify(e.response.data.errors[0].message.used_for):"");
-
+        var err=e.response.data.content[0].error;
+          this.setState({error:
+            (err.name?JSON.stringify(err.name):"")
+        +'\n'+ (err.used_for?JSON.stringify(err.used_for):"")
+          });
       }else{
-      this.state.error=e.response.data.errors[0].message;
+        this.setState({error:err});
       }
     });
     if (this.state.loadingData) {
@@ -65,19 +74,27 @@ class AddCategory extends Component {
             used_for:this.state.used_for
           }
         )
-      })
-      .then((response) => {
-        this.setState({ loadingData: false,
-          error:response.data.errors[0].message});
+      }).then((response) => {
+        if(response.data.success){
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].message});
+        }else{
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].error});
+        } 
           this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
         if(e.response.status === 400){
-          this.state.error=(e.response.data.errors[0].message.name?JSON.stringify(e.response.data.errors[0].message.name):"")
-          +'\n'+ (e.response.data.errors[0].message.used_for?JSON.stringify(e.response.data.errors[0].message.used_for):"");
-  
+          var err=e.response.data.content[0].error;
+            this.setState({error:
+              (err.name?JSON.stringify(err.name):"")
+          +'\n'+ (err.used_for?JSON.stringify(err.used_for):"")
+            });
         }else{
-        this.state.error=e.response.data.errors[0].message;
+          this.setState({error:err});
         }
       });
     if (this.state.loadingData) {
@@ -91,16 +108,28 @@ class AddCategory extends Component {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         }
-      })
-      .then((response) => {
-        this.setState({ loadingData: false,
-          error:"Category deleted successfully."});
-        console.log(response);
-        //this.props.closePopup();
-        this.props.refresh(); 
+      }).then((response) => {
+        if(response.data.success){
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].message});
+        }else{
+          this.setState({
+            loadingData: false,
+            error:response.data.content[0].error});
+        } 
+          this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
-        this.state.error="Error happened while deleting category.";
+        if(e.response.status === 400){
+          var err=e.response.data.content[0].error;
+            this.setState({error:
+              (err.name?JSON.stringify(err.name):"")
+          +'\n'+ (err.used_for?JSON.stringify(err.used_for):"")
+            });
+        }else{
+          this.setState({error:err});
+        }
       });
     if (this.state.loadingData) {
       this.deleteCategory();
