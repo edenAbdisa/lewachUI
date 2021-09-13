@@ -7,7 +7,7 @@ import "./navigation.css";
 import axios from "axios";
 import * as ROUTES from "../../constants/routes.js";
 import * as THEME from "../../constants/theme.js";
-const Navigation = () => (
+const Navigation = (props) => (
   <Navbar
    
     expand="lg"
