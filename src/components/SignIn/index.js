@@ -77,13 +77,12 @@ class SignIn extends Component {
         }
       })
       .catch((e) => {
-        var err = e.response.data.content[0].error;
-        
+        var err = e.response.data.content[0].error;        
           var err = e.response.data.content[0].error;
-          this.state.error =
+          this.setState({error:
             (err.email ? JSON.stringify(err.email) : "") +
             "\n" +(err.password ? JSON.stringify(err.password) : "")
-            +"\n"+e.response.data.content[0].message;
+            +"\n"+e.response.data.content[0].message});
          
       });
   }
