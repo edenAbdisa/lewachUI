@@ -5,15 +5,13 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import * as THEME from "../../../../constants/theme";
 import * as ROUTES from "../../../../constants/routes.js";
 import axios from "axios";
-
-const INITIAL_STATE = {
-  
-};
+ 
 
 class AddCategory extends Component {
   constructor(props) {
     super(props);
-    this.state = {name: this.props.type === "create" ? "" : this.props.singleData.name,
+    this.state = {
+      name: "",
     itemId: 0,
     error: null,
     isDelete: false,
@@ -21,7 +19,7 @@ class AddCategory extends Component {
     isEdit: false,
     loadingData: true,
     messages:"",
-    used_for:this.props.type === "create" ? "" : this.props.singleData.used_for };
+    used_for:"" };
   }
   async createCategory() {
     await axios({
@@ -151,9 +149,8 @@ class AddCategory extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  render() {
-    
-    const { name, error, used_for, } = this.state;
+  render() {    
+    const { name, error, used_for } = this.state;
     this.state.isDelete= this.props.type === "delete" ;
     this.state.isCreate=this.props.type === "create" ;
     this.state.isEdit=this.props.type === "edit" ;

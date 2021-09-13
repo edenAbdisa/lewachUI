@@ -9,12 +9,15 @@ import axios from "axios";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 require("dotenv").config();
 const INITIAL_STATE = {
   firstname: "",
   lastname: "",
   email: "",
+  phone_number:"",
+  birthdate:"",
   passwordOne: "",
   passwordTwo: "",
   passworderr: "",
@@ -135,6 +138,8 @@ class Users extends Component {
       passwordTwo,
       role,
       error,
+      phone_number,
+      birthdate,
       lat,
       lng,
       passworderr,
@@ -146,7 +151,8 @@ class Users extends Component {
       passwordOne === "" ||
       email === "" ||
       firstname === "" ||
-      lastname === "";
+      lastname === "" || phone_number=== "" ||
+      birthdate === "";
     this.state.isDelete = this.props.type === "delete";
     this.state.isCreate = this.props.type === "create";
     this.state.isEdit = this.props.type === "edit";
@@ -197,6 +203,30 @@ class Users extends Component {
                 onChange={this.onChange}
                 type="text"
                 placeholder="Email Address"
+              />
+              <Form.Label>Phone number</Form.Label>
+              <Form.Control
+                data-cy="phone_number"
+                name="phone_number"
+                value={phone_number}
+                onChange={this.onChange}
+                type="text"
+                placeholder="Phone number"
+              />
+              <Form.Label>Birthdate</Form.Label>
+              <DatePicker
+              data-cy="birthdate"
+              name="birthdate"
+              value={birthdate} 
+              style={{ display: "inline" }} 
+              selectsEnd
+              dateFormat="yyyy-MM-dd"
+              onChange={(date) => this.setState({ birthdate: date })}
+        />
+              <Form.Control
+                
+                type="text"
+                placeholder="Birthdate"
               />
               <Form.Label>Password</Form.Label>
               <Form.Control
