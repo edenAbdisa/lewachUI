@@ -32,6 +32,7 @@ const App = () => (
               <Route exact path={ROUTES.UTILITIES} component={Utilities} />
               <Route exact path={ROUTES.ACCOUNT} component={Account} />
               <Route exact path={ROUTES.MAPBOX} component={Mapbox} />
+              
             </Switch>
           </Col>
         </Grid>

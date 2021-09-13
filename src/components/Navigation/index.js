@@ -23,15 +23,40 @@ const Navigation = (props) => (
       style={{ color: THEME.HeaderFontColor }}
     />
     <Nav className="mr-sm-2">
-    {localStorage.getItem("auth")==='true'? 
+    {/* {localStorage.getItem("auth")==='true'? 
       (<NavigationAuth />) :
       (<NavigationNonAuth />)
+     } */
      }
+      <p class="nav-link" onClick={(e) =>{
+         axios({
+          method: "post",
+          url: ROUTES.API_GET_USER_LOGOUT,
+          headers: {
+            "Authorization" : `Bearer ${localStorage.getItem('token')}`
+          },
+          data: JSON.stringify({
+            remember_token:localStorage.getItem('token')
+          })
+          
+          }).then((response) => {      
+              localStorage.setItem('auth', false);      
+              localStorage.setItem('role', '');
+              localStorage.setItem('token', '');
+              localStorage.setItem('userId', '');
+              props.history.push(ROUTES.SIGNIN);
+           });
+      }
+        }
+      
+      >
+          <FaSignOutAlt /> Sign out
+        </p>
     </Nav>
   </Navbar>
 );
 
-const NavigationAuth = () => (
+const NavigationAuth = (props) => (
   <>
     <Link to={ROUTES.ACCOUNT} class="nav-link">
       Account
@@ -47,7 +72,7 @@ const NavigationAuth = () => (
   </>
 );
 
-  const onSignOut=() => { 
+  const onSignOut=(props) => { 
    axios({
     method: "post",
     url: ROUTES.API_GET_USER_LOGOUT,
@@ -63,7 +88,7 @@ const NavigationAuth = () => (
         localStorage.setItem('role', '');
         localStorage.setItem('token', '');
         localStorage.setItem('userId', '');
-        this.props.history.push(ROUTES.SIGNIN);
+        props.history.push(ROUTES.SIGNIN);
     // check if the data is populated
     // you tell it that you had the result
    // this.setState({ loadingData: false });
