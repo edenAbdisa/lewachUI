@@ -64,7 +64,7 @@ class SignIn extends Component {
         console.log(res);
         // check if the data is populated
         this.setState({ loadingData: false });
-        if (response.data.content[0].success==="true") {
+        if (response.data.success) {
           localStorage.setItem("auth", true);
           localStorage.setItem("role", res.type.toString());
           localStorage.setItem("token", res.remember_token.toString());
