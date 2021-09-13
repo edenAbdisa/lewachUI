@@ -60,24 +60,26 @@ class SignIn extends Component {
           password:password
         })
       }).then((response) => {
-          var res=response.data;
+          var res=response.data.data;
           // check if the data is populated
           this.setState({ loadingData: false});
-          if(response.contents[0].success){
+          if(response.data.contents[0].success){
             localStorage.setItem('auth', true);      
             localStorage.setItem('role', res.type.toString());
             localStorage.setItem('token', res.remember_token.toString());
             this.props.history.push(ROUTES.REPORT); 
           } else{
-            this.setState({error:response.contents[0].error});
+            this.setState({error:response.data.contents[0].error});
           } 
           if (this.state.loadingData) {
             this.login();
           }
-      }).catch((e) => {        
-        var err=e.response.content[0].error;
+      }).catch((e) => { 
+        console.log(e.response);  
+        console.log(e);     
+        var err=e.response.data.content[0].error;
         if(e.response.status === 400){
-          var err=e.response.content[0].error;
+          var err=e.response.data.content[0].error;
           this.state.error=(err.email?JSON.stringify(err.email):"")
           +'\n'+ (err.password?JSON.stringify(err.password):"");  
         }else{
