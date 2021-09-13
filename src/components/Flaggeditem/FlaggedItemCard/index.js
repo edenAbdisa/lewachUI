@@ -42,7 +42,7 @@ class FlaggedItemCard extends Component {
           error:response.data.content[0].error});
       } 
     }).catch((e) => { 
-       if(e.response.status==204){
+       if(e.response.status===204){
         this.props.refresh();
         this.props.closePopup();
        }else{
@@ -60,15 +60,10 @@ class FlaggedItemCard extends Component {
     } else {
       url = ROUTES.API_GET_ITEM + "/" + this.state.itemId;
     }
-    await axios({
-      method: "put",
-      url: url,
+    await axios.put(url,{status: "removed"},{
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
-      },
-      data: JSON.stringify({
-        status: "removed",
-      }),
+      }
     }).then((response) => {
       if(response.data.success){
         this.setState({
