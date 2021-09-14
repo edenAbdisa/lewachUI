@@ -37,6 +37,13 @@ class Membership extends Component {
       sticky: "left",
     },
     {
+      Header: "Type",
+      Footer: "Type",
+      accessor: "type",
+      sticky: "left",
+    },
+    
+    {
       Header: "Email",
       Footer: "Email",
       accessor: "email",
