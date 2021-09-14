@@ -38,6 +38,12 @@ class Type extends Component {
       accessor: "category.name",
       sticky: "left",
     },
+    {
+      Header: "Category Id",
+      Footer: "Name",
+      accessor: "category.id",
+      sticky: "left",
+    },
   ];
   async getData() {
     this.setState({ column: this.COLUMNS }); 
