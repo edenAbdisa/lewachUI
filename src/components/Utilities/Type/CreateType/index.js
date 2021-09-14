@@ -5,17 +5,15 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import * as THEME from "../../../../constants/theme";
 import * as ROUTES from "../../../../constants/routes.js";
 import axios from "axios";
-import { Redirect,withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from "react-router-dom";
 
-const INITIAL_STATE = {
- 
-};
+const INITIAL_STATE = {};
 
 class AddType extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      name:this.props.type === "create" ? " " : this.props.singleData.name,
+    this.state = {
+      name: this.props.type === "create" ? " " : this.props.singleData.name,
       categoryId: 0,
       itemId: 0,
       error: null,
@@ -24,116 +22,149 @@ class AddType extends Component {
       isEdit: false,
       loadingData: true,
       categoryList: [],
-      message:""
+      message: "",
     };
   }
   componentWillMount() {
     this.getCategory();
   }
   async createType() {
-    await axios.post(ROUTES.API_GET_TYPE,{
+    console.log({
       name: this.state.name,
-      category_id: this.state.categoryId
-    },{
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      }
-    })  
-    .then((response) => {
-      if(response.data.success){
-        this.setState({
-          loadingData: false,
-          error:response.data.content[0].message});
-      }else{
-        this.setState({
-          loadingData: false,
-          error:response.data.content[0].error});
-      } 
-        this.props.refresh(); 
-    }).catch(e=>{this.setState({ loadingData: false}); 
-      if(e.response.status === 400){
-        var err=e.response.data.content[0].error;
-          this.setState({error:(err.name?JSON.stringify(err.name):"")
-          +'\n'+ (err.category_id?JSON.stringify(err.category_id):"")        
-          });
-      }else{
-        this.setState({error:err});
-      } 
+      category_id: this.state.categoryId,
     });
+    await axios
+      .post(
+        ROUTES.API_GET_TYPE,
+        {
+          name: this.state.name,
+          category_id: this.state.categoryId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.success) {
+          this.setState({
+            loadingData: false,
+            error: response.data.content[0].message,
+          });
+        } else {
+          this.setState({
+            loadingData: false,
+            error: response.data.content[0].error,
+          });
+        }
+        this.props.refresh();
+      })
+      .catch((e) => {
+        this.setState({ loadingData: false });
+        var err = e.response.data.content[0].error;
+        if (e.response.status === 400) {
+          this.setState({
+            error:
+              (err.name ? JSON.stringify(err.name) : "") +
+              "\n" +
+              (err.category_id ? JSON.stringify(err.category_id) : ""),
+          });
+        } else {
+          this.setState({ error: err });
+        }
+      });
     if (this.state.loadingData) {
       this.createType();
     }
   }
-  async editType() { 
-      await axios.put(ROUTES.API_GET_TYPE + "/" + this.state.itemId,{
-        name: this.state.name,
-            category_id: this.state.categoryId
-          },{
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+  async editType() {
+    await axios
+      .put(
+        ROUTES.API_GET_TYPE + "/" + this.state.itemId,
+        {
+          name: this.state.name,
+          category_id: this.state.categoryId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      }).then((response) => {
-        if(response.data.success){
+      )
+      .then((response) => {
+        if (response.data.success) {
           this.setState({
             loadingData: false,
-            error:response.data.content[0].message});
-        }else{
+            error: response.data.content[0].message,
+          });
+        } else {
           this.setState({
             loadingData: false,
-            error:response.data.content[0].error});
-        } 
-          this.props.refresh(); 
-      }).catch(e=>{this.setState({ loadingData: false}); 
-        if(e.response.status === 400){
-          var err=e.response.data.content[0].error;
-            this.setState({error:(err.name?JSON.stringify(err.name):"")
-            +'\n'+ (err.category_id?JSON.stringify(err.category_id):"")        
-            });
-        }else{
-          this.setState({error:err});
-        } 
+            error: response.data.content[0].error,
+          });
+        }
+        this.props.refresh();
+      })
+      .catch((e) => {
+        this.setState({ loadingData: false });
+        if (e.response.status === 400) {
+          var err = e.response.data.content[0].error;
+          this.setState({
+            error:
+              (err.name ? JSON.stringify(err.name) : "") +
+              "\n" +
+              (err.category_id ? JSON.stringify(err.category_id) : ""),
+          });
+        } else {
+          this.setState({ error: err });
+        }
       });
     if (this.state.loadingData) {
       this.editType();
     }
   }
   async deleteType() {
-     await axios({
-        method: "delete",
-        url: ROUTES.API_GET_TYPE + "/" + this.state.itemId,
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+    await axios({
+      method: "delete",
+      url: ROUTES.API_GET_TYPE + "/" + this.state.itemId,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => {
+        if (response.data.success) {
+          this.setState({
+            loadingData: false,
+            error: response.data.content[0].message,
+          });
+        } else {
+          this.setState({
+            loadingData: false,
+            error: response.data.content[0].error,
+          });
         }
-      }).then((response) => {
-        if(response.data.success){
-          this.setState({
-            loadingData: false,
-            error:response.data.content[0].message});
-        }else{
-          this.setState({
-            loadingData: false,
-            error:response.data.content[0].error});
-        } 
-          this.props.refresh(); 
-      }).catch(e=>{this.setState({ loadingData: false}); 
-      this.props.refresh(); 
-      this.props.closePopup(); 
-          this.setState({error:e.response.data.content[0].error});
-        
+        this.props.refresh();
+      })
+      .catch((e) => {
+        this.setState({ loadingData: false });
+        this.props.refresh();
+        this.props.closePopup();
+        this.setState({ error: e.response.data.content[0].error });
       });
     if (this.state.loadingData) {
       this.deleteType();
     }
   }
-  async getCategory() { 
+  async getCategory() {
     await axios({
       method: "get",
       url: ROUTES.API_GET_CATEGORY,
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-      }
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     }).then((response) => {
-      this.setState({ categoryList: response.data.data,loadingData:false });
+      this.setState({ categoryList: response.data.data, loadingData: false });
       console.log(response);
     });
     if (this.state.loadingData) {
@@ -148,7 +179,7 @@ class AddType extends Component {
     } else {
       this.deleteType();
     }
-    
+
     event.preventDefault();
   };
   onChange = (event) => {
@@ -156,20 +187,22 @@ class AddType extends Component {
   };
 
   render() {
-    const { name,categoryId, error } = this.state;
+    const { name, categoryId, error } = this.state;
     const isInvalid = name === "";
-    this.state.isDelete= this.props.type === "delete" ;
-    this.state.isCreate=this.props.type === "create" ;
-    this.state.isEdit=this.props.type === "edit" ;
-    this.state.itemId= this.props.type === "create" ? null : this.props.singleData.id;
-    this.state.name= this.props.type === "create" ? null : this.props.singleData.name; 
-    //this.state.categoryId= this.props.type === "create" ? null : this.props.singleData.categoryId;     
-   
+    this.state.isDelete = this.props.type === "delete";
+    this.state.isCreate = this.props.type === "create";
+    this.state.isEdit = this.props.type === "edit";
+    this.state.itemId =
+      this.props.type === "create" ? null : this.props.singleData.id; 
+    //this.state.categoryId= this.props.type === "create" ? null : this.props.singleData.categoryId;
+
     return (
       <div className="popup">
         <div className="popup_inner">
-          <p onClick={this.props.closePopup} style={{ float: "right" }}
-          data-cy="closeTypepopup"
+          <p
+            onClick={this.props.closePopup}
+            style={{ float: "right" }}
+            data-cy="closeTypepopup"
           >
             <AiFillCloseCircle />
           </p>
@@ -207,16 +240,16 @@ class AddType extends Component {
                 disabled={this.state.isDelete}
                 onChange={this.onChange}
               >
-               { this.state.categoryList.map((element) => (
-               <option value={element.id}>{element.name}</option> 
-               )) } 
+                {this.state.categoryList.map((element) => (
+                  <option value={element.id}>{element.name}</option>
+                ))}
               </Form.Control>
             </Form.Group>
             <Button
               data-cy="typeSubmit"
               variant="primary"
               type="submit"
-              disabled={this.state.isDelete?false:isInvalid}
+              disabled={this.state.isDelete ? false : isInvalid}
               style={{ backgroundImage: THEME.SubmitGradientButton }}
             >
               {this.props.buttonName}
