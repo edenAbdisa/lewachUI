@@ -213,7 +213,7 @@ class Users extends Component {
               <DatePicker
               data-cy="birthdate" 
               style={{ display: "inline" }} 
-              
+              selected={this.state.birthdate}
               dateFormat="yyyy-MM-dd"
               onChange={(date) => this.setState({ birthdate: date })}
         />
@@ -221,6 +221,7 @@ class Users extends Component {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 data-cy="passwordOne"
+                
                 name="passwordOne"
                 value={passwordOne}
                 onChange={this.onChange}
