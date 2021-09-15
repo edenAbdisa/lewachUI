@@ -213,7 +213,7 @@ class Users extends Component {
               <DatePicker
               data-cy="birthdate" 
               style={{ display: "inline" }} 
-              selectsEnd
+              
               dateFormat="yyyy-MM-dd"
               onChange={(date) => this.setState({ birthdate: date })}
         />
