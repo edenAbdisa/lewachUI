@@ -211,9 +211,7 @@ class Users extends Component {
               />
               <Form.Label>Birthdate</Form.Label>
               <DatePicker
-              data-cy="birthdate"
-              name="birthdate"
-              value={birthdate} 
+              data-cy="birthdate" 
               style={{ display: "inline" }} 
               selectsEnd
               dateFormat="yyyy-MM-dd"

@@ -262,9 +262,7 @@ class Line extends Component {
           style={{ display: "inline !important" }}
           selected={this.state.startDate}
           selectsStart
-          dateFormat="yyyy-MM-dd"
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
+          dateFormat="yyyy-MM-dd" 
           onChange={(date) => this.setState({ startDate: date })}
         />{" "}
         <label for="start">End date</label>
@@ -272,9 +270,7 @@ class Line extends Component {
           style={{ display: "inline" }}
           selected={this.state.endDate}
           selectsEnd
-          dateFormat="yyyy-MM-dd"
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
+          dateFormat="yyyy-MM-dd"  
           minDate={this.state.startDate}
           onChange={(date) => this.setState({ endDate: date })}
         />
