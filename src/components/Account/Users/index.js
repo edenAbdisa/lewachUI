@@ -59,15 +59,35 @@ class Users extends Component {
     //this.props.closePopup();
   }
   fuSetGeo = (val) => {
-    console.log(val);
+    
     this.setState({
       lat: val.geometry.coordinates[0],
       lng: val.geometry.coordinates[1],
-      country: val.geometry.coordinates[0],
-      city: val.geometry.coordinates[1],
+      country: val.context[4].text,
+      city: val.context[1].text,
     });
   };
   async createUser() {
+    console.log({
+      email: this.state.email.toString(),
+      first_name: this.state.firstname.toString(),
+      last_name: this.state.lastname.toString(),
+      phone_number: this.state.phone_number.toString(),
+      password: this.state.passwordOne.toString(),
+      type: this.state.role.toString(),
+      status: "active",
+      birthdate:  this.state.birthdate.getFullYear().toString() +
+      "-" +
+      (this.state.birthdate.getMonth() + 1).toString() +
+      "-" +
+      this.state.birthdate.getDate().toString(),
+      address: {
+        latitude: this.state.lat,
+        longitude: this.state.lng,
+        type: "user",
+      },
+      membership_id: 12,
+    });
     await axios.post(ROUTES.API_GET_SINGLE_USER,{
         email: this.state.email.toString(),
         first_name: this.state.firstname.toString(),
