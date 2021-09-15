@@ -43,8 +43,8 @@ class Reporttype extends Component {
       } 
         this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false}); 
-      if(e.response.status === 400){
-        var err=e.response.data.content[0].error;
+    var err=e.response.data.content[0].error;
+      if(e.response.status === 400){        
           this.setState({error:
             (err.report_detail?JSON.stringify(err.report_detail):"")
         +'\n'+ (err.type_for?JSON.stringify(err.type_for):"")
@@ -79,8 +79,9 @@ class Reporttype extends Component {
         } 
           this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false}); 
-        if(e.response.status === 400){
-          var err=e.response.data.content[0].error;
+      var err=e.response.data.content[0].error;  
+      if(e.response.status === 400){
+          
             this.setState({error:
               (err.report_detail?JSON.stringify(err.report_detail):"")
           +'\n'+ (err.type_for?JSON.stringify(err.type_for):"")
@@ -113,10 +114,11 @@ class Reporttype extends Component {
       } 
         this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false});
-    this.props.refresh(); 
-      this.props.closePopup(); 
+    
     var err=e.response.data.content[0].error; 
         this.setState({error:err});
+    this.props.refresh(); 
+      this.props.closePopup(); 
     });
     if (this.state.loadingData) {
       this.deleteReporttype();

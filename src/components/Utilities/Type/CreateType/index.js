@@ -108,8 +108,9 @@ class AddType extends Component {
       })
       .catch((e) => {
         this.setState({ loadingData: false });
+        var err = e.response.data.content[0].error;
         if (e.response.status === 400) {
-          var err = e.response.data.content[0].error;
+         
           this.setState({
             error:
               (err.name ? JSON.stringify(err.name) : "") +

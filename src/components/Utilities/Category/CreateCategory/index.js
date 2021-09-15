@@ -45,8 +45,9 @@ class AddCategory extends Component {
         this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
+      var err=e.response.data.content[0].error;
       if(e.response.status === 400){
-        var err=e.response.data.content[0].error;
+       
           this.setState({error:
             (err.name?JSON.stringify(err.name):"")
         +'\n'+ (err.used_for?JSON.stringify(err.used_for):"")
@@ -82,8 +83,9 @@ class AddCategory extends Component {
           this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
         //this.setState({ error:e});
+        var err=e.response.data.content[0].error;
         if(e.response.status === 400){
-          var err=e.response.data.content[0].error;
+          
             this.setState({error:
               (err.name?JSON.stringify(err.name):"")
           +'\n'+ (err.used_for?JSON.stringify(err.used_for):"")
@@ -115,11 +117,13 @@ class AddCategory extends Component {
         } 
           this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false});
+      var err=e.response.data.content[0].error;
         //this.setState({ error:e});
         this.props.refresh(); 
       this.props.closePopup(); 
+
         if(e.response.status === 400){
-          var err=e.response.data.content[0].error;
+
             this.setState({error:
               (err.name?JSON.stringify(err.name):"")
           +'\n'+ (err.used_for?JSON.stringify(err.used_for):"")

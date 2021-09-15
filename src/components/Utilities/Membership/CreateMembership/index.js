@@ -43,8 +43,9 @@ class AddMembership extends Component {
         this.props.refresh(); 
     }).catch(e=>{this.setState({ loadingData: false});
       //this.setState({ error:e});
+      var err=e.response.data.content[0].error;
       if(e.response.status === 400){
-        var err=e.response.data.content[0].error;
+        
           this.setState({error:
             (err.name?JSON.stringify(err.name):"")
         +'\n'+ (err.limit_of_post?JSON.stringify(err.limit_of_post):"")
@@ -80,8 +81,9 @@ class AddMembership extends Component {
         } 
           this.props.refresh(); 
       }).catch(e=>{this.setState({ loadingData: false}); 
+      var err=e.response.data.content[0].error;
         if(e.response.status === 400){
-          var err=e.response.data.content[0].error;
+         
             this.setState({error:
               (err.name?JSON.stringify(err.name):"")
           +'\n'+ (err.limit_of_post?JSON.stringify(err.limit_of_post):"")
@@ -118,10 +120,12 @@ class AddMembership extends Component {
         this.props.refresh(); 
     }).catch(e=>{ 
       this.setState({ loadingData: false});
-      this.props.refresh(); 
-      this.props.closePopup(); 
       var err=e.response.data.content[0].error; 
       this.setState({error:err}); 
+      this.props.refresh(); 
+      this.props.closePopup(); 
+    
+      
     });
     if (this.state.loadingData) {
       this.deleteMembership();
