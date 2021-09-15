@@ -25,6 +25,8 @@ const INITIAL_STATE = {
   role: "",
   lng: 5,
   lat: 5,
+  country:"",
+  city: ""
 };
 const mapContainerRef = React.createRef(null);
 class Users extends Component {
@@ -57,9 +59,12 @@ class Users extends Component {
     //this.props.closePopup();
   }
   fuSetGeo = (val) => {
+    console.log(val);
     this.setState({
       lat: val.geometry.coordinates[0],
       lng: val.geometry.coordinates[1],
+      country: val.geometry.coordinates[0],
+      city: val.geometry.coordinates[1],
     });
   };
   async createUser() {
@@ -81,7 +86,7 @@ class Users extends Component {
           longitude: this.state.lng,
           type: "user",
         },
-        membership_id: 4,
+        membership_id: 12,
       },{headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
