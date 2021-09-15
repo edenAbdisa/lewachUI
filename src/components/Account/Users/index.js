@@ -219,11 +219,7 @@ class Users extends Component {
               dateFormat="yyyy-MM-dd"
               onChange={(date) => this.setState({ birthdate: date })}
         />
-              <Form.Control
-                
-                type="text"
-                placeholder="Birthdate"
-              />
+               
               <Form.Label>Password</Form.Label>
               <Form.Control
                 data-cy="passwordOne"
