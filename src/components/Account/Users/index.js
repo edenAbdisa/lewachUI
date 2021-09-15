@@ -71,7 +71,11 @@ class Users extends Component {
         password: this.state.passwordOne.toString(),
         type: this.state.role.toString(),
         status: "active",
-        birthdate: this.state.birthdate.toString(),
+        birthdate:  this.state.birthdate.getFullYear().toString() +
+        "-" +
+        (this.state.birthdate.getMonth() + 1).toString() +
+        "-" +
+        this.state.birthdate.getDate().toString(),
         address: {
           latitude: this.state.lat,
           longitude: this.state.lng,
