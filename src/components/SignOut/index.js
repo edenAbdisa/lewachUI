@@ -11,8 +11,8 @@ class SignOut extends Component {
     constructor(props) {
       super(props); 
     }
-      logout(){
-          axios({
+    async logout(){
+        await axios({
             method: "post",
             url: ROUTES.API_GET_USER_LOGOUT,
             headers: {
@@ -33,8 +33,10 @@ class SignOut extends Component {
            // this.setState({ loadingData: false });
           }); 
     }
-render(){return(
-    this.logout()
+render(){
+    this.logout();
+    return(
+    <></>
 )};
 
 }
