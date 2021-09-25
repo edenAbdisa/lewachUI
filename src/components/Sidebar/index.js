@@ -72,12 +72,7 @@ const Sidebar = () => {
                 <Link to={ROUTES.UTILITIES}>
                   Utilities <br /> Managment
                 </Link>
-              </MenuItem>
-              <MenuItem icon={<RiUserSettingsLine />}>
-                <Link to={ROUTES.ACCOUNT}>
-                  Internal <br /> User
-                </Link>
-              </MenuItem>
+              </MenuItem> 
             </Menu>
           </SidebarContent> 
         </ProSidebar>

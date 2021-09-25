@@ -106,6 +106,8 @@ class Users extends Component {
         address: {
           latitude: this.state.lat,
           longitude: this.state.lng,
+city: this.state.city,
+        country: this.state.country,
           type: "user",
         },
         membership_id: 12,
