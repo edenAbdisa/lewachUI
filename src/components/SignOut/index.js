@@ -11,8 +11,8 @@ class SignOut extends Component {
     constructor(props) {
       super(props); 
     }
-    async logout(){
-        await axios({
+      logout(){
+          axios({
             method: "post",
             url: ROUTES.API_GET_USER_LOGOUT,
             headers: {
