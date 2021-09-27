@@ -178,7 +178,7 @@ class AddCategory extends Component {
               <Form.Label>Category Name</Form.Label>
               <Form.Control
               onKeyPress={event => (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)}
-              placeholder="Add Skill"
+            
                 type="text"
                 placeholder={
                   this.state.isCreate

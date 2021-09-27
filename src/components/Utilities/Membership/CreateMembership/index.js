@@ -172,7 +172,9 @@ class AddMembership extends Component {
               <Form.Label>{this.props.title}</Form.Label>
               <Form.Text className="text-muted">{this.props.message}</Form.Text>
               <Form.Label>Membership name</Form.Label>
-              <Form.Control
+              <input
+              onKeyPress={event => (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)}
+            
                 type="text"
                 placeholder={
                   this.state.isCreate
