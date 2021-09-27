@@ -149,6 +149,7 @@ class AddCategory extends Component {
     //this.props.closePopup();
   }
   onChange = (event) => {
+    event.target.value = event.target.value.replace(/[^A-Za-z]/ig, '')
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -177,8 +178,7 @@ class AddCategory extends Component {
               </Form.Text> 
               <Form.Label>Category Name</Form.Label>
               <Form.Control
-              onKeyPress={event => (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)}
-            
+              
                 type="text"
                 placeholder={
                   this.state.isCreate
