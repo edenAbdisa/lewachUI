@@ -142,6 +142,9 @@ class AddMembership extends Component {
     event.preventDefault();
   };
   onChange = (event) => {
+    if(event.target.name==="name"){
+      event.target.value = event.target.value.replace(/[^A-Za-z]/ig, '');
+    }
     this.setState({
       [event.target.name]: event.target.value
     });

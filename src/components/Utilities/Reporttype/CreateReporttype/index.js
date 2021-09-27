@@ -137,6 +137,9 @@ class Reporttype extends Component {
     //this.props.closePopup();
   }
   onChange = (event) => {
+    if(event.target.report_detail==="report_detail"){
+      event.target.value = event.target.value.replace(/[^A-Za-z]/ig, '');
+    }
     this.setState({ [event.target.name]: event.target.value });
   };
 

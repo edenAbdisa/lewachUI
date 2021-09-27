@@ -149,7 +149,7 @@ class AddCategory extends Component {
     //this.props.closePopup();
   }
   onChange = (event) => {
-    event.target.value = event.target.value.replace(/[^A-Za-z]/ig, '')
+    event.target.value = event.target.value.replace(/[^A-Za-z]/ig, '');
     this.setState({ [event.target.name]: event.target.value });
   };
 
