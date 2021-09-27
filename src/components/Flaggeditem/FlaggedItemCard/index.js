@@ -134,16 +134,16 @@ class FlaggedItemCard extends Component {
           <Card style={{ width: "18rem" }} class="flagged">
             <Card.Img
               variant="top"
-              src={this.props.singleData["flagged_item.picture"]}
+              src={this.props.singleData.flagged_item.picture}
             />
             <Card.Body>
               <Card.Title>
                 {" "}
-                {this.props.singleData["flagged_item.name"]}
+                {this.props.singleData.flagged_item.name}
               </Card.Title>
               <Card.Title>
                 {" "}
-                {this.props.singleData["flagged_by.email"]}
+                {this.props.singleData.flagged_by.email}
               </Card.Title>
 
               <Card.Title> {this.props.singleData.type}</Card.Title>

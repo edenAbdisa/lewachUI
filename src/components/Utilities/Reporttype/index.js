@@ -4,6 +4,7 @@ import { GrAdd } from "react-icons/gr";
 import * as ROUTES from "../../../constants/routes.js";
 import axios from "axios";
 import RowSelection from "../../Table";
+import DataTable from 'react-data-table-component'; 
 class Reporttype extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,7 @@ class Reporttype extends Component {
       column: [],
     };
   }
-  COLUMNS = [
+  /* COLUMNS = [
     {
       Header: "Id",
       Footer: "Id",
@@ -38,8 +39,31 @@ class Reporttype extends Component {
       accessor: "type_for",
       sticky: "left",
     },
-  ];
-
+  ]; */
+  COLUMNS = [
+    {      
+      cell:row => <button onClick={() => this.editReporttypeViewPopup(row)}>Edit</button>,
+        name: 'Edit',
+        selector: row => row.id
+      
+    } ,
+    {      
+      cell:row => <button onClick={() => this.deleteReporttypeViewPopup(row)}>Delete</button>,
+        name: 'Delete',
+        selector: row => row.id
+      
+    } ,
+     { 
+        name: 'Report name',
+        selector: row => row.report_detail,
+        sortable: true 
+    },
+    { 
+        name: 'Type for',
+        selector: row => row.type_for,
+        sortable: true 
+    } 
+];
   async getData() {
     this.setState({ column: this.COLUMNS }); 
     await axios({
@@ -90,15 +114,18 @@ class Reporttype extends Component {
         >
           <GrAdd /> Add reporttype
         </p>
-
-        <RowSelection
+        <DataTable
+            columns={this.state.column}
+            data={this.state.data} 
+        />
+        {/* <RowSelection
           showApprove={false}
           showButton={true}
           data={this.state.data}
           column={this.state.column}
           edit={this.editReporttypeViewPopup.bind(this)}
           delete={this.deleteReporttypeViewPopup.bind(this)}
-        />
+        /> */}
         {this.state.addShowPopup ? (
           <CreateReporttype
             type="create"

@@ -4,6 +4,7 @@ import FlaggedItemCard from "./FlaggedItemCard";
 import * as ROUTES from "../../constants/routes.js";
 import axios from "axios";
 import RowSelection from "../Table";
+import DataTable from 'react-data-table-component'; 
 class Flagged extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +17,7 @@ class Flagged extends Component {
       column: [],
     };
   }
-  COLUMNS = [
+  /* COLUMNS = [
     {
       Header: "Id",
       Footer: "Id",
@@ -65,7 +66,25 @@ class Flagged extends Component {
       accessor: "flagged_by.first_name",
       sticky: "left",
     },
-  ];
+  ]; */
+  COLUMNS = [
+    {      
+      cell:row => <button onClick={() => this.viewFlaggedViewPopup(row)}>View</button>,
+        name: 'View',
+        selector: row => row.id
+      
+    },
+     { 
+        name: 'Name',
+        selector: row => row.flagged_item.name,
+        sortable: true 
+    },
+    { 
+        name: 'Reason',
+        selector: row => row.reason.report_detail,
+        sortable: true 
+    } 
+];
   async getData() {
     this.setState({ column: this.COLUMNS }); 
     await axios({
@@ -107,14 +126,18 @@ class Flagged extends Component {
         >
           Flagged Items
         </h3>
-        <RowSelection
+        <DataTable
+            columns={this.state.column}
+            data={this.state.data} 
+        />
+       {/*  <RowSelection
           data={this.state.data}
           column={this.state.column}
           view={this.viewFlaggedViewPopup.bind(this)} 
           showButton={false}
           showApprove={false}
           showRemove={true}
-        />
+        /> */}
         {this.state.viewShowPopup ? (
           <FlaggedItemCard
             type="edit"

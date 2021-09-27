@@ -5,6 +5,7 @@ import * as ROUTES from "../../../constants/routes.js";
 import axios from "axios";
 import RowSelection from "../../Table";
 
+import DataTable from 'react-data-table-component';
 class Type extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,7 @@ class Type extends Component {
       column: [],
     };
   }
-  COLUMNS = [
+/*   COLUMNS = [
     {
       Header: "Id",
       Footer: "Id",
@@ -44,7 +45,31 @@ class Type extends Component {
       accessor: "category.id",
       sticky: "left",
     },
-  ];
+  ]; */
+  COLUMNS = [
+    {      
+      cell:row => <button onClick={() => this.editTypeViewPopup(row)}>Edit</button>,
+        name: 'Edit',
+        selector: row => row.id
+      
+    } ,
+    {      
+      cell:row => <button onClick={() => this.deleteTypeViewPopup(row)}>Delete</button>,
+        name: 'Delete',
+        selector: row => row.id
+      
+    } ,
+    { 
+       name: 'Name',
+       selector: row => row.name,
+       sortable: true 
+   } ,
+     { 
+        name: 'Category',
+        selector: row => row.category.name,
+        sortable: true 
+    } 
+];
   async getData() {
     this.setState({ column: this.COLUMNS }); 
     await axios({
@@ -52,13 +77,7 @@ class Type extends Component {
       url: ROUTES.API_GET_TYPE,
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
-      },
-      data: JSON.stringify(
-        {
-          name: this.state.name,
-          category_id: this.state.categoryId
-        }
-      )
+      }
     }).then((response) => {
       // check if the data is populated
       console.log(response.data.data);
@@ -100,15 +119,18 @@ class Type extends Component {
         data-cy="addType">
           <GrAdd /> Add Type
         </p>
-
-        <RowSelection
+        <DataTable
+            columns={this.state.column}
+            data={this.state.data} 
+        />
+        {/* <RowSelection
            showApprove={false}
           showButton={true}
           data={this.state.data}
           column={this.state.column}
           edit={this.editTypeViewPopup.bind(this)}
           delete={this.deleteTypeViewPopup.bind(this)}
-        />
+        /> */}
         {this.state.addShowPopup ? (
           <CreateType
             type="create"

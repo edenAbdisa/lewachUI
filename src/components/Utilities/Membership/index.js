@@ -4,7 +4,7 @@ import { GrAdd } from "react-icons/gr";
 import * as ROUTES from "../../../constants/routes.js";
 import axios from "axios";
 import RowSelection from "../../Table";
-
+import DataTable from 'react-data-table-component'; 
 class Membership extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +22,36 @@ class Membership extends Component {
     };
   }
   COLUMNS = [
+    {      
+      cell:row => <button onClick={() => this.editMembershipViewPopup(row)}>Edit</button>,
+        name: 'Edit',
+        selector: row => row.id 
+      
+    } ,
+    {      
+      cell:row => <button onClick={() => this.deleteMembershipViewPopup(row)}>Delete</button>,
+        name: 'Delete',
+        selector: row => row.id 
+      
+    } ,
+     { 
+        name: 'Name',
+        selector: row => row.name,
+        sortable: true 
+    },
+    { 
+        name: 'Transaction limit',
+        selector: row => row.transaction_limit,
+        sortable: true 
+    }
+    ,
+     { 
+        name: 'Limit of post',
+        selector: row => row.limit_of_post,
+        sortable: true 
+    }
+];
+ /*  COLUMNS = [
     {
       Header: "Id",
       Footer: "Id",
@@ -46,7 +76,7 @@ class Membership extends Component {
       accessor: "limit_of_post",
       sticky: "left",
     },
-  ];
+  ]; */
   async getData() {
     this.setState({ column: this.COLUMNS }); 
     await axios({
@@ -106,15 +136,18 @@ class Membership extends Component {
         >
           <GrAdd /> Add Membership
         </p>
-
-        <RowSelection
+        <DataTable
+            columns={this.state.column}
+            data={this.state.data} 
+        />
+        {/* <RowSelection
           showButton={true}
           showApprove={false}
           data={this.state.data}
           column={this.state.column}
           edit={this.editMembershipViewPopup.bind(this)}
           delete={this.deleteMembershipViewPopup.bind(this)}
-        />
+        /> */}
         {this.state.addShowPopup ? (
           <CreateMembership
             type="create"

@@ -95,7 +95,7 @@ class UserCard extends Component {
     <ListGroup className="list-group-flush">
       <ListGroupItem>{this.props.singleData.phone_number}</ListGroupItem>
       <ListGroupItem>{this.props.singleData.email}</ListGroupItem>
-      <ListGroupItem> {this.props.singleData["membership.name"]}</ListGroupItem>
+      <ListGroupItem> {this.props.singleData.membership.name}</ListGroupItem>
     </ListGroup>
     <Card.Body>
     <Button

@@ -4,6 +4,7 @@ import { GrAdd } from "react-icons/gr";
 import * as ROUTES from "../../../constants/routes.js";
 import axios from "axios";
 import RowSelection from "../../Table";
+import DataTable from 'react-data-table-component'; 
 class Category extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +21,30 @@ class Category extends Component {
     };
   }
   COLUMNS = [
+    {      
+      cell:row => <button onClick={() => this.editCategoryViewPopup(row)}>Edit</button>,
+        name: 'Edit',
+        selector: row => row.id
+      
+    } ,
+    {      
+      cell:row => <button onClick={() => this.deleteCategoryViewPopup(row)}>Delete</button>,
+        name: 'Delete',
+        selector: row => row.id
+      
+    } ,
+     { 
+        name: 'Name',
+        selector: row => row.name,
+        sortable: true 
+    },
+    { 
+        name: 'Used for',
+        selector: row => row.used_for,
+        sortable: true 
+    } 
+];
+ /*  COLUMNS = [
     {
       Header: "Id",
       Footer: "Id",
@@ -38,7 +63,7 @@ class Category extends Component {
       accessor: "used_for",
       sticky: "left",
     }
-  ];
+  ]; */
 
   async getData() {
     this.setState({ column: this.COLUMNS }); 
@@ -90,15 +115,18 @@ class Category extends Component {
         >
           <GrAdd /> Add category
         </p>
-
-        <RowSelection
+        <DataTable
+            columns={this.state.column}
+            data={this.state.data} 
+        />
+        {/* <RowSelection
           data={this.state.data}
           column={this.state.column}
           edit={this.editCategoryViewPopup.bind(this)}
           delete={this.deleteCategoryViewPopup.bind(this)}
           showButton={true}
           showApprove={false}
-        />
+        /> */}
         {this.state.addShowPopup ? (
           <CreateCategory
             type="create"

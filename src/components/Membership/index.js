@@ -4,6 +4,7 @@ import * as ROUTES from "../../constants/routes.js";
 import * as THEME from "../../constants/theme.js";
 import axios from "axios";
 import RowSelection from "../Table";
+import DataTable from 'react-data-table-component'; 
 class Membership extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +18,7 @@ class Membership extends Component {
       column: []
     };
   }
-  COLUMNS = [
+ /*  COLUMNS = [
     {
       Header: "Name",
       Footer: "Name",
@@ -61,8 +62,30 @@ class Membership extends Component {
       accessor: "TIN_picture",
       sticky: "left",
     }
-  ];
-
+  ]; */
+  COLUMNS = [
+    {      
+      cell:row => <button onClick={() => this.approveOrganizationViewPopup(row)}>View</button>,
+        name: 'View',
+        selector: row => row.id
+      
+    } ,
+     { 
+        name: 'Name',
+        selector: row => row.first_name,
+        sortable: true 
+    },
+    { 
+        name: 'Membership type',
+        selector: row => row.membership.name,
+        sortable: true 
+    } ,
+    { 
+        name: 'Type',
+        selector: row => row.type,
+        sortable: true 
+    } 
+];
   async getData() {
     this.setState({ column: this.COLUMNS }); 
     await axios.get(ROUTES.API_GET_USER+'/pending',{ 
@@ -103,14 +126,18 @@ class Membership extends Component {
         fontSize: THEME.TitleSize,
       }}
     >User Managment</h3>
-        <RowSelection
+    <DataTable
+            columns={this.state.column}
+            data={this.state.data} 
+        />
+        {/* <RowSelection
           data={this.state.data}
           column={this.state.column}
           approve={this.approveOrganizationViewPopup.bind(this)} 
           showButton={false}
           showApprove={true}
           showRemove={false}
-        />
+        /> */}
         {this.state.approveShowPopup ? (
           <UserCard
             singleData={this.state.singleData} 

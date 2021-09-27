@@ -14,7 +14,7 @@ class AddType extends Component {
     super(props);
     this.state = {
       name: this.props.type === "create" ? " " : this.props.singleData.name,
-      categoryId: this.props.type === "create" ? " " : this.props.singleData["category.id"],
+      categoryId: this.props.type === "create" ? " " : this.props.singleData.category.id,
       itemId: 0,
       error: null,
       isDelete: false,
@@ -163,10 +163,11 @@ class AddType extends Component {
       url: ROUTES.API_GET_CATEGORY,
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+      }
     }).then((response) => {
-      this.setState({ categoryList: response.data.data, loadingData: false });
       console.log(response);
+      this.setState({ categoryList: response.data.data, loadingData: false });
+      
     });
     if (this.state.loadingData) {
       this.getCategory();
@@ -231,7 +232,7 @@ class AddType extends Component {
                 {" "}
                 {this.state.isCreate
                   ? "Select category"
-                  : this.props.singleData.category}{" "}
+                  : this.props.singleData.category.name}{" "}
               </Form.Label>
               <Form.Control
                 as="select"
