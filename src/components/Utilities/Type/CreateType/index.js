@@ -146,6 +146,7 @@ class AddType extends Component {
           });
         }
         this.props.refresh();
+        
       })
       .catch((e) => {
         this.setState({ loadingData: false });

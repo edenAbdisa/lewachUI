@@ -3,7 +3,7 @@
       "testFiles": "**/*.test.{js,ts,jsx,tsx}",
       "componentFolder": "src"
     },
-    "baseUrl": "https://lewach-ui.vercel.app",
+    "baseUrl": "https://lewach-ui.vercel.app/",
     "chromeWebSecurity": false,
     
       "viewportWidth": 1400,
