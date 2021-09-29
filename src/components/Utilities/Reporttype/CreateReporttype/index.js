@@ -15,7 +15,7 @@ class Reporttype extends Component {
     super(props);
     this.state = { 
     report_detail: this.props.type === "create" ? "" : this.props.singleData.report_detail,
-    type_for: this.props.type === "create" ? "" : this.props.singleData.type_for,
+    type_for: 'item',
     itemId: 0,
     error: null,
     isDelete: false,
