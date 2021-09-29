@@ -19,7 +19,9 @@ class AddCategory extends Component {
     isEdit: false,
     loadingData: true,
     messages:"",
-    used_for:this.props.type === "create" ? "" : this.props.singleData.used_for };
+    used_for:"item"}
+
+    //used_for:this.props.type === "create" ? "" : this.props.singleData.used_for };
   }
   async createCategory() {
      

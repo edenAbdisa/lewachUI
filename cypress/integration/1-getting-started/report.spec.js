@@ -12,7 +12,26 @@ import * as THEME from "../../../src/constants/theme.js";
     cy.wait(1500);
    // cy.url().should('include', '/report')
   }) */ 
- 
+  it('loads', () => {
+    cy.visit('/')
+    cy.wait(2500);  
+    cy.get('.form-group')
+    cy.get('[name="email"]').type('liwach2021@gmail.com{enter}')
+    cy.get('[name="password"]').type('password{enter}') 
+    /* cy.wait(500);
+    cy.window().then(win => {
+      win.document
+        .querySelector("iframe[src*='recaptcha']")
+        .contentDocument.getElementById("recaptcha-token")
+        .click();
+    }); */ 
+    cy.get('[data-cy=signinSubmit]')
+    .invoke('attr', 'disabled', false)
+    .click()
+    cy.wait(2500);
+    
+  cy.visit('/report') 
+  })
 it('Get list of item', () => { 
   cy.wait(2500);
     cy.get('[data-cy=h3title]').should('contain', 'Report') 
@@ -23,8 +42,7 @@ it('Get list of item', () => {
         expect(response).to.have.property('headers') 
       })
 })
-it('Get list of service', () => {
-  cy.visit('/report')
+it('Get list of service', () => { 
   cy.wait(1500);
     cy.get('#uncontrolled-tab-example-tab-service').first().click()
     cy.get('[data-cy=h3title]').should('contain', 'Report') 
