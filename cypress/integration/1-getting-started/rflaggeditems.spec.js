@@ -25,14 +25,15 @@ it('Get list of flagged item', () => {
         expect(response).to.have.property('headers') 
       })
 })
-/* it('Approve flagged item', () => { 
-  cy.get('#cell-1-110 > button').click()
-    cy.get('.form-group')
-    cy.get('#formBasicAddCategory').type('CategoryuNewForTest{enter}') 
-    cy.wait(500);
-    cy.get('[data-cy=categorySubmit]').click()
-    cy.wait(500);
-    cy.get('[data-cy=closeCategorypopup]') 
-    .click()
-    cy.wait(500); 
-}) */
+it('Approve flagged item', () => { 
+  cy.get('#cell-1-29 > button').click() 
+  cy.get('[data-cy=removeSubmit]') 
+  .click() 
+  cy.wait(500);
+}) 
+it('Keep flagged item', () => { 
+  cy.get('#cell-1-29 > button').click() 
+  cy.get('[data-cy=removeSubmit]') 
+  .click() 
+  cy.wait(500);
+})

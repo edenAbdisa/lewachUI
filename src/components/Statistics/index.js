@@ -1,9 +1,8 @@
 import React,{Component} from "react";
-import Line from "../Chart/Line";
+//import Line from "../Chart/Line";
 import { Row, Col } from "react-bootstrap";
 import * as THEME from "../../constants/theme.js";
-import * as ROUTES from "../../constants/routes.js";
-import CardStatistics from "./CardStatistics";
+import * as ROUTES from "../../constants/routes.js"; 
 import axios from "axios";
 class Statistics extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class Statistics extends Component {
       startDate:today.getFullYear().toString() + '-' + (today.getMonth().toString() ) + '-' + today.getDate().toString(),
       endDate:today.getFullYear().toString() + '-' + (today.getMonth() + 1).toString() + '-' + today.getDate().toString()
     }
-  }
+  }/* 
   async getUserData() {
    var data={};
    var lineData=[]; 
@@ -163,7 +162,7 @@ class Statistics extends Component {
     this.getRequestData();
     this.getServiceData();
     this.getFlagData();
-  }
+  } */
   render(){
   return(
   <> 
@@ -180,56 +179,56 @@ class Statistics extends Component {
     </h3> 
     <Row style={{ textAlign: "-webkit-center", padding: 9, marginTop: 15 }}>
       <Col>
-        <Line
+        {/* <Line
           data-cy="forServiceLine"
           dataPoints={this.state.forServiceLineData}
           title="Number of registered Service"
           ylabel="Number of service"
           xlabel="Date"
           type='service'
-        />{" "}
+        />{" "} */}
       </Col>
       <Col>
-        <Line
+       {/*  <Line
          data-cy="forItemLine"
           dataPoints={this.state.forItemLineData}
           title="Number of registered items"
           ylabel="Number of items"
           xlabel="Date"
           type='item'
-        />
+        /> */}
       </Col>
     </Row>
     <Row style={{ textAlign: "-webkit-center", padding: 9, marginTop: 15 }}>
       <Col>
-        <Line
+        {/* <Line
           data-cy="forUserLine"
           dataPoints={this.state.forUserLineData}
           title="Number of registered users"
           ylabel="Number of users"
           xlabel="Date"
           type='user'
-        />{" "}
+        />{" "} */}
       </Col>
       <Col>
-        <Line
+       {/*  <Line
           dataPoints={this.state.forFlagLineData}
           title="Number of flagged items"
           ylabel="Number of Flagged items"
           xlabel="Date"
           type='flag'
-        />
+        /> */}
       </Col>
     </Row>
     <Row style={{ textAlign: "-webkit-center", padding: 9, marginTop: 15 }}>
       <Col>
-        <Line
+        {/* <Line
         dataPoints={this.state.forRequestLineData}
           title="Number of Request"
           ylabel="Number of Requests"
           xlabel="Date"
           type='request'
-        />{" "}
+        />{" "} */}
       </Col>
     </Row>
   </>

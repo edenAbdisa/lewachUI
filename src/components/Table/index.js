@@ -124,38 +124,7 @@ const RowSelection = (props) => {
         <tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                <>
-                {props.showButton? (<>
-                      <td onClick={()=>props.edit(row.values)} data-cy="editSelectedItem">
-                        <AiOutlineEdit />
-                      </td>
-                      <td onClick={()=>props.delete(row.values)} data-cy="deleteSelectedItem">
-                        <AiOutlineDelete />
-                      </td></>):null
-                      }
-                      { props.showApprove? (<>
-                      <td onClick={()=>props.approve(row.values)} data-cy="approveSelectedItem">
-                        <FcApprove />
-                      </td>
-                      </>):null
-                      }
-                      { props.showRemove? (<>
-                        <td onClick={()=>props.view(row.values)} data-cy="viewSelectedItem">
-                        <AiOutlineFolderView/>
-                      </td> 
-                      </>):null
-                      }
-                      </>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>                    
-                  );
-                })}
-
-              </tr>
-            );
+            
           })}
         </tbody>
       </table>

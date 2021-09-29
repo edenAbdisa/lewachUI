@@ -6,7 +6,7 @@
         "rflaggeditems.spec.js",
         "utilities.spec.js" 
       ],
-      "componentFolder": "src"
+      "componentFolder": "src/components"
     },
     
     "baseUrl": "http://localhost:3000/",

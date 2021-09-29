@@ -154,6 +154,7 @@ class FlaggedItemCard extends Component {
               }}
             >
               <Button
+              data-cy="keepSubmit"
                 variant="primary"
                 type="submit"
                 onClick={(e) => this.keepItem(e)}
@@ -162,6 +163,7 @@ class FlaggedItemCard extends Component {
                 Keep it
               </Button>
               <Button
+              data-cy="removeSubmit"
                 variant="primary"
                 type="submit"
                 onClick={(e) => this.removeItem(e)}

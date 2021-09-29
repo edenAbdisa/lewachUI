@@ -83,7 +83,9 @@ class UserCard extends Component {
 
       <div className="popup">
         <div className="popup_inner">
-          <p onClick={this.props.closePopup} style={{ float: "right" }}>
+          <p onClick={this.props.closePopup} style={{ float: "right" }}
+          data-cy="closeUserpopup"
+          >
             <AiFillCloseCircle />
           </p>
 
@@ -99,6 +101,7 @@ class UserCard extends Component {
     </ListGroup>
     <Card.Body>
     <Button
+    data-cy="approveSubmit"
               variant="primary"
               type="submit"
               onClick={(e) => this.approveOrganization(e)} 
@@ -107,6 +110,7 @@ class UserCard extends Component {
               Approve
             </Button>
             <Button
+            data-cy="declineSubmit"
               variant="primary"
               onClick={(e) => this.declineOrganization(e)} 
               style={{ backgroundImage: THEME.SubmitGradientButton }}

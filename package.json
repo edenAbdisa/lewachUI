@@ -38,8 +38,7 @@
     "web-vitals": "^1.0.1",
     "worker-loader": "^3.0.8"
   },
-  "nyc":{
-    "report-dir":"cypress-coverage",
+  "nyc":{ 
     "exclude":["src/css"]
   },
   "proxy": "http://liwachapi.herokuapp.com",

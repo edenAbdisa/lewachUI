@@ -109,9 +109,7 @@ it('Edit type', () => {
 })
 it('Delete type', () => { 
   cy.get('#cell-1-78> button').click()
-  cy.get('.form-group')
-  cy.get('#formBasicAddType').type('NewuType{enter}') 
-  cy.get('#exampleForm\\.ControlSelect2').select('Appliance')
+  cy.get('.form-group') 
   cy.get('[data-cy=typeSubmit]') 
   .click()
   cy.wait(500);
@@ -132,8 +130,8 @@ it('Add membership', () => {
     .click()
     cy.get('.form-group')
     cy.get('#formBasicAddMembership').type('NewuMembership{enter}') 
-    cy.get('[data-cy=transactionLimit]').type('45{enter}') 
-    cy.get('[data-cy=limitOfPost]').type('45{enter}') 
+    cy.get('[data-cy=transactionLimit]').type('4{enter}') 
+    cy.get('[data-cy=limitOfPost]').type('4{enter}') 
     cy.get('[data-cy=membershipSubmit]').click()
     cy.wait(500);
     cy.get('[data-cy=closeMembershippopup]').click()
@@ -143,8 +141,8 @@ it('Edit membership', () => {
   cy.get('#cell-1-51 > button').click()
   cy.get('.form-group')
     cy.get('#formBasicAddMembership').type('NewuMembership{enter}') 
-    cy.get('[data-cy=transactionLimit]').type('45{enter}') 
-    cy.get('[data-cy=limitOfPost]').type('45{enter}') 
+    cy.get('[data-cy=transactionLimit]').type('5{enter}') 
+    cy.get('[data-cy=limitOfPost]').type('5{enter}') 
     cy.get('[data-cy=membershipSubmit]').click()
     cy.wait(500);
     cy.get('[data-cy=closeMembershippopup]').click()
@@ -153,10 +151,6 @@ it('Edit membership', () => {
 it('Delete membership', () => { 
   cy.get('#cell-1-51 > button').click()
   cy.get('.form-group')
-    cy.get('#formBasicAddMembership').type('NewuMembership{enter}') 
-    cy.get('[data-cy=transactionLimit]').type('45{enter}') 
-    cy.get('[data-cy=limitOfPost]').type('45{enter}') 
-    cy.get('[data-cy=membershipSubmit]').click()
     cy.wait(500);
     cy.get('[data-cy=closeMembershippopup]').click()
     cy.wait(500);
@@ -196,9 +190,7 @@ it('Edit report type', () => {
 })
 it('Delete report type', () => { 
   cy.get('#cell-1-22 > button').click()
-  cy.get('.form-group')
-    cy.get('[data-cy=reporttypeName]').type('NewuReporttype{enter}') 
-    cy.get('#exampleForm\\.ControlSelect2').select('Item') 
+  cy.get('.form-group') 
     cy.get('[data-cy=reporttypeSubmit]') 
     .click()
     cy.wait(500);
@@ -210,5 +202,5 @@ it('Delete report type', () => {
 it('Logout', () => {
   cy.wait(1500)
     cy.get('.mr-sm-2 > .nav-link').click()
-    cy.url().should('include', '/signin')
+    cy.url().should('include', '/signout')
 })

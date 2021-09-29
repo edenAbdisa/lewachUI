@@ -25,14 +25,15 @@ it('Get list of membership ', () => {
         expect(response).to.have.property('headers') 
       })
 })
-/* it('Approve flagged item', () => { 
-  cy.get('#cell-1-110 > button').click()
-    cy.get('.form-group')
-    cy.get('#formBasicAddCategory').type('CategoryuNewForTest{enter}') 
-    cy.wait(500);
-    cy.get('[data-cy=categorySubmit]').click()
-    cy.wait(500);
-    cy.get('[data-cy=closeCategorypopup]') 
-    .click()
-    cy.wait(500); 
-}) */
+it('Approve organization report type', () => { 
+    cy.get('#cell-1-92 > button').click() 
+      cy.get('[data-cy=approveSubmit]') 
+      .click() 
+      cy.wait(500);
+  })
+  it('Decline organization report type', () => { 
+    cy.get('#cell-1-93 > button').click() 
+      cy.get('[data-cy=declineSubmit]') 
+      .click() 
+      cy.wait(500);
+  })

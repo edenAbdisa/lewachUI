@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+/* import React, { Component } from "react";
 import CanvasJSReact from "../../../css/canvasjs.react";
 import "./../../../css/slider.css";
 import { Form, Button } from "react-bootstrap"; 
@@ -291,3 +291,4 @@ class Line extends Component {
 }
 
 export default Line;
+ */
