@@ -48,9 +48,7 @@ const Sidebar = () => {
           </SidebarHeader>
           <SidebarContent style={{backgroundColor:THEME.SidebarColor}}>
             <Menu iconShape="square" style={{backgroundColor:THEME.SidebarColor}}>
-            <MenuItem icon={<FiMapPin />} style={{backgroundColor:THEME.SidebarColor}}>
-                <Link to={ROUTES.MAPBOX}>Users <br/> Map  </Link>
-              </MenuItem>
+             
               <MenuItem icon={<FaList />} style={{backgroundColor:THEME.SidebarColor}}>
                 <Link to={ROUTES.REPORT}>Report </Link>
               </MenuItem>

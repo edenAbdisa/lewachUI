@@ -38,6 +38,10 @@
     "web-vitals": "^1.0.1",
     "worker-loader": "^3.0.8"
   },
+  "nyc":{
+    "report-dir":"cypress-coverage",
+    "exclude":["src/css"]
+  },
   "proxy": "http://liwachapi.herokuapp.com",
   "scripts": {
     "start": "react-scripts -r @cypress/instrument-cra start",

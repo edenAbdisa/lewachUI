@@ -120,6 +120,7 @@ class Membership extends Component {
     return (
       <>
       <h3
+       data-cy="h3title"
       style={{
         textAlign: "center",
         color: THEME.TitleColor,
