@@ -1,23 +1,17 @@
 import * as ROUTE from "../../../src/constants/routes.js";
 import * as THEME from "../../../src/constants/theme.js";
-before(() => {
+/*  before(() => {
     cy.visit('/')
     cy.get('.form-group')
     cy.get('[name="email"]').type('liwach2021@gmail.com{enter}')
     cy.get('[name="password"]').type('password{enter}') 
-    /* cy.wait(500);
-    cy.window().then(win => {
-      win.document
-        .querySelector("iframe[src*='recaptcha']")
-        .contentDocument.getElementById("recaptcha-token")
-        .click();
-    }); */ 
+     
     cy.get('[data-cy=signinSubmit]')
     .invoke('attr', 'disabled', false)
     .click()
-    cy.wait(500);
+    cy.wait(1500);
     cy.url().should('include', '/report')
-  })
+  })  */
  
 it('Get list of category', () => {
   cy.visit('/utilities') 

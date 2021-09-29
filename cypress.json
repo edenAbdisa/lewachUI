@@ -1,8 +1,14 @@
 {
     "component": {
-      "testFiles": "**/*.test.{js,ts,jsx,tsx}",
+      "testFiles": [
+        "login/*.js",
+        "report.spec.js",
+        "rflaggeditems.spec.js",
+        "utilities.spec.js" 
+      ],
       "componentFolder": "src"
     },
+    
     "baseUrl": "https://lewach-ui.vercel.app/",
     "chromeWebSecurity": false,
     
@@ -10,3 +16,4 @@
       "viewportHeight": 660
     
   }
+ 

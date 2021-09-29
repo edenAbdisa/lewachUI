@@ -9,9 +9,7 @@ import Flagged from "../Flaggeditem";
 import Membership from "../Membership";
 import Utilities from "../Utilities";
 import SignIn from "../SignIn";
-import SignOut from "../SignOut";
-import Account from "../Account";
-import Mapbox from "../Mapbox";
+import SignOut from "../SignOut";  
 import { Grid, Col } from "react-flexbox-grid";
 import "./App.css";
 const App = () => (
@@ -30,9 +28,7 @@ const App = () => (
               <Route exact path={ROUTES.STATISTICS} component={Statistics} />
               <Route exact path={ROUTES.FLAGGEDITEMS} component={Flagged} />
               <Route exact path={ROUTES.MEMBERSHIP} component={Membership} />
-              <Route exact path={ROUTES.UTILITIES} component={Utilities} />
-              <Route exact path={ROUTES.ACCOUNT} component={Account} />
-              <Route exact path={ROUTES.MAPBOX} component={Mapbox} />
+              <Route exact path={ROUTES.UTILITIES} component={Utilities} /> 
               <Route exact path={ROUTES.SIGN_OUT} component={SignOut} />
             </Switch>
           </Col>

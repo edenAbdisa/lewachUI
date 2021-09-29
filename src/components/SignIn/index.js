@@ -5,19 +5,16 @@ import * as ROUTES from "../../constants/routes";
 import * as THEME from "../../constants/theme";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { withRouter } from "react-router-dom";
-import ReCaptchaV2 from "react-google-recaptcha";
+import { withRouter } from "react-router-dom"; 
 
 const defaultForm = {
   email: "",
-  password: "",
-  token: "",
+  password: "" 
 };
 const INITIAL_STATE = {
   email: "",
   password: "",
-  error: null,
-  token: "",
+  error: null 
 };
 
 const ERROR_CODE_ACCOUNT_EXISTS =
@@ -34,17 +31,7 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
-  }
-  handleToken = (token) => {
-    this.setState({ token: token });
-  };
-
-  /**
-   * Removes the token from the from object
-   */
-  handleExpire = () => {
-    this.setState({ token: null });
-  };
+  } 
   async login() {
     const { email, password } = this.state;
     await axios({
@@ -98,7 +85,7 @@ class SignIn extends Component {
   render() {
     const { email, password, token, error } = this.state;
 
-    const isInvalid = password === "" || email === "" || token === "";
+    const isInvalid = password === "" || email === "" ;
 
     return (
       <div className="outer ">
@@ -139,13 +126,7 @@ class SignIn extends Component {
             </Button>
             <p>{error}</p>
           </Form>
-        </div>
-
-        <ReCaptchaV2
-          sitekey={process.env.REACT_APP_SITE_KEY}
-          onChange={this.handleToken}
-          onExpire={this.handleExpire}
-        />
+        </div> 
       </div>
     );
   }

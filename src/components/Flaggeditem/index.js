@@ -118,6 +118,7 @@ class Flagged extends Component {
     return (
       <>
         <h3
+        data-cy="h3title"
           style={{
             textAlign: "center",
             color: THEME.TitleColor,
@@ -127,6 +128,7 @@ class Flagged extends Component {
           Flagged Items
         </h3>
         <DataTable
+            data-cy="flaggeddatatable"
             columns={this.state.column}
             data={this.state.data} 
         />
